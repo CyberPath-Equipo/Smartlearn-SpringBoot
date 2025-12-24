@@ -3,6 +3,7 @@ package com.cyberpath.springboot.controlador.contenido;
 import com.cyberpath.springboot.dto.contenido.TeoriaDto;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
 import com.cyberpath.springboot.modelo.contenido.Teoria;
+import com.cyberpath.springboot.servicio.contenido.SubtemaServicio;
 import com.cyberpath.springboot.servicio.contenido.TeoriaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,12 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/smartlearn/api")
 @RestController
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class TeoriaControlador {
 
     private final TeoriaServicio teoriaServicio;
+    private final SubtemaServicio subtemaServicio;
 
     @GetMapping("/teoria")
     public ResponseEntity<List<TeoriaDto>> lista() {
@@ -44,10 +47,11 @@ public class TeoriaControlador {
     @PostMapping("/teoria")
     public ResponseEntity<TeoriaDto> save(@RequestBody TeoriaDto teoriaDto) {
         Teoria teoria = mapDtoToEntity(teoriaDto);
+        Subtema subtema = subtemaServicio.getById(teoriaDto.getIdSubtema());
 
         // Asocia con Subtema si está presente
         if (teoriaDto.getIdSubtema() != null) {
-            teoria.setSubtema(Subtema.builder().id(teoriaDto.getIdSubtema()).build());
+            teoria.setSubtema(subtema);
         }
 
         Teoria guardada = teoriaServicio.save(teoria);
@@ -57,10 +61,11 @@ public class TeoriaControlador {
     @PutMapping("/teoria/{id}")
     public ResponseEntity<TeoriaDto> update(@PathVariable Integer id, @RequestBody TeoriaDto teoriaDto) {
         Teoria datosActualizacion = mapDtoToEntity(teoriaDto);
+        Subtema subtema = subtemaServicio.getById(teoriaDto.getIdSubtema());
 
         // Asocia con Subtema
         if (teoriaDto.getIdSubtema() != null) {
-            datosActualizacion.setSubtema(Subtema.builder().id(teoriaDto.getIdSubtema()).build());
+            datosActualizacion.setSubtema(subtema);
         }
 
         Teoria actualizada = teoriaServicio.update(id, datosActualizacion);

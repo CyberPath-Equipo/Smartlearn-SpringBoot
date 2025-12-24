@@ -1,9 +1,13 @@
 package com.cyberpath.springboot.controlador.ejercicio;
 
-import com.cyberpath.springboot.dto.ejercicio.EjercicioDto;
+import com.cyberpath.springboot.dto.ejercicio.*;
 import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
+import com.cyberpath.springboot.modelo.ejercicio.Opcion;
+import com.cyberpath.springboot.modelo.ejercicio.Pregunta;
 import com.cyberpath.springboot.servicio.ejercicio.EjercicioServicio;
+import com.cyberpath.springboot.servicio.ejercicio.OpcionServicio;
+import com.cyberpath.springboot.servicio.ejercicio.PreguntaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +17,12 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/smartlearn/api")
 @RestController
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class EjercicioControlador {
 
     private final EjercicioServicio ejercicioServicio;
+    private final PreguntaServicio preguntaServicio;
 
     @GetMapping("/ejercicio")
     public ResponseEntity<List<EjercicioDto>> lista() {
@@ -41,6 +47,21 @@ public class EjercicioControlador {
         return ResponseEntity.ok(convertToDto(ejercicio));
     }
 
+    @GetMapping("/ejercicio/{id}/preguntas")
+    public ResponseEntity<List<PreguntaDto>> getPreguntas(@PathVariable Integer id) {
+        Ejercicio ejercicio = ejercicioServicio.getById(id);
+        if (ejercicio == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<Pregunta> preguntas = ejercicio.getPreguntas();
+        List<PreguntaDto> dtos = preguntas.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
+    }
+
     @PostMapping("/ejercicio")
     public ResponseEntity<EjercicioDto> save(@RequestBody EjercicioDto ejercicioDto) {
         Ejercicio ejercicio = mapDtoToEntity(ejercicioDto);
@@ -51,6 +72,23 @@ public class EjercicioControlador {
         }
 
         Ejercicio guardado = ejercicioServicio.save(ejercicio);
+        return ResponseEntity.ok(convertToDto(guardado));
+    }
+
+    @PostMapping("/ejercicio/{id}/pregunta")
+    public ResponseEntity<PreguntaDto> crearPregunta(@PathVariable Integer id, @RequestBody PreguntaDto preguntaDto) {
+        Ejercicio ejercicio = ejercicioServicio.getById(id);
+        if (ejercicio == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Pregunta pregunta = Pregunta.builder()
+                .enunciado(preguntaDto.getEnunciado())
+                .ejercicio(ejercicio)
+                .build();
+
+        Pregunta guardado = preguntaServicio.save(pregunta);
+
         return ResponseEntity.ok(convertToDto(guardado));
     }
 
@@ -80,6 +118,14 @@ public class EjercicioControlador {
                 .nombre(ejercicio.getNombre())
                 .hecho(ejercicio.getHecho())
                 .idSubtema(ejercicio.getSubtema() != null ? ejercicio.getSubtema().getId() : null)
+                .build();
+    }
+
+    private PreguntaDto convertToDto(Pregunta pregunta) {
+        return PreguntaDto.builder()
+                .id(pregunta.getId())
+                .enunciado(pregunta.getEnunciado())
+                .idEjercicio(pregunta.getEjercicio() != null ? pregunta.getEjercicio().getId() : null)
                 .build();
     }
 

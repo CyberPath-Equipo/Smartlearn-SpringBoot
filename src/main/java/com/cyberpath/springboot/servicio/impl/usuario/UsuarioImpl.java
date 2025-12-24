@@ -1,14 +1,17 @@
 package com.cyberpath.springboot.servicio.impl.usuario;
 
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
+import com.cyberpath.springboot.web.PasswordManager;
 import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
+import org.apache.catalina.authenticator.SavedRequest;
 import org.springframework.stereotype.Service;
 import com.cyberpath.springboot.repositorio.usuario.UsuarioRepositorio;
 import com.cyberpath.springboot.servicio.usuario.UsuarioServicio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -24,6 +27,16 @@ public class UsuarioImpl implements UsuarioServicio {
     @Override
     public Usuario getById(Integer id) {
         return usuarioRepositorio.findById(id).orElse(null);
+    }
+
+    @Override
+    public Usuario getByCorreo(String correo) {
+        for (Usuario usuario : usuarioRepositorio.findAll()){
+            if (usuario.getCorreo().equalsIgnoreCase(correo)){
+                return usuario;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -78,4 +91,24 @@ public class UsuarioImpl implements UsuarioServicio {
 
         return usuarioRepositorio.save(aux);
     }
+
+    @Override
+    public boolean cambiarPassword(Integer id, String passwordActual, String passwordNueva) {
+        Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
+        PasswordManager passwordManager = new PasswordManager();
+        if (usuario == null) {
+            return false;
+        }
+
+        // Validar password actual
+        if (!passwordManager.validarContrasena(passwordActual, usuario.getContrasena())) {
+            return false;
+        }
+
+        usuario.setContrasena(passwordManager.encode(passwordNueva));
+        usuarioRepositorio.save(usuario);
+
+        return true;
+    }
+
 }

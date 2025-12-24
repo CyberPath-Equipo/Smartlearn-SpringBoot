@@ -9,5 +9,6 @@ public interface SubtemaServicio {
     Subtema getById(Integer id);
     Subtema save(Subtema subtema);
     void delete(Integer id);
+    void deleteTeoria(Integer idTeoria);
     Subtema update(Integer id, Subtema subtema);
 }

@@ -14,7 +14,7 @@ import lombok.*;
 public class UsuarioMateria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuariomateria")
+    @Column(name = "id_usuario_materia")
     private Integer id;
 
     @ManyToOne

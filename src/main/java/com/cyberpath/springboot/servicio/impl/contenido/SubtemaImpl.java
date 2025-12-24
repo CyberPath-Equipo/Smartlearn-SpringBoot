@@ -1,5 +1,6 @@
 package com.cyberpath.springboot.servicio.impl.contenido;
 
+import com.cyberpath.springboot.repositorio.contenido.TeoriaRepositorio;
 import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
 import com.cyberpath.springboot.repositorio.contenido.SubtemaRepositorio;
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 public class SubtemaImpl implements SubtemaServicio {
     private final SubtemaRepositorio subtemaRepositorio;
+    private final TeoriaRepositorio teoriaRepositorio;
 
     @Override
     public List<Subtema> getAll() {
@@ -31,6 +33,13 @@ public class SubtemaImpl implements SubtemaServicio {
     @Override
     public void delete(Integer id) {
         subtemaRepositorio.deleteById(id);
+    }
+
+    @Override
+    public void deleteTeoria(Integer idTeoria) {
+        Subtema subtema = subtemaRepositorio.findById(idTeoria).orElseThrow(() -> new RuntimeException("Subtema no encontrado"));
+        teoriaRepositorio.delete(subtema.getTeoria());
+        subtema.setTeoria(null);
     }
 
     @Override

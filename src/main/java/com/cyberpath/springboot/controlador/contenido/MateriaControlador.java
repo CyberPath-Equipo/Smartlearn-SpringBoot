@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/smartlearn/api")
 @RestController
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class MateriaControlador {
 
