@@ -1,4 +1,4 @@
-package com.cyberpath.springboot.servicio.usuario;
+package com.cyberpath.springboot.servicio.servicio.usuario;
 
 import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
 

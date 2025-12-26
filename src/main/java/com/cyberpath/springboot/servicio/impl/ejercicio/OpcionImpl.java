@@ -2,7 +2,7 @@ package com.cyberpath.springboot.servicio.impl.ejercicio;
 
 import com.cyberpath.springboot.modelo.ejercicio.Opcion;
 import com.cyberpath.springboot.repositorio.ejercicio.OpcionRepositorio;
-import com.cyberpath.springboot.servicio.ejercicio.OpcionServicio;
+import com.cyberpath.springboot.servicio.servicio.ejercicio.OpcionServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

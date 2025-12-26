@@ -5,8 +5,7 @@ import com.cyberpath.springboot.dto.ejercicio.PreguntaDto;
 import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.ejercicio.Opcion;
 import com.cyberpath.springboot.modelo.ejercicio.Pregunta;
-import com.cyberpath.springboot.servicio.ejercicio.OpcionServicio;
-import com.cyberpath.springboot.servicio.ejercicio.PreguntaServicio;
+import com.cyberpath.springboot.servicio.servicio.ejercicio.PreguntaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +15,10 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/smartlearn/api")
 @RestController
-@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class PreguntaControlador {
 
     private final PreguntaServicio preguntaServicio;
-    private final OpcionServicio opcionServicio;
 
     @GetMapping("/pregunta")
     public ResponseEntity<List<PreguntaDto>> lista() {
@@ -34,19 +31,6 @@ public class PreguntaControlador {
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(dtos);
-    }
-
-    @GetMapping("pregunta/{id}/opciones")
-    public ResponseEntity<List<OpcionDto>> listaOpciones(@PathVariable int id) {
-        Pregunta pregunta = preguntaServicio.getById(id);
-        if (pregunta == null) {
-            return ResponseEntity.notFound().build();
-        }
-        List<Opcion> opciones = pregunta.getOpciones();
-        List<OpcionDto> dtos = opciones.stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
     }
 
@@ -91,21 +75,35 @@ public class PreguntaControlador {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/pregunta/{id}/opciones")
+    public ResponseEntity<List<OpcionDto>> getOpcionesByPregunta(@PathVariable Integer id) {
+        Pregunta pregunta = preguntaServicio.getById(id);
+        if (pregunta == null || pregunta.getOpciones() == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<OpcionDto> dtos = pregunta.getOpciones().stream()
+                .map(this::convertOpcionToDto)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
+    }
+
+    private OpcionDto convertOpcionToDto(Opcion opcion) {
+        return OpcionDto.builder()
+                .id(opcion.getId())
+                .texto(opcion.getTexto())
+                .correcta(opcion.getCorrecta())
+                .idPregunta(opcion.getPregunta() != null ? opcion.getPregunta().getId() : null)
+                .build();
+    }
+
     // ====================== MÉTODOS DE CONVERSIÓN ======================
     private PreguntaDto convertToDto(Pregunta pregunta) {
         return PreguntaDto.builder()
                 .id(pregunta.getId())
                 .enunciado(pregunta.getEnunciado())
                 .idEjercicio(pregunta.getEjercicio() != null ? pregunta.getEjercicio().getId() : null)
-                .build();
-    }
-
-    private OpcionDto convertToDto(Opcion opcion) {
-        return OpcionDto.builder()
-                .id(opcion.getId())
-                .texto(opcion.getTexto())
-                .correcta(opcion.getCorrecta())
-                .idPregunta(opcion.getPregunta() != null ? opcion.getPregunta().getId() : null)
                 .build();
     }
 

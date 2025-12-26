@@ -3,7 +3,7 @@ package com.cyberpath.springboot.servicio.impl.usuario;
 import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.usuario.Rol;
 import com.cyberpath.springboot.repositorio.usuario.RolRepositorio;
-import com.cyberpath.springboot.servicio.usuario.RolServicio;
+import com.cyberpath.springboot.servicio.servicio.usuario.RolServicio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

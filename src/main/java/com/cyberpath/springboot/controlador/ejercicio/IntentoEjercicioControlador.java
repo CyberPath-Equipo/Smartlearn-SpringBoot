@@ -4,7 +4,7 @@ import com.cyberpath.springboot.dto.ejercicio.IntentoEjercicioDto;
 import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
-import com.cyberpath.springboot.servicio.ejercicio.IntentoEjercicioServicio;
+import com.cyberpath.springboot.servicio.servicio.ejercicio.IntentoEjercicioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

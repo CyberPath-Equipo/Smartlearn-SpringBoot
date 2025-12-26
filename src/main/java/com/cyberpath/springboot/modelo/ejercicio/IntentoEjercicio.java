@@ -15,9 +15,10 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "tbl_intento_ejercicio")
-public class IntentoEjercicio {
+public class
+IntentoEjercicio {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Agregado: ID auto-generado
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_intento_ejercicio")
     private Integer id;
 
@@ -25,7 +26,7 @@ public class IntentoEjercicio {
     private Double puntaje;
 
     @Column(name = "fecha", nullable = false)
-    private LocalDateTime fecha = LocalDateTime.now();
+    private String fecha = LocalDateTime.now().toString();
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")

@@ -1,4 +1,4 @@
-package com.cyberpath.springboot.servicio.contenido;
+package com.cyberpath.springboot.servicio.servicio.contenido;
 
 import com.cyberpath.springboot.modelo.contenido.Subtema;
 
@@ -9,6 +9,5 @@ public interface SubtemaServicio {
     Subtema getById(Integer id);
     Subtema save(Subtema subtema);
     void delete(Integer id);
-    void deleteTeoria(Integer idTeoria);
     Subtema update(Integer id, Subtema subtema);
 }

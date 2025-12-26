@@ -4,7 +4,7 @@ import com.cyberpath.springboot.dto.contenido.ProgresoSubtemaDto;
 import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
-import com.cyberpath.springboot.servicio.contenido.ProgresoSubtemaServicio;
+import com.cyberpath.springboot.servicio.servicio.contenido.ProgresoSubtemaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.cyberpath.springboot.servicio.contenido;
+package com.cyberpath.springboot.servicio.servicio.contenido;
 
 import com.cyberpath.springboot.modelo.contenido.Materia;
 
@@ -10,4 +10,6 @@ public interface MateriaServicio {
     Materia save(Materia materia);
     void delete(Integer id);
     Materia update(Integer id, Materia materia);
+
+    Long countEjerciciosByMateriaId(Integer idMateria);
 }

@@ -3,7 +3,7 @@ package com.cyberpath.springboot.servicio.impl.contenido;
 import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.contenido.Materia;
 import com.cyberpath.springboot.repositorio.contenido.MateriaRepositorio;
-import com.cyberpath.springboot.servicio.contenido.MateriaServicio;
+import com.cyberpath.springboot.servicio.servicio.contenido.MateriaServicio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +41,10 @@ public class MateriaImpl implements MateriaServicio {
         aux.setDescripcion(materia.getDescripcion());
 
         return materiaRepositorio.save(aux);
+    }
+
+    @Override
+    public Long countEjerciciosByMateriaId(Integer idMateria) {
+        return materiaRepositorio.countEjerciciosByMateriaId(idMateria);
     }
 }

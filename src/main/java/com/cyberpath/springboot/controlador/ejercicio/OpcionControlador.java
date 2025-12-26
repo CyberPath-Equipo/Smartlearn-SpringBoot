@@ -3,7 +3,7 @@ package com.cyberpath.springboot.controlador.ejercicio;
 import com.cyberpath.springboot.dto.ejercicio.OpcionDto;
 import com.cyberpath.springboot.modelo.ejercicio.Opcion;
 import com.cyberpath.springboot.modelo.ejercicio.Pregunta;
-import com.cyberpath.springboot.servicio.ejercicio.OpcionServicio;
+import com.cyberpath.springboot.servicio.servicio.ejercicio.OpcionServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/smartlearn/api")
 @RestController
-@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class OpcionControlador {
 

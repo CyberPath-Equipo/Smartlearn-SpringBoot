@@ -21,7 +21,7 @@ public class Configuracion {
     private boolean notificacionesActivadas = true;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tamano_fuente", nullable = false)
+    @Column(name = "tamano_fuente")
     private TamanoFuente tamanoFuente = TamanoFuente.medio;
 
     @Column(name = "modo_offline")

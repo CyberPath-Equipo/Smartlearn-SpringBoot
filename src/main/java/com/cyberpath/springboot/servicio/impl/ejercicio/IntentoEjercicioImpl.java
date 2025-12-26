@@ -2,7 +2,7 @@ package com.cyberpath.springboot.servicio.impl.ejercicio;
 
 import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.repositorio.ejercicio.IntentoEjercicioRepositorio;
-import com.cyberpath.springboot.servicio.ejercicio.IntentoEjercicioServicio;
+import com.cyberpath.springboot.servicio.servicio.ejercicio.IntentoEjercicioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

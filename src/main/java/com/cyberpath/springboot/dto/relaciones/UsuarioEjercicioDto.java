@@ -1,21 +1,18 @@
-package com.cyberpath.springboot.dto.ejercicio;
+package com.cyberpath.springboot.dto.relaciones;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class IntentoEjercicioDto {
+public class UsuarioEjercicioDto {
     private Integer id;
-    private double puntaje;
-    private String fecha;
 
     private Integer idUsuario;
     private Integer idEjercicio;
+    private boolean hecho;
 }

@@ -3,7 +3,7 @@ package com.cyberpath.springboot.servicio.impl.recurso;
 import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.recurso.RecursoAdjunto;
 import com.cyberpath.springboot.repositorio.recurso.RecursoAdjuntoRepositorio;
-import com.cyberpath.springboot.servicio.recurso.RecursoAdjuntoServicio;
+import com.cyberpath.springboot.servicio.servicio.recurso.RecursoAdjuntoServicio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -14,14 +14,15 @@ public class Teoria {
     @Column(name = "id_subtema")
     private Integer id;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id_subtema")
-    private Subtema subtema;
-
     @Column(name = "contenido")
     private String contenido;
 
     @Column(name = "revisado")
-    private Boolean revisado;
+    private Boolean revisado = false;
+
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id_subtema")
+    private Subtema subtema;
 }

@@ -1,6 +1,8 @@
 package com.cyberpath.springboot.modelo.ejercicio;
 
 import com.cyberpath.springboot.modelo.contenido.Subtema;
+import com.cyberpath.springboot.modelo.relaciones.UsuarioEjercicio;
+import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +41,10 @@ public class Ejercicio {
     @OneToMany(mappedBy = "ejercicio", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<IntentoEjercicio> intentos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "ejercicio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<UsuarioEjercicio> usuariosEjercicios = new ArrayList<>();
 
     public void addPregunta(Pregunta pregunta) {
         this.preguntas.add(pregunta);

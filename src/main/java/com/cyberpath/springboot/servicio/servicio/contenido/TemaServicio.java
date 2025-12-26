@@ -1,4 +1,4 @@
-package com.cyberpath.springboot.servicio.contenido;
+package com.cyberpath.springboot.servicio.servicio.contenido;
 
 import com.cyberpath.springboot.modelo.contenido.Tema;
 

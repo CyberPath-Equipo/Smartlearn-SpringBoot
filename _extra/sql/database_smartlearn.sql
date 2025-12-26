@@ -8,15 +8,15 @@ USE smartlearn;
 
 CREATE TABLE tbl_materia (
   id_materia INT NOT NULL AUTO_INCREMENT,
-  nombre VARCHAR(255) NOT NULL,
-  descripcion TEXT NULL,
+  nombre VARCHAR(255),
+  descripcion TEXT,
   PRIMARY KEY (id_materia)
 ) ENGINE=InnoDB;
 
 CREATE TABLE tbl_tema (
   id_tema INT NOT NULL AUTO_INCREMENT,
   id_materia INT NOT NULL,
-  nombre VARCHAR(255) NOT NULL,
+  nombre VARCHAR(255),
   PRIMARY KEY (id_tema),
   INDEX idx_materia (id_materia),
   CONSTRAINT fk_tema_materia
@@ -27,7 +27,7 @@ CREATE TABLE tbl_tema (
 CREATE TABLE tbl_subtema (
   id_subtema INT NOT NULL AUTO_INCREMENT,
   id_tema INT NOT NULL,
-  nombre VARCHAR(255) NOT NULL,
+  nombre VARCHAR(255),
   PRIMARY KEY (id_subtema),
   INDEX idx_tema (id_tema),
   CONSTRAINT fk_subtema_tema
@@ -38,7 +38,7 @@ CREATE TABLE tbl_subtema (
 -- Teoría: 1:1 con subtema (PK compartida)
 CREATE TABLE tbl_teoria (
   id_subtema INT NOT NULL,
-  contenido TEXT NULL,
+  contenido TEXT,
   revisado TINYINT(1) DEFAULT 0,
   PRIMARY KEY (id_subtema),
   CONSTRAINT fk_teoria_subtema
@@ -48,14 +48,14 @@ CREATE TABLE tbl_teoria (
 
 CREATE TABLE tbl_tipo_recurso (
   id_tipo_recurso INT NOT NULL AUTO_INCREMENT,
-  nombre VARCHAR(100) NOT NULL,
-  descripcion VARCHAR(255) NULL,
+  nombre VARCHAR(100),
+  descripcion VARCHAR(255),
   PRIMARY KEY (id_tipo_recurso)
 ) ENGINE=InnoDB;
 
 CREATE TABLE tbl_rol (
   id_rol INT NOT NULL AUTO_INCREMENT,
-  tipo VARCHAR(100) NOT NULL,
+  tipo VARCHAR(100),
   PRIMARY KEY (id_rol)
 ) ENGINE=InnoDB;
 
@@ -66,7 +66,7 @@ CREATE TABLE tbl_rol (
 CREATE TABLE tbl_ejercicio (
   id_ejercicio INT NOT NULL AUTO_INCREMENT,
   id_subtema INT NOT NULL,
-  nombre VARCHAR(255) NOT NULL,
+  nombre VARCHAR(255),
   hecho TINYINT(1) DEFAULT 0,
   PRIMARY KEY (id_ejercicio),
   INDEX idx_subtema (id_subtema),
@@ -78,7 +78,7 @@ CREATE TABLE tbl_ejercicio (
 CREATE TABLE tbl_pregunta (
   id_pregunta INT NOT NULL AUTO_INCREMENT,
   id_ejercicio INT NOT NULL,
-  enunciado TEXT NOT NULL,
+  enunciado TEXT,                    -- quitado NOT NULL (puedes tener preguntas sin texto temporalmente si quieres)
   PRIMARY KEY (id_pregunta),
   INDEX idx_ejercicio (id_ejercicio),
   CONSTRAINT fk_pregunta_ejercicio
@@ -89,7 +89,7 @@ CREATE TABLE tbl_pregunta (
 CREATE TABLE tbl_opcion (
   id_opcion INT NOT NULL AUTO_INCREMENT,
   id_pregunta INT NOT NULL,
-  texto VARCHAR(255) NOT NULL,
+  texto VARCHAR(255),
   es_correcta TINYINT(1) DEFAULT 0,
   PRIMARY KEY (id_opcion),
   INDEX idx_pregunta (id_pregunta),
@@ -103,9 +103,9 @@ CREATE TABLE tbl_recurso_adjunto (
   id_subtema INT NOT NULL,
   id_tipo_recurso INT NOT NULL,
   orden INT DEFAULT 0,
-  titulo VARCHAR(255) NULL,
-  url VARCHAR(500) NOT NULL,
-  descripcion TEXT NULL,
+  titulo VARCHAR(255),
+  url VARCHAR(500),                  -- quitado NOT NULL (puedes insertar sin URL mientras la completas)
+  descripcion TEXT,
   PRIMARY KEY (id_recurso),
   INDEX idx_subtema_orden (id_subtema, orden),
   INDEX idx_tipo (id_tipo_recurso),
@@ -123,10 +123,10 @@ CREATE TABLE tbl_recurso_adjunto (
 
 CREATE TABLE tbl_usuario (
   id_usuario INT NOT NULL AUTO_INCREMENT,
-  nombre_cuenta VARCHAR(100) NOT NULL,
-  correo VARCHAR(255) NOT NULL,
-  contrasena VARCHAR(255) NOT NULL,
-  id_rol INT NOT NULL,
+  nombre_cuenta VARCHAR(100),
+  correo VARCHAR(255),
+  contrasena VARCHAR(255),
+  id_rol INT NOT NULL,               -- dejo NOT NULL porque sin rol el usuario no tiene sentido
   PRIMARY KEY (id_usuario),
   UNIQUE KEY uniq_correo (correo),
   INDEX idx_rol (id_rol),
@@ -135,7 +135,6 @@ CREATE TABLE tbl_usuario (
     ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
--- N:M usuario ↔ materia
 CREATE TABLE tbl_usuariomateria (
   id_usuario_materia INT NOT NULL AUTO_INCREMENT,
   id_usuario INT NOT NULL,
@@ -160,7 +159,7 @@ CREATE TABLE tbl_intento_ejercicio (
   id_intento_ejercicio INT NOT NULL AUTO_INCREMENT,
   id_usuario INT NOT NULL,
   id_ejercicio INT NOT NULL,
-  puntaje DECIMAL(5,2) NULL,
+  puntaje DECIMAL(5,2),
   fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id_intento_ejercicio),
   INDEX idx_usuario_fecha (id_usuario, fecha DESC),
@@ -196,12 +195,11 @@ CREATE TABLE tbl_progreso_subtema (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
--- 1:1 con PK compartida
 CREATE TABLE tbl_ultima_conexion (
   id_usuario INT NOT NULL,
-  ultima_conexion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  dispositivo VARCHAR(255) NULL,
-  id_subtema INT NULL,
+  ultima_conexion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  dispositivo VARCHAR(255),
+  id_subtema INT,
   PRIMARY KEY (id_usuario),
   INDEX idx_subtema (id_subtema),
   CONSTRAINT fk_ultimacon_usuario
@@ -216,7 +214,6 @@ CREATE TABLE tbl_ultima_conexion (
 -- 5. CONFIGURACIÓN PERSONAL
 -- ============================================================
 
--- 1:1 con PK compartida
 CREATE TABLE tbl_configuracion (
   id_usuario INT NOT NULL,
   modo_audio TINYINT(1) DEFAULT 0,
