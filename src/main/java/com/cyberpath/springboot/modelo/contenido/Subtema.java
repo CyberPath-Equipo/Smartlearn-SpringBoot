@@ -17,7 +17,6 @@ import java.util.List;
 @Table(name = "tbl_subtema")
 public class Subtema {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_subtema")
     private Integer id;
 
@@ -28,8 +27,7 @@ public class Subtema {
     @JoinColumn(name = "id_tema")
     private Tema tema;
 
-    // RELACIÓN 1:1 CORRECTA CON TEORIA
-    @OneToOne(mappedBy = "subtema", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY, optional = true)
+    @OneToOne(mappedBy = "subtema", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private Teoria teoria;
 
     @OneToMany(mappedBy = "subtema", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -47,13 +45,6 @@ public class Subtema {
     @OneToMany(mappedBy = "subtema", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private List<Ejercicio> ejercicios = new ArrayList<>();
-
-    public void setTeoria(Teoria teoria) {
-        this.teoria = teoria;
-        if (teoria != null) {
-            teoria.setSubtema(this);
-        }
-    }
 
     public void addRecursoAdjunto(RecursoAdjunto recursoAdjunto) {
         this.recursosAdjuntos.add(recursoAdjunto);

@@ -2,7 +2,7 @@ package com.cyberpath.springboot.servicio.impl.contenido;
 
 import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
 import com.cyberpath.springboot.repositorio.contenido.ProgresoSubtemaRepositorio;
-import com.cyberpath.springboot.servicio.contenido.ProgresoSubtemaServicio;
+import com.cyberpath.springboot.servicio.servicio.contenido.ProgresoSubtemaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

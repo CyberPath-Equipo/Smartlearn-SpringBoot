@@ -3,7 +3,9 @@ package com.cyberpath.springboot.controlador.contenido;
 import com.cyberpath.springboot.dto.contenido.MateriaDto;
 import com.cyberpath.springboot.dto.contenido.TemaDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
-import com.cyberpath.springboot.servicio.contenido.MateriaServicio;
+import com.cyberpath.springboot.modelo.contenido.Tema;
+import com.cyberpath.springboot.modelo.usuario.Usuario;
+import com.cyberpath.springboot.servicio.servicio.contenido.MateriaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,6 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/smartlearn/api")
 @RestController
-@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class MateriaControlador {
 
@@ -43,7 +44,7 @@ public class MateriaControlador {
     }
 
     @GetMapping("/materia/{id}/temas")
-    public ResponseEntity<List<TemaDto>> getTemas(@PathVariable Integer id) {
+    public ResponseEntity<List<TemaDto>> getTemasByMateria(@PathVariable Integer id) {
         Materia materia = materiaServicio.getById(id);
         if (materia == null) {
             return ResponseEntity.notFound().build();
@@ -58,6 +59,7 @@ public class MateriaControlador {
                         .collect(Collectors.toList())
         );
     }
+
 
     @PostMapping("/materia")
     public ResponseEntity<MateriaDto> save(@RequestBody MateriaDto materiaDto) {
@@ -79,6 +81,20 @@ public class MateriaControlador {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/materia/{id}/total-ejercicios")
+    public ResponseEntity<Long> getTotalEjerciciosByMateria(@PathVariable Integer id) {
+        // Verifica si la materia existe
+        Materia materia = materiaServicio.getById(id);
+        if (materia == null) {
+            return ResponseEntity.notFound().build();
+        }
+        // Obtiene el conteo de ejercicios
+        Long totalEjercicios = materiaServicio.countEjerciciosByMateriaId(id);
+        return ResponseEntity.ok(totalEjercicios);
+    }
+
+
+
     // ====================== MÉTODOS DE CONVERSIÓN ======================
     private MateriaDto convertToDto(Materia materia) {
         return MateriaDto.builder()
@@ -87,6 +103,8 @@ public class MateriaControlador {
                 .descripcion(materia.getDescripcion())
                 .build();
     }
+
+
 
     // ====================== MAPEO DTO → ENTIDAD ======================
     private Materia mapDtoToEntity(MateriaDto dto) {

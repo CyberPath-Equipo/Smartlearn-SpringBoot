@@ -1,4 +1,4 @@
-package com.cyberpath.springboot.servicio.ejercicio;
+package com.cyberpath.springboot.servicio.servicio.ejercicio;
 
 import com.cyberpath.springboot.modelo.ejercicio.Pregunta;
 

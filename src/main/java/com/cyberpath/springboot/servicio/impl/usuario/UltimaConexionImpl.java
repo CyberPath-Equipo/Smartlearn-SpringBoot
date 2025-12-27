@@ -3,7 +3,7 @@ package com.cyberpath.springboot.servicio.impl.usuario;
 import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
 import com.cyberpath.springboot.repositorio.usuario.UltimaConexionRepositorio;
-import com.cyberpath.springboot.servicio.usuario.UltimaConexionServicio;
+import com.cyberpath.springboot.servicio.servicio.usuario.UltimaConexionServicio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +26,9 @@ public class UltimaConexionImpl implements UltimaConexionServicio {
 
     @Override
     public UltimaConexion save(UltimaConexion conexion) {
+        if (conexion.getUsuario() == null || repositorio.existsById(conexion.getUsuario().getId())) {
+            throw new RuntimeException("Usuario inválido o ya tiene UltimaConexion");
+        }
         return repositorio.save(conexion);
     }
 

@@ -3,7 +3,7 @@ package com.cyberpath.springboot.controlador.usuario;
 import com.cyberpath.springboot.dto.usuario.ConfiguracionDto;
 import com.cyberpath.springboot.modelo.usuario.Configuracion;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
-import com.cyberpath.springboot.servicio.usuario.ConfiguracionServicio;
+import com.cyberpath.springboot.servicio.servicio.usuario.ConfiguracionServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

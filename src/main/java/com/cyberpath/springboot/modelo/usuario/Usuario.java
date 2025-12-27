@@ -2,6 +2,7 @@ package com.cyberpath.springboot.modelo.usuario;
 
 import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
+import com.cyberpath.springboot.modelo.relaciones.UsuarioEjercicio;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,21 +15,20 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "tbl_usuario",
-        uniqueConstraints = @UniqueConstraint(columnNames = "correo"))
+@Table(name = "tbl_usuario", uniqueConstraints = @UniqueConstraint(columnNames = "correo"))
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "nombre_cuenta", nullable = false, length = 100)
+    @Column(name = "nombre_cuenta", length = 100)
     private String nombreCuenta;
 
-    @Column(name = "correo", nullable = false, length = 255)
+    @Column(name = "correo", length = 255)
     private String correo;
 
-    @Column(name = "contrasena", nullable = false, length = 255)
+    @Column(name = "contrasena", length = 255)
     private String contrasena;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -52,6 +52,10 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private List<UsuarioMateria> usuariosMaterias = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<UsuarioEjercicio> usuariosEjercicios = new ArrayList<>();
 
     public void addIntentoEjercicio(IntentoEjercicio intentoEjercicio) {
         this.intentoEjercicio.add(intentoEjercicio);

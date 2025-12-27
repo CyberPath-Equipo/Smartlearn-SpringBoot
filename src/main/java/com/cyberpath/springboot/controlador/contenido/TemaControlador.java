@@ -5,8 +5,7 @@ import com.cyberpath.springboot.dto.contenido.SubtemaDto;
 import com.cyberpath.springboot.dto.contenido.TemaDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
 import com.cyberpath.springboot.modelo.contenido.Tema;
-import com.cyberpath.springboot.servicio.contenido.MateriaServicio;
-import com.cyberpath.springboot.servicio.contenido.TemaServicio;
+import com.cyberpath.springboot.servicio.servicio.contenido.TemaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +15,10 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/smartlearn/api")
 @RestController
-@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class TemaControlador {
 
     private final TemaServicio temaServicio;
-    private final MateriaServicio materiaServicio;
 
     @GetMapping("/tema")
     public ResponseEntity<List<TemaDto>> lista() {
@@ -47,7 +44,7 @@ public class TemaControlador {
     }
 
     @GetMapping("/tema/{id}/subtemas")
-    public ResponseEntity<List<SubtemaDto>> getSubtemas(@PathVariable Integer id) {
+    public ResponseEntity<List<SubtemaDto>> getSubtemasByTema(@PathVariable Integer id) {
         Tema tema = temaServicio.getById(id);
         if (tema == null) {
             return ResponseEntity.notFound().build();

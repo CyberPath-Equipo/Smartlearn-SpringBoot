@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class RecursoAdjunto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_recurso")
+    @Column(name = "id_recurso_adjunto")
     private Integer id;
 
     @Column(name = "orden")
