@@ -2,7 +2,7 @@ package com.cyberpath.springboot.controlador.recurso;
 
 import com.cyberpath.springboot.dto.recurso.TipoRecursoDto;
 import com.cyberpath.springboot.modelo.recurso.TipoRecurso;
-import com.cyberpath.springboot.servicio.recurso.TipoRecursoServicio;
+import com.cyberpath.springboot.servicio.servicio.recurso.TipoRecursoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

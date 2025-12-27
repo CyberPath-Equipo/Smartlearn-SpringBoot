@@ -2,7 +2,7 @@ package com.cyberpath.springboot.controlador.usuario;
 
 import com.cyberpath.springboot.dto.usuario.RolDto;
 import com.cyberpath.springboot.modelo.usuario.Rol;
-import com.cyberpath.springboot.servicio.usuario.RolServicio;
+import com.cyberpath.springboot.servicio.servicio.usuario.RolServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UltimaConexionDto {
     private Integer id;
-    private LocalDateTime ultimaConexion;
+    private String ultimaConexion;
     private String dispositivo;
 
     private Integer idUsuario;

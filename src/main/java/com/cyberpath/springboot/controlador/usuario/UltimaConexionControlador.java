@@ -4,7 +4,7 @@ import com.cyberpath.springboot.dto.usuario.UltimaConexionDto;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
 import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
-import com.cyberpath.springboot.servicio.usuario.UltimaConexionServicio;
+import com.cyberpath.springboot.servicio.servicio.usuario.UltimaConexionServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,30 +44,41 @@ public class UltimaConexionControlador {
 
     @PostMapping("/ultima-conexion")
     public ResponseEntity<UltimaConexionDto> save(@RequestBody UltimaConexionDto conexionDto) {
-        UltimaConexion conexion = mapDtoToEntity(conexionDto);
-
-        if (conexionDto.getId() != null) {
-            conexion.setUsuario(Usuario.builder().id(conexionDto.getId()).build());
+        try {
+            UltimaConexion conexion = mapDtoToEntity(conexionDto);
+            System.out.println("DEBUG: Recibido DTO - idUsuario: " + conexionDto.getIdUsuario() + ", idSubtema: " + conexionDto.getIdSubtema());  // Agrega esto
+            if (conexionDto.getIdUsuario() != null) {
+                conexion.setUsuario(Usuario.builder().id(conexionDto.getIdUsuario()).build());
+            }
+            if (conexionDto.getIdSubtema() != null) {
+                conexion.setSubtema(Subtema.builder().id(conexionDto.getIdSubtema()).build());
+            }
+            UltimaConexion guardada = ultimaConexionServicio.save(conexion);
+            return ResponseEntity.ok(convertToDto(guardada));
+        } catch (Exception e) {
+            System.err.println("ERROR 500 en save: " + e.getMessage());  // Agrega esto
+            e.printStackTrace();  // Muestra el stack trace completo
+            return ResponseEntity.internalServerError().build();
         }
-        if (conexionDto.getIdSubtema() != null) {
-            conexion.setSubtema(Subtema.builder().id(conexionDto.getIdSubtema()).build());
-        }
-
-        UltimaConexion guardada = ultimaConexionServicio.save(conexion);
-        return ResponseEntity.ok(convertToDto(guardada));
     }
 
     @PutMapping("/ultima-conexion/{id}")
     public ResponseEntity<UltimaConexionDto> update(@PathVariable Integer id, @RequestBody UltimaConexionDto conexionDto) {
-        UltimaConexion datosActualizacion = mapDtoToEntity(conexionDto);
+        try {
+            UltimaConexion datosActualizacion = mapDtoToEntity(conexionDto);
 
-        datosActualizacion.setUsuario(Usuario.builder().id(id).build());
-        if (conexionDto.getIdSubtema() != null) {
-            datosActualizacion.setSubtema(Subtema.builder().id(conexionDto.getIdSubtema()).build());
+            datosActualizacion.setUsuario(Usuario.builder().id(id).build());  // id es idUsuario, OK para @MapsId
+            if (conexionDto.getIdSubtema() != null) {
+                datosActualizacion.setSubtema(Subtema.builder().id(conexionDto.getIdSubtema()).build());
+            }
+
+            UltimaConexion actualizada = ultimaConexionServicio.update(id, datosActualizacion);
+            return ResponseEntity.ok(convertToDto(actualizada));
+        } catch (Exception e) {
+            System.err.println("ERROR 500 en update: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
         }
-
-        UltimaConexion actualizada = ultimaConexionServicio.update(id, datosActualizacion);
-        return ResponseEntity.ok(convertToDto(actualizada));
     }
 
     @DeleteMapping("/ultima-conexion/{id}")

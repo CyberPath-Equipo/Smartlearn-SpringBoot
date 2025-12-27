@@ -1,23 +1,29 @@
 package com.cyberpath.springboot.servicio.impl.usuario;
 
+import com.cyberpath.springboot.modelo.contenido.Materia;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
-import com.cyberpath.springboot.web.PasswordManager;
+import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
+import com.cyberpath.springboot.repositorio.relaciones.UsuarioEjercicioRepositorio;
+import com.cyberpath.springboot.repositorio.usuario.UltimaConexionRepositorio;
+import com.cyberpath.springboot.servicio.servicio.contenido.MateriaServicio;
 import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
-import org.apache.catalina.authenticator.SavedRequest;
 import org.springframework.stereotype.Service;
 import com.cyberpath.springboot.repositorio.usuario.UsuarioRepositorio;
-import com.cyberpath.springboot.servicio.usuario.UsuarioServicio;
+import com.cyberpath.springboot.servicio.servicio.usuario.UsuarioServicio;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
 @Service
 public class UsuarioImpl implements UsuarioServicio {
     private final UsuarioRepositorio usuarioRepositorio;
+    private final UsuarioEjercicioRepositorio usuarioEjercicioRepositorio;
+    private final MateriaServicio materiaServicio;
+    private final UltimaConexionRepositorio ultimaConexionRepositorio;
 
     @Override
     public List<Usuario> getAll() {
@@ -30,18 +36,19 @@ public class UsuarioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario getByCorreo(String correo) {
-        for (Usuario usuario : usuarioRepositorio.findAll()){
-            if (usuario.getCorreo().equalsIgnoreCase(correo)){
-                return usuario;
-            }
-        }
-        return null;
-    }
-
-    @Override
     public Usuario save(Usuario usuario) {
-        return usuarioRepositorio.save(usuario);
+        // Primero guarda el usuario para obtener su ID
+        Usuario guardado = usuarioRepositorio.save(usuario);
+        // Crea UltimaConexion SIN setear ID manualmente (deja que @MapsId lo haga)
+        UltimaConexion ultimaConexion = UltimaConexion.builder()
+                .ultimaConexion(LocalDateTime.now().toString())  // Fecha actual como String
+                .dispositivo("default")  // Valor por defecto
+                .usuario(guardado)  // Asigna el usuario (esto asigna el ID automáticamente)
+                .build();
+        UltimaConexion guardadaConexion = ultimaConexionRepositorio.save(ultimaConexion);
+        // Si la relación es bidireccional, setea la referencia en Usuario
+        guardado.setUltimaConexion(guardadaConexion);
+        return guardado;
     }
 
     @Override
@@ -93,22 +100,16 @@ public class UsuarioImpl implements UsuarioServicio {
     }
 
     @Override
-    public boolean cambiarPassword(Integer id, String passwordActual, String passwordNueva) {
-        Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
-        PasswordManager passwordManager = new PasswordManager();
-        if (usuario == null) {
-            return false;
-        }
-
-        // Validar password actual
-        if (!passwordManager.validarContrasena(passwordActual, usuario.getContrasena())) {
-            return false;
-        }
-
-        usuario.setContrasena(passwordManager.encode(passwordNueva));
-        usuarioRepositorio.save(usuario);
-
-        return true;
+    public Usuario findByNombreCuenta(String nombreCuenta) {
+        return usuarioRepositorio.findByNombreCuenta(nombreCuenta).orElse(null);
     }
 
+    @Override
+    public Long countEjerciciosRealizadosByUsuarioAndMateria(Integer idUsuario, Integer idMateria) {
+        return usuarioEjercicioRepositorio.countEjerciciosRealizadosByUsuarioAndMateria(idUsuario, idMateria);
+    }
+    @Override
+    public Materia getMateriaById(Integer idMateria) {
+        return materiaServicio.getById(idMateria);
+    }
 }

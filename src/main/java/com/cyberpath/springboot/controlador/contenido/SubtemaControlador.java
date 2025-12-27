@@ -1,15 +1,16 @@
 package com.cyberpath.springboot.controlador.contenido;
 
+import com.cyberpath.springboot.dto.contenido.MateriaDto;
 import com.cyberpath.springboot.dto.contenido.SubtemaDto;
 import com.cyberpath.springboot.dto.contenido.TemaDto;
 import com.cyberpath.springboot.dto.contenido.TeoriaDto;
 import com.cyberpath.springboot.dto.ejercicio.EjercicioDto;
+import com.cyberpath.springboot.modelo.contenido.Materia;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
 import com.cyberpath.springboot.modelo.contenido.Tema;
-import com.cyberpath.springboot.modelo.contenido.Teoria;
 import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
-import com.cyberpath.springboot.servicio.contenido.SubtemaServicio;
-import com.cyberpath.springboot.servicio.ejercicio.EjercicioServicio;
+import com.cyberpath.springboot.modelo.usuario.Usuario;
+import com.cyberpath.springboot.servicio.servicio.contenido.SubtemaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,10 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/smartlearn/api")
 @RestController
-@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class SubtemaControlador {
 
     private final SubtemaServicio subtemaServicio;
-    private final EjercicioServicio ejercicioServicio;
 
     @GetMapping("/subtema")
     public ResponseEntity<List<SubtemaDto>> lista() {
@@ -69,48 +68,6 @@ public class SubtemaControlador {
         );
     }
 
-    @GetMapping("/subtema/{id}/teoria")
-    public ResponseEntity<TeoriaDto> getTeoria(@PathVariable Integer id) {
-        Subtema subtema = subtemaServicio.getById(id);
-        if (subtema == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Teoria teoria = subtema.getTeoria();
-        if (teoria == null) {
-            return ResponseEntity.noContent().build();
-        }
-        TeoriaDto dto = TeoriaDto.builder()
-                .id(teoria.getId())
-                .contenido(teoria.getContenido())
-                .revisado(teoria.getRevisado())
-                .build();
-        return ResponseEntity.ok(dto);
-    }
-
-    @GetMapping("/subtema/{id}/ejercicios")
-    public ResponseEntity<List<EjercicioDto>> getEjerciciosBySubtema(@PathVariable Integer id) {
-
-        Subtema subtema = subtemaServicio.getById(id);
-        if (subtema == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        List<Ejercicio> ejercicios = subtema.getEjercicios();
-
-        List<EjercicioDto> dtos = ejercicios.stream()
-                .map(e -> EjercicioDto.builder()
-                        .id(e.getId())
-                        .nombre(e.getNombre())
-                        .hecho(Boolean.TRUE.equals(e.getHecho()))
-                        .idSubtema(id)
-                        .build()
-                )
-                .toList();
-
-        return ResponseEntity.ok(dtos);
-    }
-
     @PostMapping("/subtema")
     public ResponseEntity<SubtemaDto> save(@RequestBody SubtemaDto subtemaDto) {
         Subtema subtema = mapDtoToEntity(subtemaDto);
@@ -124,30 +81,10 @@ public class SubtemaControlador {
         return ResponseEntity.ok(convertToDto(guardado));
     }
 
-    @PostMapping("/subtema/{id}/ejercicios")
-    public ResponseEntity<EjercicioDto> crearEjercicio(@PathVariable Integer id, @RequestBody EjercicioDto dto) {
-
-        Subtema subtema = subtemaServicio.getById(id);
-        if (subtema == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Ejercicio ejercicio = Ejercicio.builder()
-                .nombre(dto.getNombre())
-                .hecho(false)
-                .subtema(subtema)
-                .build();
-
-        Ejercicio guardado = ejercicioServicio.save(ejercicio);
-
-        return ResponseEntity.ok(convertEjercicioToDto(guardado));
-    }
-
     @PutMapping("/subtema/{id}")
     public ResponseEntity<SubtemaDto> update(@PathVariable Integer id, @RequestBody SubtemaDto subtemaDto) {
         Subtema datosActualizacion = mapDtoToEntity(subtemaDto);
 
-        // Asocia con Tema
         if (subtemaDto.getIdTema() != null) {
             datosActualizacion.setTema(Tema.builder().id(subtemaDto.getIdTema()).build());
         }
@@ -162,12 +99,25 @@ public class SubtemaControlador {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/subtema/teoria/{idTeoria}")
-    public ResponseEntity<Void> deleteTeoria(@PathVariable Integer idTeoria) {
-        subtemaServicio.deleteTeoria(idTeoria);
-        return ResponseEntity.noContent().build();
-    }
+    @GetMapping("/subtema/{idSubtema}/ejercicios")
+    public ResponseEntity<List<EjercicioDto>> getEjerciciosBySubtema(@PathVariable Integer idSubtema) {
+        Subtema subtema = subtemaServicio.getById(idSubtema);
+        if (subtema == null) {
+            return ResponseEntity.notFound().build();
+        }
 
+        return ResponseEntity.ok(
+                subtema.getEjercicios()
+                        .stream()
+                        .map( s -> EjercicioDto.builder()
+                                .id(s.getId())
+                                .nombre(s.getNombre())
+                                .idSubtema(idSubtema)
+                                .hecho(s.getHecho())
+                                .build())
+                        .collect(Collectors.toList())
+        );
+    }
 
     // ====================== MÉTODOS DE CONVERSIÓN ======================
     private SubtemaDto convertToDto(Subtema subtema) {
@@ -182,7 +132,7 @@ public class SubtemaControlador {
         return EjercicioDto.builder()
                 .id(ejercicio.getId())
                 .nombre(ejercicio.getNombre())
-                .hecho(ejercicio.getHecho())
+                .hecho(ejercicio.getHecho() != null && ejercicio.getHecho())
                 .idSubtema(ejercicio.getSubtema() != null ? ejercicio.getSubtema().getId() : null)
                 .build();
     }

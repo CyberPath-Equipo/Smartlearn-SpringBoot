@@ -3,7 +3,7 @@ package com.cyberpath.springboot.servicio.impl.ejercicio;
 import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.ejercicio.Pregunta;
 import com.cyberpath.springboot.repositorio.ejercicio.PreguntaRepositorio;
-import com.cyberpath.springboot.servicio.ejercicio.PreguntaServicio;
+import com.cyberpath.springboot.servicio.servicio.ejercicio.PreguntaServicio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

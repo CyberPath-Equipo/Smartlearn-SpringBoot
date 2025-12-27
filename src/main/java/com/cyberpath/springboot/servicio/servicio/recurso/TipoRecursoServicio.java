@@ -1,4 +1,4 @@
-package com.cyberpath.springboot.servicio.recurso;
+package com.cyberpath.springboot.servicio.servicio.recurso;
 
 import com.cyberpath.springboot.modelo.recurso.TipoRecurso;
 

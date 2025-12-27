@@ -4,7 +4,6 @@ import com.cyberpath.springboot.modelo.contenido.Subtema;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -17,15 +16,15 @@ public class UltimaConexion {
     @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "ultima_conexion", nullable = false)
-    private LocalDateTime ultimaConexion = LocalDateTime.now();
+    @Column(name = "ultima_conexion")
+    private String ultimaConexion;
 
     @Column(name = "dispositivo",  length = 255)
     private String dispositivo;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)

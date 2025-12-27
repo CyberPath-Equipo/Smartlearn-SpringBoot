@@ -3,7 +3,7 @@ package com.cyberpath.springboot.servicio.impl.contenido;
 import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.contenido.Tema;
 import com.cyberpath.springboot.repositorio.contenido.TemaRepositorio;
-import com.cyberpath.springboot.servicio.contenido.TemaServicio;
+import com.cyberpath.springboot.servicio.servicio.contenido.TemaServicio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
