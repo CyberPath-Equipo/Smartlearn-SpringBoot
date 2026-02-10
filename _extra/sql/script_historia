@@ -1,0 +1,419 @@
+USE smartlearn;
+
+/* HISTORIA */
+
+-- Script completo para crear la base de datos smartlearn y poblarla con datos de Historia de México (Nivel Básico)
+-- Basado en la estructura proporcionada, adaptando la información educativa a las tablas.
+
+-- Materia
+INSERT INTO tbl_materia (nombre, descripcion) VALUES
+('Historia de México', 'Curso básico de historia de México');
+
+-- Temas (Bloques)
+INSERT INTO tbl_tema (id_materia, nombre) VALUES
+(1, 'Bloque 1: Conociendo el pasado'),
+(1, 'Bloque 2: Las primeras personas en México'),
+(1, 'Bloque 3: Grandes civilizaciones antiguas'),
+(1, 'Bloque 4: La llegada de los españoles'),
+(1, 'Bloque 5: México como colonia'),
+(1, 'Bloque 6: La independencia de México'),
+(1, 'Bloque 7: El México libre y sus luchas'),
+(1, 'Bloque 8: Porfiriato y Revolución Mexicana');
+
+-- Subtemas (Uno por tema, correspondiente al bloque)
+INSERT INTO tbl_subtema (id_tema, nombre) VALUES
+(1, 'Conociendo el pasado'),
+(2, 'Las primeras personas en México'),
+(3, 'Grandes civilizaciones antiguas'),
+(4, 'La llegada de los españoles'),
+(5, 'México como colonia'),
+(6, 'La independencia de México'),
+(7, 'El México libre y sus luchas'),
+(8, 'Porfiriato y Revolución Mexicana');
+
+-- Teoría (Contenido de cada bloque)
+INSERT INTO tbl_teoria (id_subtema, contenido, revisado) VALUES
+(1, '¿Qué es la historia? La historia es el estudio de los acontecimientos pasados que han influido en la humanidad. Nos ayuda a comprender cómo vivían las personas en diferentes épocas, qué desafíos enfrentaron y cómo sus acciones han moldeado el mundo en el que vivimos hoy. A través de la historia, podemos aprender sobre las culturas, tradiciones y eventos que han dejado una huella en la sociedad. Para las personas con discapacidad visual, la historia se puede explorar mediante narraciones auditivas, relatos orales y descripciones detalladas que permiten imaginar los escenarios y comprender los contextos históricos. La tecnología también ofrece herramientas como audiolibros y aplicaciones accesibles que facilitan el aprendizaje de la historia de manera inclusiva. ¿Por qué es importante conocer lo que pasó antes? Conocer la historia nos permite entender el presente y prepararnos para el futuro. Al estudiar los errores y aciertos del pasado, podemos tomar decisiones más informadas y evitar repetir equivocaciones. Además, la historia nos enseña sobre la evolución de los derechos humanos, las luchas por la justicia y los avances sociales que han beneficiado a muchas personas. El tiempo histórico: pasado, presente y futuro. El tiempo histórico se refiere a la manera en que organizamos y comprendemos los eventos a lo largo del tiempo. Se divide en tres momentos: pasado, presente y futuro. Pasado: Incluye todos los eventos que ya han ocurrido. Por ejemplo, la independencia de México en 1821. Presente: Es el momento actual en el que vivimos. Por ejemplo, el día de hoy y las actividades que realizamos. Futuro: Se refiere a lo que aún no ha sucedido. Por ejemplo, los planes y metas que tenemos para los próximos años. Cómo se cuenta la historia: relatos, leyendas, y testimonios orales. La historia se transmite a través de diversas fuentes que nos proporcionan información sobre el pasado. Estas fuentes pueden ser: Orales: Relatos y testimonios contados por personas que vivieron ciertos eventos o que han transmitido historias de generación en generación. Escritas: Documentos, cartas, libros y registros que contienen información sobre hechos históricos. Materiales: Objetos, monumentos y artefactos que nos dan pistas sobre cómo vivían las personas en otras épocas.', 0),
+(2, '¿Cómo eran las primeras comunidades? Las primeras comunidades humanas en lo que hoy es México se formaron hace miles de años. Estas personas vivían en pequeños grupos y se desplazaban constantemente en busca de alimento. No tenían casas permanentes; en su lugar, utilizaban refugios temporales como cuevas o estructuras hechas con ramas y hojas. La vida en estas comunidades era sencilla pero colaborativa. Todos los miembros del grupo tenían responsabilidades: algunos se encargaban de buscar comida, otros de cuidar a los niños o de preparar herramientas. La cooperación era esencial para sobrevivir en un entorno natural lleno de desafíos. Estas comunidades también compartían conocimientos a través de historias y enseñanzas orales. De esta manera, las habilidades y experiencias se transmitían de generación en generación, fortaleciendo los lazos entre sus miembros. Aunque no dejaron escritos, su legado perdura en las herramientas que fabricaron, los restos de sus campamentos y las tradiciones que, en algunos casos, han llegado hasta nuestros días. Cazadores y recolectores. Durante la mayor parte de la prehistoria, los seres humanos fueron cazadores y recolectores. Esto significa que obtenían su alimento cazando animales y recolectando frutas, semillas y raíces. Esta forma de vida requería un profundo conocimiento del entorno natural y una gran habilidad para rastrear y cazar. En el territorio que hoy es México, se han encontrado evidencias de estas actividades. Por ejemplo, en Tultepec, Estado de México, arqueólogos descubrieron trampas para mamuts construidas hace aproximadamente 15,000 años. Estas estructuras muestran la inteligencia y cooperación de estos grupos para cazar animales de gran tamaño. Además de cazar, recolectaban una variedad de plantas comestibles. Conocían las temporadas en las que ciertas frutas estaban maduras y sabían cuáles eran seguras para el consumo. Este conocimiento era vital para su supervivencia y se transmitía oralmente entre generaciones. La vida de los cazadores y recolectores estaba en constante movimiento. Seguían a los animales y se desplazaban según las estaciones del año. Esta movilidad les permitía adaptarse a diferentes entornos y aprovechar los recursos disponibles en cada región. Nacimiento de la agricultura. Con el tiempo, algunas comunidades comenzaron a observar que podían plantar semillas y cultivar sus propios alimentos. Este descubrimiento marcó el inicio de la agricultura. Al aprender a sembrar y cosechar, las personas ya no dependían únicamente de la caza y la recolección. La agricultura permitió que las comunidades se establecieran en un lugar fijo, dando origen a los primeros asentamientos permanentes. Cultivaban maíz, frijol, calabaza y otros alimentos básicos que siguen siendo fundamentales en la dieta mexicana. Además de cultivar plantas, comenzaron a domesticar animales como perros, pavos y abejas. Esto les proporcionaba carne, huevos, miel y compañía. La combinación de agricultura y domesticación de animales mejoró significativamente su calidad de vida. Periodos Prehispánicos en México. Etapa Lítica (Paleoindio) Aproximadamente 30,000 a.C. a 2,500 a.C: La Etapa Lítica marca los primeros momentos de ocupación humana en lo que hoy conocemos como México. Durante este periodo, los grupos humanos eran nómadas y se dedicaban a la caza, la recolección y la pesca para subsistir. Fabricaban herramientas de piedra, como puntas de proyectil, que les ayudaban en sus actividades cotidianas. Estos grupos no tenían viviendas permanentes; se desplazaban según las estaciones del año y la disponibilidad de recursos. La transmisión de conocimientos se realizaba de manera oral, compartiendo experiencias y enseñanzas que permitían la adaptación al entorno. Preclásico - Aproximadamente 2,500 a.C. a 200 d.C. El Preclásico es un periodo de transición donde las comunidades comenzaron a establecerse de manera más permanente. La agricultura se consolidó como la principal actividad económica, cultivando plantas como el maíz, el frijol, la calabaza y el chile. Esto permitió el crecimiento de aldeas y el desarrollo de estructuras sociales más complejas. Durante este tiempo, surgieron las primeras grandes civilizaciones en Mesoamérica, como los olmecas, quienes son considerados la "cultura madre" debido a su influencia en otras culturas posteriores. Desarrollaron sistemas de escritura, calendarios y una rica tradición artística y religiosa. La vida cotidiana en el Preclásico estaba marcada por la organización comunitaria, la construcción de centros ceremoniales y el intercambio de bienes y conocimientos con otras regiones. Clásico - Aproximadamente 200 d.C. a 800 d.C. El periodo Clásico se caracteriza por el auge de grandes ciudades y civilizaciones. En el sur de Mesoamérica, floreció la civilización maya, destacando por sus avances en astronomía, matemáticas y escritura jeroglífica. Construyeron impresionantes ciudades como Tikal, Palenque y Copán, con templos, pirámides y observatorios astronómicos. En el centro de México, la ciudad de Teotihuacán alcanzó su máximo esplendor. Su urbanismo planificado, con avenidas amplias y monumentos como la Pirámide del Sol y la Pirámide de la Luna, reflejaban una sociedad organizada y avanzada. Durante este periodo, las redes de comercio y comunicación se expandieron, facilitando el intercambio cultural y tecnológico entre diferentes regiones de Mesoamérica. Posclásico - Aproximadamente 800 d.C. a 1521 d.C. El Posclásico es un periodo de grandes transformaciones y conflictos. Civilizaciones como los toltecas, los zapotecas, los mixtecos y los mexicas (aztecas) dominaron diversas regiones de Mesoamérica. Los mexicas, por ejemplo, establecieron el imperio más grande de la época, con su capital en Tenochtitlán, ubicada en lo que hoy es la Ciudad de México. Este periodo estuvo marcado por una intensa actividad militar, expansión territorial y la consolidación de estructuras políticas y religiosas complejas. Las ciudades-estado competían por el control de recursos y territorios, lo que llevó a alianzas y conflictos bélicos. A pesar de los desafíos, las civilizaciones del Posclásico dejaron un legado perdurable en la arquitectura, el arte, la religión y las tradiciones que aún influyen en la cultura mexicana contemporánea. Las culturas madre: olmecas. Los olmecas son conocidos como la "cultura madre" de Mesoamérica porque influyeron en muchas civilizaciones posteriores. Vivieron en las regiones costeras del Golfo de México, principalmente en los actuales estados de Veracruz y Tabasco, alrededor del año 1200 a.C. Una de las características más impresionantes de los olmecas son sus enormes cabezas de piedra talladas, que pueden medir hasta tres metros de altura. Estas esculturas muestran rostros humanos con rasgos distintivos y se cree que representan a líderes importantes de su sociedad. Los olmecas desarrollaron un sistema de escritura y un calendario, y fueron pioneros en la construcción de centros ceremoniales con pirámides y plazas. Su arte y arquitectura reflejan una profunda conexión con la naturaleza y lo espiritual. La influencia olmeca se extendió a través del comercio y el intercambio cultural. Muchas de sus ideas, estilos artísticos y prácticas religiosas fueron adoptadas por civilizaciones posteriores como los mayas y los mexicas, dejando un legado duradero en la historia de México.', 0),
+(3, 'Teotihuacanos: La ciudad de los dioses. Teotihuacán, cuyo nombre significa "lugar donde fueron creados los dioses", fue una de las ciudades más importantes de Mesoamérica. Ubicada en el Valle de México, alcanzó su apogeo entre los siglos I y VII d.C. Su influencia se extendió por gran parte de la región, desde el norte hasta el sur del actual México, así como Guatemala y Honduras. La ciudad era conocida por su impresionante arquitectura, destacando la Pirámide del Sol y la Pirámide de la Luna. Estas estructuras eran centros ceremoniales donde se realizaban rituales religiosos. Además, Teotihuacán contaba con una red de calzadas que conectaban diferentes áreas de la ciudad, facilitando el comercio y la comunicación. Aunque la escritura teotihuacana no ha sido completamente descifrada, se han encontrado murales y esculturas que representan a sus habitantes y sus creencias. Estos artefactos ofrecen una visión de la vida cotidiana y las prácticas religiosas de esta civilización. La caída de Teotihuacán, alrededor del siglo VII, sigue siendo un misterio. Sin embargo, su legado perdura en las influencias culturales y arquitectónicas que dejó en otras civilizaciones mesoamericanas. Mayas: Sabiduría y astronomía. La civilización maya floreció en el sureste de México, Guatemala, Belice y partes de Honduras y El Salvador. Se destacó por sus avances en astronomía, matemáticas y escritura. Desarrollaron un sistema de numeración vigesimal (basado en el número 20) y fueron pioneros en el uso del concepto del cero. Los mayas construyeron impresionantes ciudades como Tikal, Palenque y Chichén Itzá. Estas ciudades contaban con pirámides escalonadas, templos, observatorios astronómicos y plazas ceremoniales. La arquitectura maya reflejaba su profundo conocimiento del cosmos y su conexión con los dioses. La escritura maya, conocida como jeroglífica, era utilizada para registrar eventos históricos, genealogías y rituales religiosos. Aunque muchos de sus códices fueron destruidos durante la colonización, algunos han sobrevivido y continúan siendo estudiados por arqueólogos y epigrafistas. A pesar de su colapso en el periodo Clásico Tardío (alrededor del siglo IX), la cultura maya persiste en sus descendientes actuales, quienes mantienen vivas muchas de sus tradiciones y lenguas. Mexicas: El imperio del sol. Los mexicas, también conocidos como aztecas, fueron una civilización que se asentó en el Valle de México en el siglo XIV. Fundaron la ciudad de Tenochtitlan, que se convirtió en la capital de su imperio. Este imperio abarcaba gran parte del centro y sur de México y estaba compuesto por una red de ciudades-estado aliadas. La sociedad mexica estaba organizada jerárquicamente. En la cima se encontraba el tlatoani, el gobernante supremo; seguido por los nobles, sacerdotes, guerreros y comerciantes; y en la base, los macehualtin, campesinos y artesanos. La religión desempeñaba un papel central en la vida mexica, con numerosos dioses asociados a aspectos de la naturaleza y la vida cotidiana. Los mexicas eran conocidos por sus habilidades en la guerra, el comercio y la agricultura. Cultivaban maíz, frijol, chile y cacao, y desarrollaron chinampas, islas artificiales construidas en lagos, para ampliar su superficie cultivable. La llegada de los españoles en el siglo XVI marcó el fin del imperio mexica. Sin embargo, su legado perdura en la Ciudad de México, que se construyó sobre las ruinas de Tenochtitlan, y en las tradiciones, lengua y cultura de sus descendientes.', 0),
+(4, 'Primeros contactos con los pueblos indígenas. En 1517, los primeros exploradores españoles llegaron a la península de Yucatán, donde establecieron contacto con los pueblos mayas. Estos encuentros iniciales fueron relativamente pacíficos, y los mayas recibieron a los extranjeros con hospitalidad. Sin embargo, las posteriores expediciones españolas tuvieron un carácter más agresivo, lo que alteró las relaciones con los pueblos indígenas. En 1519, Hernán Cortés, desobedeciendo órdenes del gobernador de Cuba, Diego Velázquez, emprendió una expedición hacia el territorio del actual México. A su llegada, estableció alianzas con pueblos indígenas como los tlaxcaltecas, quienes compartían intereses comunes con los españoles debido a su rivalidad con el Imperio Mexica. La llegada a Tenochtitlán. El 8 de noviembre de 1519, Cortés y su ejército llegaron a Tenochtitlán, la capital del Imperio Mexica, donde fueron recibidos por el emperador Moctezuma II. Moctezuma, posiblemente influenciado por presagios y leyendas sobre el regreso de Quetzalcoatl, recibió a los españoles con obsequios y hospitalidad. Sin embargo, este encuentro fue una mezcla de fascinación y desconfianza, ya que los mexicas no comprendían completamente las intenciones de los visitantes. La caída de Tenochtitlán. La relación entre los españoles y los mexicas se deterioró rápidamente. En 1520, tras la muerte de Moctezuma y una serie de enfrentamientos, los españoles fueron expulsados de Tenochtitlán en un evento conocido como la "Noche Triste". Sin embargo, Cortés regresó al año siguiente con refuerzos y aliados indígenas, sitiando la ciudad durante varios meses. Finalmente, el 13 de agosto de 1521, Tenochtitlán cayó, marcando el fin del Imperio Mexica y el inicio de la colonización española en la región. A pesar de estos desafíos, muchos pueblos indígenas resistieron y preservaron aspectos fundamentales de su identidad cultural. Hoy en día, las lenguas, tradiciones y cosmovisiones indígenas siguen siendo una parte vital del patrimonio cultural de México.', 0),
+(5, 'La organización del Virreinato de la Nueva España. Tras la caída de Tenochtitlán, los españoles establecieron el Virreinato de la Nueva España, que abarcaba gran parte de América del Norte, Central y el Caribe. La capital fue Ciudad de México, construida sobre las ruinas de Tenochtitlán. El virrey era el representante del rey de España y tenía autoridad sobre la administración, la economía y la religión en el territorio. La sociedad colonial estaba jerárquicamente organizada. En la cima se encontraban los peninsulares, nacidos en España; seguidos por los criollos, hijos de españoles nacidos en América; mestizos, producto de la mezcla entre europeos e indígenas; indígenas, que eran la mayoría de la población; y afrodescendientes, traídos como esclavos. La evangelización y el mestizaje. Uno de los principales objetivos de los colonizadores fue la evangelización de los pueblos indígenas. Los misioneros, principalmente franciscanos, dominicos y agustinos, establecieron conventos y escuelas para enseñar el cristianismo, el idioma español y las costumbres europeas. Este proceso llevó a la conversión forzada de muchos indígenas y a la destrucción de sus creencias y prácticas religiosas. El mestizaje, resultado de la mezcla entre europeos, indígenas y africanos, dio lugar a una nueva identidad cultural. Este fenómeno se reflejó en el arte, la comida, la música y las costumbres, creando una rica diversidad cultural que caracteriza a México hasta la fecha. La economía colonial. La economía del Virreinato de la Nueva España se basaba en la explotación de los recursos naturales y la mano de obra indígena. Las encomiendas eran sistemas en los que los colonizadores recibían tierras y el derecho a cobrar tributos a los indígenas, a cambio de su protección y evangelización. Sin embargo, en la práctica, muchos indígenas fueron sometidos a trabajos forzados en minas y plantaciones. El oro y la plata extraídos de las minas de Zacatecas y Guanajuato fueron fundamentales para la economía colonial. Además, se cultivaban productos como el azúcar, el cacao y el maíz, que eran exportados a Europa. Este modelo económico favoreció a los colonizadores y enriqueció a la Corona española, mientras que los pueblos indígenas sufrían explotación y marginación.', 0),
+(6, 'Antecedentes de la lucha por la independencia. La lucha por la independencia de México fue el resultado de diversos factores internos y externos que generaron un descontento generalizado entre los habitantes del Virreinato de la Nueva España. Entre los factores internos se encuentran las desigualdades sociales y económicas, la explotación de los pueblos indígenas y la creciente influencia de las ideas ilustradas que promovían la libertad y la igualdad. Por otro lado, los factores externos incluyen las revoluciones en otras partes del mundo, como la Independencia de las Trece Colonias en América del Norte (1776) y la Revolución Francesa (1789), que inspiraron a los mexicanos a luchar por su autonomía. El inicio del movimiento insurgente. El movimiento de independencia comenzó el 16 de septiembre de 1810, cuando el sacerdote Miguel Hidalgo y Costilla emitió el famoso "Grito de Dolores" en el pueblo de Dolores, Guanajuato. Este llamado a la lucha reunió a miles de personas que se unieron para enfrentar al ejército colonial español. A lo largo de los años siguientes, otros líderes insurgentes como Ignacio Allende, Juan Aldama y José María Morelos continuaron la lucha, enfrentándose a las fuerzas realistas y buscando apoyo tanto dentro como fuera del país. La consolidación de la independencia. A pesar de las derrotas sufridas por los insurgentes en los primeros años del movimiento, la lucha continuó con renovado ímpetu. José María Morelos, por ejemplo, convocó el Congreso de Chilpancingo en 1813, donde se proclamó la independencia de México y se establecieron las bases para una nación libre y soberana. Sin embargo, la lucha no terminó con la muerte de Morelos en 1815. Fue hasta 1820, con la firma de los Tratados de Córdoba entre los insurgentes y las autoridades coloniales, que se reconoció la independencia de México. La consumación de la independencia. El 27 de septiembre de 1821, el Ejército Trigarante, formado por las fuerzas insurgentes y los realistas, entró triunfante en la Ciudad de México, marcando la consumación de la independencia. Este evento puso fin a más de 300 años de dominio colonial español y dio inicio a una nueva etapa en la historia de México como nación independiente.', 0),
+(7, 'El Imperio de Iturbide. En 1822, Iturbide fue proclamado emperador de México, estableciendo el Primer Imperio Mexicano. Sin embargo, su gobierno enfrentó múltiples desafíos, como la falta de reconocimiento internacional y la oposición interna de diversos grupos políticos. La falta de recursos económicos y las tensiones con el Congreso llevaron a la abdicación de Iturbide en 1823, dando paso a la proclamación de la República Federal. La República Federal y los conflictos internos. Con la adopción de la Constitución de 1824, México se organizó como una república federal, otorgando autonomía a los estados y estableciendo un sistema de gobierno basado en la división de poderes. Sin embargo, las diferencias ideológicas entre federalistas y centralistas generaron constantes enfrentamientos. Durante este periodo, el país experimentó numerosos cambios de gobierno, golpes de Estado y conflictos armados. Figuras como Antonio López de Santa Anna jugaron un papel destacado, alternando entre el poder y el exilio en múltiples ocasiones. La inestabilidad política dificultó el desarrollo económico y social de la nación. Pérdidas territoriales y conflictos internacionales. En 1836, Texas, entonces parte de México, declaró su independencia, lo que desencadenó una serie de conflictos con Estados Unidos. Posteriormente, en 1846, estalló la guerra entre México y Estados Unidos, culminando en 1848 con la firma del Tratado de Guadalupe Hidalgo. Este tratado significó la pérdida de más de la mitad del territorio mexicano, incluyendo California, Nuevo México y Arizona. Además, México enfrentó la llamada "Guerra de los Pasteles" en 1838, una intervención francesa motivada por reclamaciones económicas. Estos conflictos internacionales debilitaron aún más al país y evidenciaron la necesidad de reformas estructurales. La Reforma y la Constitución de 1857. En un esfuerzo por estabilizar el país y establecer un marco legal sólido, se promulgó la Constitución de 1857. Este documento consagró principios liberales como la libertad de expresión, la abolición de los privilegios eclesiásticos y militares, y la garantía de derechos individuales. Sin embargo, la implementación de estas reformas generó una fuerte oposición por parte de sectores conservadores y de la Iglesia, lo que desembocó en la Guerra de Reforma entre 1858 y 1861. A pesar de los desafíos, la Constitución de 1857 sentó las bases para la consolidación del Estado mexicano y la modernización de sus instituciones. La Intervención Francesa y el Segundo Imperio. Tras la Guerra de Reforma, México enfrentaba una grave crisis económica y suspendió el pago de su deuda externa. Esto llevó a que Francia, junto con España y el Reino Unido, interviniera en el país en 1861. Aunque España y el Reino Unido se retiraron, Francia continuó su intervención y, en 1864, estableció el Segundo Imperio Mexicano bajo el emperador Maximiliano de Habsburgo. Este régimen fue apoyado por los conservadores, pero enfrentó la resistencia de los liberales liderados por Benito Juárez. Con el retiro del apoyo francés y la captura de Maximiliano en 1867, el Segundo Imperio llegó a su fin, y la República fue restaurada. La República Restaurada. Con la restauración de la República en 1867, Benito Juárez retomó la presidencia y se enfocó en reconstruir el país, implementando reformas para fortalecer las instituciones y promover el desarrollo económico. A su muerte en 1872, Sebastián Lerdo de Tejada asumió la presidencia, continuando con las políticas liberales. Sin embargo, la reelección de Lerdo en 1876 fue impugnada por Porfirio Díaz, quien, mediante el Plan de Tuxtepec, se levantó en armas y asumió el poder, marcando el inicio de una nueva etapa en la historia de México.', 0),
+(8, 'El Porfiriato. El Porfiriato fue el periodo en el que Porfirio Díaz gobernó México, desde 1876 hasta 1911, con una breve interrupción entre 1880 y 1884. Durante estos años, el país experimentó un notable crecimiento económico y estabilidad política. Se construyeron más de 19,000 kilómetros de vías férreas, se modernizó la infraestructura y se promovió la inversión extranjera en sectores como la minería, la agricultura y la industria. Sin embargo, este progreso tuvo un alto costo social. La riqueza se concentró en manos de unos pocos, mientras que la mayoría de la población vivía en condiciones de pobreza y marginación. La represión política, la censura y la falta de libertades civiles caracterizaron el régimen de Díaz, quien se mantuvo en el poder mediante elecciones fraudulentas y el uso de la fuerza. Causas y estallido de la Revolución Mexicana. El descontento social acumulado durante el Porfiriato llevó al surgimiento de movimientos opositores. En 1910, Francisco I. Madero, un político y empresario del norte del país, lanzó el Plan de San Luis, en el que llamaba a la población a levantarse en armas el 20 de noviembre de ese año para derrocar a Díaz. La Revolución Mexicana comenzó como una insurrección contra la dictadura de Porfirio Díaz y continuó como una lucha entre diversas facciones revolucionarias. Las principales causas del conflicto fueron la crisis del Porfiriato, la desigualdad social en el campo y las campañas opositoras de Francisco Madero. Etapas y líderes de la Revolución. Tras la renuncia de Díaz en 1911, Madero asumió la presidencia, pero su gobierno enfrentó la oposición de diversos grupos. En 1913, un golpe de Estado conocido como la Decena Trágica resultó en el asesinato de Madero y el ascenso al poder de Victoriano Huerta. La oposición a Huerta unió a líderes revolucionarios como Venustiano Carranza, Francisco Villa y Emiliano Zapata. En 1914, Villa y Zapata se encontraron en la Ciudad de México, uniendo sus fuerzas en una histórica entrada a la capital. Sin embargo, las diferencias entre las facciones revolucionarias llevaron a nuevos conflictos internos. La Constitución de 1917 y el fin del conflicto armado. En 1917, bajo el liderazgo de Carranza, se promulgó una nueva Constitución que incorporó demandas sociales y políticas surgidas de la Revolución. La Constitución de 1917 fue la primera en el mundo por su contenido político y social, estableciendo derechos laborales, la propiedad de la tierra y la educación laica y gratuita. Aunque la promulgación de la Constitución marcó un hito importante, la violencia continuó en los años siguientes. Líderes como Zapata y Villa fueron asesinados en 1919 y 1923, respectivamente. No existe un consenso sobre cuándo terminó el proceso revolucionario; algunas fuentes lo sitúan en 1920 con la presidencia de Adolfo de la Huerta, mientras que otras lo extienden hasta los años 1940.', 0);
+
+-- Ejercicios (Uno por subtema, con preguntas basadas en las preguntas abiertas y de opción múltiple)
+INSERT INTO tbl_ejercicio (id_subtema, nombre, hecho) VALUES
+(1, 'Ejercicio Bloque 1: Conociendo el pasado', 0),
+(2, 'Ejercicio Bloque 2: Las primeras personas en México', 0),
+(3, 'Ejercicio Bloque 3: Grandes civilizaciones antiguas', 0),
+(4, 'Ejercicio Bloque 4: La llegada de los españoles', 0),
+(5, 'Ejercicio Bloque 5: México como colonia', 0),
+(6, 'Ejercicio Bloque 6: La independencia de México', 0),
+(7, 'Ejercicio Bloque 7: El México libre y sus luchas', 0),
+(8, 'Ejercicio Bloque 8: Porfiriato y Revolución Mexicana', 0);
+
+-- Preguntas y opciones para Bloque 1
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(1, '¿Qué estudia la historia?'),
+(1, '¿Por qué es importante conocer la historia?'),
+(1, '¿Cuál de los siguientes representa el tiempo histórico?'),
+(1, '¿Qué son los testimonios orales?'),
+(1, '¿Qué tipo de narración es una leyenda?'),
+(1, '¿Qué elemento ayuda a entender cómo vivían las personas en el pasado?'),
+(1, '¿Qué diferencia hay entre un relato histórico y una leyenda?'),
+(1, '¿Qué afirmación sobre el pasado, el presente y el futuro es correcta?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(1, 'El futuro de la humanidad', 0),
+(1, 'Los eventos del pasado humano', 1),
+(1, 'Los sueños de las personas', 0),
+(1, 'Las predicciones astronómicas', 0),
+(2, 'Para repetir los mismos errores', 0),
+(2, 'Para comprender nuestro presente y construir un mejor futuro', 1),
+(2, 'Para olvidar el pasado', 0),
+(2, 'Para vivir en el pasado', 0),
+(3, 'Solo el presente', 0),
+(3, 'El pasado, el presente y el futuro', 1),
+(3, 'Solo el pasado', 0),
+(3, 'Solo el futuro', 0),
+(4, 'Libros antiguos', 0),
+(4, 'Restos arqueológicos', 0),
+(4, 'Relatos que las personas transmiten de generación en generación', 1),
+(4, 'Documentos escritos por reyes', 0),
+(5, 'Una historia inventada sin relación con la cultura', 0),
+(5, 'Un relato basado en hechos reales pero con elementos fantásticos', 1),
+(5, 'Un informe científico', 0),
+(5, 'Un discurso político', 0),
+(6, 'Canciones modernas', 0),
+(6, 'Relatos históricos', 1),
+(6, 'Publicidad de televisión', 0),
+(6, 'Redes sociales', 0),
+(7, 'El relato histórico se basa en pruebas, la leyenda mezcla hechos y fantasía', 1),
+(7, 'No hay ninguna diferencia', 0),
+(7, 'La leyenda siempre es más verdadera que el relato', 0),
+(7, 'El relato histórico es más corto que la leyenda', 0),
+(8, 'Son momentos que no se relacionan entre sí', 0),
+(8, 'El pasado influye en el presente y el futuro', 1),
+(8, 'El futuro determina el pasado', 0),
+(8, 'El presente no tiene relación con el pasado', 0);
+
+-- Preguntas y opciones para Bloque 2
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(2, '¿Cómo vivían las primeras comunidades humanas en México?'),
+(2, '¿Qué actividades realizaban los cazadores y recolectores?'),
+(2, '¿Qué evento permitió que las comunidades se establecieran en lugares fijos?'),
+(2, '¿Qué alimento básico comenzaron a cultivar las primeras comunidades agrícolas?'),
+(2, '¿Qué periodo marca la presencia de los primeros grupos humanos en México?'),
+(2, '¿Qué civilización es considerada la "cultura madre" de Mesoamérica?'),
+(2, '¿Qué construyeron los olmecas que es reconocido por su tamaño e importancia cultural?'),
+(2, '¿Qué caracterizó al periodo Clásico en Mesoamérica?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(9, 'En grandes ciudades permanentes', 0),
+(9, 'En pequeños grupos nómadas', 1),
+(9, 'En fortalezas de piedra', 0),
+(9, 'En aldeas agrícolas', 0),
+(10, 'Construir templos', 0),
+(10, 'Cazar y recolectar alimentos', 1),
+(10, 'Hacer comercio de metales', 0),
+(10, 'Domesticar caballos', 0),
+(11, 'El descubrimiento de la rueda', 0),
+(11, 'El inicio de la agricultura', 1),
+(11, 'La llegada de los españoles', 0),
+(11, 'El descubrimiento del fuego', 0),
+(12, 'Trigo', 0),
+(12, 'Arroz', 0),
+(12, 'Maíz', 1),
+(12, 'Papa', 0),
+(13, 'Preclásico', 0),
+(13, 'Etapa Lítica', 1),
+(13, 'Clásico', 0),
+(13, 'Posclásico', 0),
+(14, 'Mayas', 0),
+(14, 'Mexicas', 0),
+(14, 'Toltecas', 0),
+(14, 'Olmecas', 1),
+(15, 'Canales de riego', 0),
+(15, 'Cabezas colosales de piedra', 1),
+(15, 'Murallas defensivas', 0),
+(15, 'Grandes caminos de piedra', 0),
+(16, 'Nomadismo y caza', 0),
+(16, 'Formación de grandes ciudades y avances culturales', 1),
+(16, 'Desaparición de todas las culturas', 0),
+(16, 'Uso exclusivo de cuevas como viviendas', 0);
+
+-- Preguntas y opciones para Bloque 3
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(3, '¿En qué Valle se ubicaba Teotihuacán?'),
+(3, '¿Cuál de las siguientes estructuras NO pertenece a Teotihuacán?'),
+(3, '¿Qué civilización mesoamericana destacó por sus conocimientos astronómicos y matemáticos?'),
+(3, '¿Qué base numérica utilizaban los mayas en su sistema de numeración?'),
+(3, '¿Qué civilización construyó la ciudad de Tenochtitlan?'),
+(3, '¿Qué tipo de estructura construyeron los mexicas para ampliar sus áreas de cultivo?'),
+(3, '¿Qué término describe a los campesinos y artesanos mexicas?'),
+(3, '¿Sobre qué antigua ciudad se construyó la actual Ciudad de México?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(17, 'Valle de Oaxaca', 0),
+(17, 'Valle de México', 1),
+(17, 'Valle de Puebla', 0),
+(17, 'Valle de Morelos', 0),
+(18, 'Pirámide del Sol', 0),
+(18, 'Pirámide de la Luna', 0),
+(18, 'Templo de Kukulkán', 1),
+(18, 'Calzadas ceremoniales', 0),
+(19, 'Mexicas', 0),
+(19, 'Teotihuacanos', 0),
+(19, 'Mayas', 1),
+(19, 'Zapotecas', 0),
+(20, 'Base 10', 0),
+(20, 'Base 12', 0),
+(20, 'Base 20', 1),
+(20, 'Base 60', 0),
+(21, 'Mayas', 0),
+(21, 'Teotihuacanos', 0),
+(21, 'Toltecas', 0),
+(21, 'Mexicas', 1),
+(22, 'Terrazas', 0),
+(22, 'Chinampas', 1),
+(22, 'Campos elevados', 0),
+(22, 'Cenotes', 0),
+(23, 'Tlatoanis', 0),
+(23, 'Pochtecas', 0),
+(23, 'Macehualtin', 1),
+(23, 'Pipiltin', 0),
+(24, 'Teotihuacán', 0),
+(24, 'Tikal', 0),
+(24, 'Tenochtitlan', 1),
+(24, 'Chichén Itzá', 0);
+
+-- Preguntas y opciones para Bloque 4
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(4, '¿En qué año emprendió Hernán Cortés su expedición hacia el actual México?'),
+(4, '¿Qué gobernador ordenó a Cortés no salir de Cuba?'),
+(4, '¿Qué pueblo indígena se alió con los españoles por rivalidad con los mexicas?'),
+(4, '¿Cómo se llamó el emperador mexica que recibió a Cortés en Tenochtitlán?'),
+(4, '¿Qué evento ocurrió en 1520 y marcó un retroceso temporal para los españoles?'),
+(4, '¿Qué creencia mexica pudo influir en la recepción de los españoles como seres divinos?'),
+(4, '¿Qué acontecimiento marca el fin del Imperio Mexica?'),
+(4, '¿Qué característica cultural indígena sigue viva en la actualidad?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(25, '1517', 0),
+(25, '1518', 0),
+(25, '1519', 1),
+(25, '1521', 0),
+(26, 'Pedro de Alvarado', 0),
+(26, 'Diego Velázquez', 1),
+(26, 'Carlos V', 0),
+(26, 'Francisco de Montejo', 0),
+(27, 'Zapotecas', 0),
+(27, 'Totonacas', 0),
+(27, 'Tlaxcaltecas', 1),
+(27, 'Mayas', 0),
+(28, 'Itzcóatl', 0),
+(28, 'Cuauhtémoc', 0),
+(28, 'Moctezuma II', 1),
+(28, 'Nezahualcóyotl', 0),
+(29, 'El regreso de Cortés a España', 0),
+(29, 'La creación del Virreinato', 0),
+(29, 'La Noche Triste', 1),
+(29, 'La fundación de Veracruz', 0),
+(30, 'El mito de Huitzilopochtli', 0),
+(30, 'La leyenda de Quetzalcoatl', 1),
+(30, 'La profecía de Tezcatlipoca', 0),
+(30, 'El Popol Vuh', 0),
+(31, 'La muerte de Moctezuma II', 0),
+(31, 'El primer contacto en Yucatán', 0),
+(32, 'La organización imperial', 0),
+(32, 'La esclavitud ritual', 0),
+(32, 'Las lenguas y tradiciones', 1),
+(32, 'El tributo al tlatoani', 0);
+
+-- Preguntas y opciones para Bloque 5
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(5, '¿Cuál era la capital del Virreinato de la Nueva España?'),
+(5, '¿Quién estaba en la cima de la sociedad colonial?'),
+(5, '¿Qué grupo religioso impulsó la evangelización en la colonia?'),
+(5, '¿Qué actividad económica fue más importante en las minas coloniales?'),
+(5, '¿Qué eran las encomiendas?'),
+(5, '¿Qué productos agrícolas se exportaban desde la colonia?'),
+(5, '¿Qué impacto tuvo el mestizaje en la cultura?'),
+(5, '¿Quiénes eran los criollos?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(33, 'Veracruz', 0),
+(33, 'Tenochtitlán', 0),
+(33, 'Ciudad de México', 1),
+(33, 'Guadalajara', 0),
+(34, 'Mestizos', 0),
+(34, 'Criollos', 0),
+(34, 'Peninsulares', 1),
+(34, 'Indígenas', 0),
+(35, 'Jesuitas y benedictinos', 0),
+(35, 'Franciscanos, dominicos y agustinos', 1),
+(35, 'Carmelitas', 0),
+(35, 'Trinitarios', 0),
+(36, 'Cobre', 0),
+(36, 'Oro y plata', 1),
+(36, 'Hierro', 0),
+(36, 'Carbón', 0),
+(37, 'Granjas familiares', 0),
+(37, 'Sistemas de tributo y trabajo indígena', 1),
+(37, 'Conventos misioneros', 0),
+(37, 'Templos religiosos', 0),
+(38, 'Trigo y cebada', 0),
+(38, 'Azúcar y cacao', 1),
+(38, 'Algodón y café', 0),
+(38, 'Papa y soya', 0),
+(39, 'Eliminó las costumbres indígenas', 0),
+(39, 'Generó una nueva identidad cultural', 1),
+(39, 'Fue rechazado por los colonizadores', 0),
+(39, 'Produjo conflictos étnicos permanentes', 0),
+(40, 'Hijos de indígenas y españoles', 0),
+(40, 'Indígenas evangelizados', 0),
+(40, 'Hijos de españoles nacidos en América', 1),
+(40, 'Esclavos africanos liberados', 0);
+
+-- Preguntas y opciones para Bloque 6
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(6, '¿Cuál fue uno de los factores externos que influyó en la independencia de México?'),
+(6, '¿Qué personaje inició el movimiento de independencia en 1810?'),
+(6, '¿Cómo se llamó el evento donde Hidalgo convocó al pueblo a levantarse contra el dominio español?'),
+(6, '¿Quién continuó la lucha por la independencia tras la muerte de Hidalgo?'),
+(6, '¿Qué proclamó el Congreso de Chilpancingo en 1813?'),
+(6, '¿Qué documento firmaron en 1821 para reconocer la independencia?'),
+(6, '¿Qué ejército entró triunfante a la Ciudad de México el 27 de septiembre de 1821?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(41, 'La guerra de los pasteles', 0),
+(41, 'La Revolución Francesa', 1),
+(41, 'La guerra de reforma', 0),
+(41, 'El porfiriato', 0),
+(42, 'José María Morelos', 0),
+(42, 'Vicente Guerrero', 0),
+(42, 'Miguel Hidalgo', 1),
+(42, 'Agustín de Iturbide', 0),
+(43, 'Tratados de Córdoba', 0),
+(43, 'Grito de Dolores', 1),
+(43, 'Plan de Ayutla', 0),
+(43, 'Congreso de Chilpancingo', 0),
+(44, 'Agustín de Iturbide', 0),
+(44, 'José María Morelos', 1),
+(44, 'Benito Juárez', 0),
+(44, 'Juan Aldama', 0),
+(45, 'La Constitución de 1857', 0),
+(45, 'La independencia de México', 1),
+(45, 'El Plan de Iguala', 0),
+(45, 'La monarquía española', 0),
+(46, 'Grito de Dolores', 0),
+(46, 'Tratados de Córdoba', 1),
+(46, 'Plan de Tuxtepec', 0),
+(46, 'Plan de Ayala', 0),
+(47, 'Ejército de Oriente', 0),
+(47, 'Ejército Realista', 0),
+(47, 'Ejército Trigarante', 1),
+(47, 'Ejército del Norte', 0);
+
+-- Preguntas y opciones para Bloque 7
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(7, '¿Quién fue proclamado emperador de México en 1822?'),
+(7, '¿Qué estableció la Constitución de 1824?'),
+(7, '¿Qué personaje fue protagonista de varios gobiernos durante la república temprana?'),
+(7, '¿Cuál fue una consecuencia del Tratado de Guadalupe Hidalgo?'),
+(7, '¿Qué conflicto con Francia ocurrió en 1838?'),
+(7, '¿Qué principios estableció la Constitución de 1857?'),
+(7, '¿Qué emperador fue impuesto por Francia durante la Segunda Intervención?'),
+(7, '¿Qué plan permitió a Porfirio Díaz asumir el poder en 1876?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(48, 'Benito Juárez', 0),
+(48, 'Maximiliano de Habsburgo', 0),
+(48, 'Agustín de Iturbide', 1),
+(48, 'Antonio López de Santa Anna', 0),
+(49, 'Una monarquía constitucional', 0),
+(49, 'Un gobierno centralista', 0),
+(49, 'Una república federal', 1),
+(49, 'El segundo imperio', 0),
+(50, 'Benito Juárez', 0),
+(50, 'Miguel Hidalgo', 0),
+(50, 'Porfirio Díaz', 0),
+(50, 'Antonio López de Santa Anna', 1),
+(51, 'México anexó Texas', 0),
+(51, 'México perdió más de la mitad de su territorio', 1),
+(51, 'Se abolió la esclavitud', 0),
+(51, 'Terminó la Guerra de Reforma', 0),
+(52, 'Intervención Francesa', 0),
+(52, 'Guerra de Reforma', 0),
+(52, 'Guerra de los Pasteles', 1),
+(52, 'Batalla de Puebla', 0),
+(53, 'Derechos divinos del rey', 0),
+(53, 'Supremacía del clero', 0),
+(53, 'Derechos individuales y libertad de expresión', 1),
+(53, 'Reelección presidencial indefinida', 0),
+(54, 'Agustín de Iturbide', 0),
+(54, 'Sebastián Lerdo', 0),
+(54, 'Maximiliano de Habsburgo', 1),
+(54, 'Napoleón III', 0),
+(55, 'Plan de Ayutla', 0),
+(55, 'Plan de San Luis', 0),
+(55, 'Plan de Tuxtepec', 1),
+(55, 'Plan de Tacubaya', 0);
+
+-- Preguntas y opciones para Bloque 8
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(8, '¿Cuántos años gobernó Porfirio Díaz, aproximadamente, durante el Porfiriato?'),
+(8, '¿Cuál fue uno de los principales logros económicos del Porfiriato?'),
+(8, '¿Qué característica política marcó al régimen de Porfirio Díaz?'),
+(8, '¿Qué documento proclamó Francisco I. Madero en 1910 para llamar a la Revolución?'),
+(8, '¿Qué hecho marcó el inicio formal de la Revolución Mexicana?'),
+(8, '¿Qué suceso ocurrió durante la Decena Trágica en 1913?'),
+(8, '¿Qué líderes revolucionarios se encontraron en la Ciudad de México en 1914?'),
+(8, '¿Qué estableció la Constitución de 1917?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(56, '10 años', 0),
+(56, '25 años', 0),
+(56, '30 años', 1),
+(56, '5 años', 0),
+(57, 'Nacionalización del petróleo', 0),
+(57, 'Reforma agraria', 0),
+(57, 'Construcción de más de 19,000 km de vías férreas', 1),
+(57, 'Reducción del poder militar', 0),
+(58, 'Pluralidad democrática', 0),
+(58, 'Alternancia política', 0),
+(58, 'Censura y represión', 1),
+(58, 'Transparencia electoral', 0),
+(59, 'Plan de Ayala', 0),
+(59, 'Plan de Tuxtepec', 0),
+(59, 'Plan de San Luis', 1),
+(59, 'Plan de Guadalupe', 0),
+(60, 'La promulgación de la Constitución de 1917', 0),
+(60, 'El levantamiento armado del 20 de noviembre de 1910', 1),
+(60, 'La Decena Trágica', 0),
+(60, 'El exilio de Porfirio Díaz', 0),
+(61, 'El derrocamiento de Porfirio Díaz', 0),
+(61, 'La renuncia de Carranza', 0),
+(61, 'El asesinato de Madero y Pino Suárez', 1),
+(61, 'La unión de Villa y Zapata', 0),
+(62, 'Carranza y Obregón', 0),
+(62, 'Zapata y Madero', 0),
+(62, 'Villa y Zapata', 1),
+(62, 'Huerta y Calles', 0),
+(63, 'Reelección indefinida', 0),
+(63, 'Supremacía de la Iglesia', 0),
+(63, 'Derechos laborales y propiedad de la tierra', 1),
+(63, 'Retorno al centralismo', 0);
+
+-- Recursos adjuntos (basados en enlaces proporcionados, uno por subtema)
+INSERT INTO tbl_recurso_adjunto (id_subtema, id_tipo_recurso, orden, titulo, url, descripcion) VALUES
+(1, 1, 1, 'Historia de México desde la época prehispánica hasta la colonia', 'https://www.valledefiladelfia.net/historia-de-meacutexico.html', 'Recurso adicional sobre la historia de México.'),
+(2, 1, 1, 'La prehistoria de los primeros seres humanos a las primeras sociedades urbanas', 'https://nuevaescuelamexicana.sep.gob.mx/contenido/coleccion/la-prehistoria-de-los-primeros-seres-humanos-a-las-primeras-sociedades-urbanas-2/?utm_source=chatgpt.com', 'Información sobre la prehistoria en México.'),
+(3, 1, 1, 'Personajes del México prehispánico', 'https://quizlet.com/mx/213918526/historia-personajes-del-mexico-prehispanico-flash-cards/', 'Flashcards sobre personajes prehispánicos.'),
+(4, 1, 1, 'Educación en México desde la época prehispánica hasta la colonia', 'https://www.timetoast.com/timelines/educacion-en-mexico-desde-la-epoca-prehispanica-hasta-la-colonia', 'Línea de tiempo educativa.'),
+(5, 1, 1, 'Historia de México', 'https://es.wikipedia.org/wiki/Historia_de_M%C3%A9xico', 'Artículo de Wikipedia sobre la historia de México.'),
+(6, 1, 1, 'Historia de México prehispánico', 'https://culturacientifica.utpl.edu.ec/historia-mexico-prehispanico/', 'Recurso sobre historia prehispánica.'),
+(7, 1, 1, 'Independencia de México: lo más relevante de la lucha que inició el 16 de septiembre de 1810', 'https://ciencia.unam.mx/leer/1039/independencia-de-mexico-lo-mas-relevante-de-la-lucha-que-inicio-el-16-de-septiembre-de-1810?utm_source=chatgpt.com', 'Detalles sobre la independencia.'),
+(8, 1, 1, 'Porfiriato', 'https://es.m.wikipedia.org/wiki/Porfiriato', 'Información sobre el Porfiriato.'),
+(1, 1, 2, 'Libro de historia de México', 'https://libros.conaliteg.gob.mx/2022/P4HIA.htm', 'Libro oficial de historia.');
