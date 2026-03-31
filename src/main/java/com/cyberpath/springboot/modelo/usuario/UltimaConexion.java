@@ -17,13 +17,13 @@ public class UltimaConexion {
     @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "ultima_conexion")
-    private String ultimaConexion;
+    @Column(name = "ultima_conexion", nullable = false)
+    private LocalDateTime ultimaConexion;
 
-    @Column(name = "dispositivo",  length = 255)
+    @Column(name = "dispositivo", length = 255)
     private String dispositivo;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;

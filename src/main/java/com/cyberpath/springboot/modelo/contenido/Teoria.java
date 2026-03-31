@@ -3,6 +3,8 @@ package com.cyberpath.springboot.modelo.contenido;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,14 +16,21 @@ public class Teoria {
     @Column(name = "id_subtema")
     private Integer id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId
     @JoinColumn(name = "id_subtema")
     private Subtema subtema;
 
-    @Column(name = "contenido")
+    @Lob
+    @Column(name = "contenido", nullable = false)
     private String contenido;
 
-    @Column(name = "revisado")
+    @Column(name = "revisado", nullable = false)
     private Boolean revisado = false;
+
+    @Column(name = "fuente", length = 500)
+    private String fuente;
+
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 }

@@ -1,14 +1,13 @@
 package com.cyberpath.springboot.modelo.ejercicio;
 
 import com.cyberpath.springboot.modelo.contenido.Subtema;
-import com.cyberpath.springboot.modelo.relaciones.UsuarioEjercicio;
-import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +26,21 @@ public class Ejercicio {
     @Column(name = "nombre", nullable = false, length = 255)
     private String nombre;
 
-    @Column(name = "hecho")
-    private Boolean hecho;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo")
+    private TipoEjercicio tipo;
+
+    @Column(name = "dificultad")
+    private Integer dificultad;
+
+    @Column(name = "orden")
+    private Integer orden;
+
+    @Column(name = "activo")
+    private Boolean activo;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_subtema", nullable = false)
@@ -42,9 +54,6 @@ public class Ejercicio {
     @Builder.Default
     private List<IntentoEjercicio> intentos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "ejercicio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @Builder.Default
-    private List<UsuarioEjercicio> usuariosEjercicios = new ArrayList<>();
 
     public void addPregunta(Pregunta pregunta) {
         this.preguntas.add(pregunta);

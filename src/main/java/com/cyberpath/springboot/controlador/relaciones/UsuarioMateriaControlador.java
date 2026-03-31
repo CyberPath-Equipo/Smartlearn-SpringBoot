@@ -3,11 +3,11 @@ package com.cyberpath.springboot.controlador.relaciones;
 import com.cyberpath.springboot.dto.contenido.MateriaDto;
 import com.cyberpath.springboot.dto.relaciones.UsuarioMateriaDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
-import com.cyberpath.springboot.modelo.usuario.Usuario;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
+import com.cyberpath.springboot.modelo.relaciones.UsuarioMateriaId;
+import com.cyberpath.springboot.modelo.usuario.Usuario;
 import com.cyberpath.springboot.servicio.servicio.contenido.MateriaServicio;
 import com.cyberpath.springboot.servicio.servicio.relaciones.UsuarioMateriaServicio;
-import com.cyberpath.springboot.servicio.servicio.usuario.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,6 @@ public class UsuarioMateriaControlador {
 
     private final UsuarioMateriaServicio usuarioMateriaServicio;
     private final MateriaServicio materiaServicio;
-    private final UsuarioServicio usuarioServicio;
 
     @GetMapping("/usuario-materia")
     public ResponseEntity<List<UsuarioMateriaDto>> lista() {
@@ -50,11 +49,7 @@ public class UsuarioMateriaControlador {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(
-                lista.stream()
-                        .map(this::convertToDto)
-                        .collect(Collectors.toList())
-        );
+        return ResponseEntity.ok(lista.stream().map(this::convertToDto).collect(Collectors.toList()));
     }
 
     @GetMapping("/usuario-materia/usuario/{idUsuario}/materias")
@@ -77,46 +72,39 @@ public class UsuarioMateriaControlador {
     public ResponseEntity<UsuarioMateriaDto> save(@RequestBody UsuarioMateriaDto usuarioMateriaDto) {
         UsuarioMateria usuarioMateria = mapDtoToEntity(usuarioMateriaDto);
 
-        // Asocia con Materia y Usuario si están presentes
-        if (usuarioMateriaDto.getIdMateria() != null) {
-            usuarioMateria.setMateria(Materia.builder().id(usuarioMateriaDto.getIdMateria()).build());
-        }
-        if (usuarioMateriaDto.getIdUsuario() != null) {
-            usuarioMateria.setUsuario(Usuario.builder().id(usuarioMateriaDto.getIdUsuario()).build());
-        }
-
         UsuarioMateria guardada = usuarioMateriaServicio.save(usuarioMateria);
         return ResponseEntity.ok(convertToDto(guardada));
     }
 
-    @PutMapping("/usuario-materia/{id}")
-    public ResponseEntity<UsuarioMateriaDto> update(@PathVariable Integer id, @RequestBody UsuarioMateriaDto usuarioMateriaDto) {
+    @PutMapping("/usuario-materia/{idUsuario}/{idMateria}")
+    public ResponseEntity<UsuarioMateriaDto> update(@PathVariable Integer idUsuario, @PathVariable Integer idMateria,
+                                                    @RequestBody UsuarioMateriaDto usuarioMateriaDto) {
         UsuarioMateria datosActualizacion = mapDtoToEntity(usuarioMateriaDto);
 
-        // Asocia relaciones
-        if (usuarioMateriaDto.getIdMateria() != null) {
-            datosActualizacion.setMateria(Materia.builder().id(usuarioMateriaDto.getIdMateria()).build());
-        }
-        if (usuarioMateriaDto.getIdUsuario() != null) {
-            datosActualizacion.setUsuario(Usuario.builder().id(usuarioMateriaDto.getIdUsuario()).build());
-        }
+        UsuarioMateriaId id = UsuarioMateriaId.builder()
+                .idUsuario(idUsuario)
+                .idMateria(idMateria)
+                .build();
 
         UsuarioMateria actualizada = usuarioMateriaServicio.update(id, datosActualizacion);
         return ResponseEntity.ok(convertToDto(actualizada));
     }
 
-    @DeleteMapping("/usuario-materia/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    @DeleteMapping("/usuario-materia/{idUsuario}/{idMateria}")
+    public ResponseEntity<Void> delete(@PathVariable Integer idUsuario, @PathVariable Integer idMateria) {
+        UsuarioMateriaId id = UsuarioMateriaId.builder()
+                .idUsuario(idUsuario)
+                .idMateria(idMateria)
+                .build();
         usuarioMateriaServicio.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private UsuarioMateriaDto convertToDto(UsuarioMateria usuarioMateria) {
         return UsuarioMateriaDto.builder()
-                .id(usuarioMateria.getId())
                 .idMateria(usuarioMateria.getMateria() != null ? usuarioMateria.getMateria().getId() : null)
                 .idUsuario(usuarioMateria.getUsuario() != null ? usuarioMateria.getUsuario().getId() : null)
+                .suscritoEn(usuarioMateria.getSuscritoEn())
                 .build();
     }
 
@@ -124,14 +112,22 @@ public class UsuarioMateriaControlador {
         return MateriaDto.builder()
                 .id(materia.getId())
                 .nombre(materia.getNombre())
+                .slug(materia.getSlug())
                 .descripcion(materia.getDescripcion())
+                .createdAt(materia.getCreatedAt())
+                .updatedAt(materia.getUpdatedAt())
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private UsuarioMateria mapDtoToEntity(UsuarioMateriaDto dto) {
-        return UsuarioMateria.builder()
-                .id(dto.getId())
-                .build();
+        UsuarioMateria relacion = new UsuarioMateria();
+        if (dto.getIdMateria() != null) {
+            relacion.setMateria(Materia.builder().id(dto.getIdMateria()).build());
+        }
+        if (dto.getIdUsuario() != null) {
+            relacion.setUsuario(Usuario.builder().id(dto.getIdUsuario()).build());
+        }
+        relacion.setSuscritoEn(dto.getSuscritoEn());
+        return relacion;
     }
 }

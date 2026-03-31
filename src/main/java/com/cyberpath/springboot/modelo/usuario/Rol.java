@@ -22,8 +22,11 @@ public class Rol {
     @Column(name = "id_rol")
     private Integer id;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "tipo", nullable = false, length = 100)
     private String tipo;
+
+    @Column(name = "descripcion", length = 255)
+    private String descripcion;
 
     @OneToMany(mappedBy = "rol", fetch = FetchType.LAZY)
     @Builder.Default

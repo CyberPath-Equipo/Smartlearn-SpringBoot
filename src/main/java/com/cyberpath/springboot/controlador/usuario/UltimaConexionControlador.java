@@ -44,41 +44,28 @@ public class UltimaConexionControlador {
 
     @PostMapping("/ultima-conexion")
     public ResponseEntity<UltimaConexionDto> save(@RequestBody UltimaConexionDto conexionDto) {
-        try {
-            UltimaConexion conexion = mapDtoToEntity(conexionDto);
-            System.out.println("DEBUG: Recibido DTO - idUsuario: " + conexionDto.getIdUsuario() + ", idSubtema: " + conexionDto.getIdSubtema());  // Agrega esto
-            if (conexionDto.getIdUsuario() != null) {
-                conexion.setUsuario(Usuario.builder().id(conexionDto.getIdUsuario()).build());
-            }
-            if (conexionDto.getIdSubtema() != null) {
-                conexion.setSubtema(Subtema.builder().id(conexionDto.getIdSubtema()).build());
-            }
-            UltimaConexion guardada = ultimaConexionServicio.save(conexion);
-            return ResponseEntity.ok(convertToDto(guardada));
-        } catch (Exception e) {
-            System.err.println("ERROR 500 en save: " + e.getMessage());  // Agrega esto
-            e.printStackTrace();  // Muestra el stack trace completo
-            return ResponseEntity.internalServerError().build();
+        UltimaConexion conexion = mapDtoToEntity(conexionDto);
+        if (conexionDto.getIdUsuario() != null) {
+            conexion.setUsuario(Usuario.builder().id(conexionDto.getIdUsuario()).build());
         }
+        if (conexionDto.getIdSubtema() != null) {
+            conexion.setSubtema(Subtema.builder().id(conexionDto.getIdSubtema()).build());
+        }
+        UltimaConexion guardada = ultimaConexionServicio.save(conexion);
+        return ResponseEntity.ok(convertToDto(guardada));
     }
 
     @PutMapping("/ultima-conexion/{id}")
     public ResponseEntity<UltimaConexionDto> update(@PathVariable Integer id, @RequestBody UltimaConexionDto conexionDto) {
-        try {
-            UltimaConexion datosActualizacion = mapDtoToEntity(conexionDto);
+        UltimaConexion datosActualizacion = mapDtoToEntity(conexionDto);
 
-            datosActualizacion.setUsuario(Usuario.builder().id(id).build());  // id es idUsuario, OK para @MapsId
-            if (conexionDto.getIdSubtema() != null) {
-                datosActualizacion.setSubtema(Subtema.builder().id(conexionDto.getIdSubtema()).build());
-            }
-
-            UltimaConexion actualizada = ultimaConexionServicio.update(id, datosActualizacion);
-            return ResponseEntity.ok(convertToDto(actualizada));
-        } catch (Exception e) {
-            System.err.println("ERROR 500 en update: " + e.getMessage());
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().build();
+        datosActualizacion.setUsuario(Usuario.builder().id(id).build());
+        if (conexionDto.getIdSubtema() != null) {
+            datosActualizacion.setSubtema(Subtema.builder().id(conexionDto.getIdSubtema()).build());
         }
+
+        UltimaConexion actualizada = ultimaConexionServicio.update(id, datosActualizacion);
+        return ResponseEntity.ok(convertToDto(actualizada));
     }
 
     @DeleteMapping("/ultima-conexion/{id}")
@@ -87,7 +74,6 @@ public class UltimaConexionControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private UltimaConexionDto convertToDto(UltimaConexion conexion) {
         return UltimaConexionDto.builder()
                 .id(conexion.getId())
@@ -98,7 +84,6 @@ public class UltimaConexionControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private UltimaConexion mapDtoToEntity(UltimaConexionDto dto) {
         return UltimaConexion.builder()
                 .id(dto.getId())

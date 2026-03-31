@@ -2,22 +2,26 @@ package com.cyberpath.springboot.servicio.impl.relaciones;
 
 import com.cyberpath.springboot.dto.relaciones.UsuarioMateriaDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
+import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
+import com.cyberpath.springboot.modelo.relaciones.UsuarioMateriaId;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
+import com.cyberpath.springboot.servicio.servicio.relaciones.UsuarioMateriaServicio;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
-import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cyberpath.springboot.repositorio.relaciones.UsuarioMateriaRepositorio;
-import com.cyberpath.springboot.servicio.servicio.relaciones.UsuarioMateriaServicio;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
 public class UsuarioMateriaImpl implements UsuarioMateriaServicio {
     private final UsuarioMateriaRepositorio usuarioMateriaRepositorio;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Override
     public List<UsuarioMateria> getAll() {
@@ -25,30 +29,22 @@ public class UsuarioMateriaImpl implements UsuarioMateriaServicio {
     }
 
     @Override
-    public UsuarioMateria getById(Integer id) {
+    public UsuarioMateria getById(UsuarioMateriaId id) {
         return usuarioMateriaRepositorio.findById(id).orElse(null);
     }
 
     @Override
     public List<Materia> getMateriasByUser(Integer userId) {
-        List<UsuarioMateria> usuarioMateriaList = getAll();
-        List<Materia> materiasUsuario = new ArrayList<>();
-
-        for (UsuarioMateria usuario: usuarioMateriaList){
-            if (usuario.getUsuario().getId() == userId){
-                materiasUsuario.add(usuario.getMateria());
-            }
-        }
-        return materiasUsuario;
+        return usuarioMateriaRepositorio.findByUsuarioId(userId)
+                .stream()
+                .map(UsuarioMateria::getMateria)
+                .collect(Collectors.toList());
     }
 
     @Override
     public UsuarioMateria save(UsuarioMateria usuarioMateria) {
         return usuarioMateriaRepositorio.save(usuarioMateria);
     }
-
-    @Autowired
-    private EntityManager entityManager;
 
     @Override
     public UsuarioMateria saveReferencia(UsuarioMateriaDto dto) {
@@ -59,19 +55,24 @@ public class UsuarioMateriaImpl implements UsuarioMateriaServicio {
 
         relacion.setUsuario(usuarioRef);
         relacion.setMateria(materiaRef);
+        relacion.setSuscritoEn(dto.getSuscritoEn());
 
         return usuarioMateriaRepositorio.save(relacion);
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(UsuarioMateriaId id) {
         usuarioMateriaRepositorio.deleteById(id);
     }
 
     @Override
-    public UsuarioMateria update(Integer id, UsuarioMateria usuarioMateria) {
+    public UsuarioMateria update(UsuarioMateriaId id, UsuarioMateria usuarioMateria) {
         UsuarioMateria aux = usuarioMateriaRepositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Relacion UsuarioMateria no encontrada"));
+
+        if (usuarioMateria.getSuscritoEn() != null) {
+            aux.setSuscritoEn(usuarioMateria.getSuscritoEn());
+        }
 
         return usuarioMateriaRepositorio.save(aux);
     }

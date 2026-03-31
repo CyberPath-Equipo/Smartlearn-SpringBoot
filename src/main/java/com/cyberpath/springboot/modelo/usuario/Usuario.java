@@ -2,11 +2,11 @@ package com.cyberpath.springboot.modelo.usuario;
 
 import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
-import com.cyberpath.springboot.modelo.relaciones.UsuarioEjercicio;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,21 +15,36 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "tbl_usuario", uniqueConstraints = @UniqueConstraint(columnNames = "correo"))
+@Table(name = "tbl_usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "nombre_cuenta", length = 100)
+    @Column(name = "nombre_cuenta", nullable = false, length = 100)
     private String nombreCuenta;
 
-    @Column(name = "correo", length = 255)
+    @Column(name = "correo", nullable = false, length = 255)
     private String correo;
 
-    @Column(name = "contrasena", length = 255)
+    @Column(name = "contrasena", nullable = false, length = 255)
     private String contrasena;
+
+    @Column(name = "nombre_completo", length = 255)
+    private String nombreCompleto;
+
+    @Column(name = "activo", nullable = false)
+    private Boolean activo;
+
+    @Column(name = "verificado", nullable = false)
+    private Boolean verificado;
+
+    @Column(name = "creado_en", nullable = false, updatable = false)
+    private LocalDateTime creadoEn;
+
+    @Column(name = "actualizado_en")
+    private LocalDateTime actualizadoEn;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_rol", nullable = false)
@@ -53,9 +68,6 @@ public class Usuario {
     @Builder.Default
     private List<UsuarioMateria> usuariosMaterias = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @Builder.Default
-    private List<UsuarioEjercicio> usuariosEjercicios = new ArrayList<>();
 
     public void addIntentoEjercicio(IntentoEjercicio intentoEjercicio) {
         this.intentoEjercicio.add(intentoEjercicio);

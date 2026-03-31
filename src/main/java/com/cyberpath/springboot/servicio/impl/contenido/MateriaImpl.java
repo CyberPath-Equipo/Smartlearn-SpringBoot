@@ -38,6 +38,7 @@ public class MateriaImpl implements MateriaServicio {
         Materia aux = materiaRepositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Materia no encontrada"));
         aux.setNombre(materia.getNombre());
+        aux.setSlug(materia.getSlug());
         aux.setDescripcion(materia.getDescripcion());
 
         return materiaRepositorio.save(aux);

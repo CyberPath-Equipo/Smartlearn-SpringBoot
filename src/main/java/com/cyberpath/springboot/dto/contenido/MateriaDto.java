@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -12,5 +14,8 @@ import lombok.NoArgsConstructor;
 public class MateriaDto {
     private Integer id;
     private String nombre;
+    private String slug;
     private String descripcion;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

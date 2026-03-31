@@ -45,9 +45,8 @@ public class ConfiguracionControlador {
     public ResponseEntity<ConfiguracionDto> save(@RequestBody ConfiguracionDto configuracionDto) {
         Configuracion configuracion = mapDtoToEntity(configuracionDto);
 
-        // Asocia con Usuario si el idUsuario está presente
-        if (configuracionDto.getId() != null) {
-            configuracion.setUsuario(Usuario.builder().id(configuracionDto.getId()).build());
+        if (configuracionDto.getIdUsuario() != null) {
+            configuracion.setUsuario(Usuario.builder().id(configuracionDto.getIdUsuario()).build());
         }
 
         Configuracion guardada = configuracionServicio.save(configuracion);
@@ -80,6 +79,7 @@ public class ConfiguracionControlador {
                 .modoOffline(configuracion.isModoOffline())
                 .notificacionesActivadas(configuracion.isNotificacionesActivadas())
                 .tamanoFuente(configuracion.getTamanoFuente())
+                .idUsuario(configuracion.getUsuario() != null ? configuracion.getUsuario().getId() : null)
                 .build();
     }
 

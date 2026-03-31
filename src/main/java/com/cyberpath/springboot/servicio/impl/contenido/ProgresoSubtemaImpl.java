@@ -40,7 +40,6 @@ public class ProgresoSubtemaImpl implements ProgresoSubtemaServicio {
         aux.setTeoriaLeida(progresoSubtema.getTeoriaLeida());
         aux.setEjerciciosCompletados(progresoSubtema.getEjerciciosCompletados());
         aux.setEjerciciosTotales(progresoSubtema.getEjerciciosTotales());
-        aux.setPorcentaje(progresoSubtema.getPorcentaje());
         aux.setUltimoAcceso(progresoSubtema.getUltimoAcceso());
         aux.setUsuario(progresoSubtema.getUsuario());
         aux.setSubtema(progresoSubtema.getSubtema());

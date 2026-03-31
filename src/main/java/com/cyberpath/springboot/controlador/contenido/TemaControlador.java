@@ -5,7 +5,6 @@ import com.cyberpath.springboot.dto.contenido.SubtemaDto;
 import com.cyberpath.springboot.dto.contenido.TemaDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
 import com.cyberpath.springboot.modelo.contenido.Tema;
-import com.cyberpath.springboot.servicio.servicio.contenido.MateriaServicio;
 import com.cyberpath.springboot.servicio.servicio.contenido.TemaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +18,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class TemaControlador {
-
     private final TemaServicio temaServicio;
-    private final MateriaServicio materiaServicio;
 
     @GetMapping("/tema")
     public ResponseEntity<List<TemaDto>> lista() {
@@ -58,6 +55,10 @@ public class TemaControlador {
                         .map(s -> SubtemaDto.builder()
                                 .id(s.getId())
                                 .nombre(s.getNombre())
+                                .orden(s.getOrden())
+                                .createdAt(s.getCreatedAt())
+                                .updatedAt(s.getUpdatedAt())
+                                .idTema(tema.getId())
                                 .build())
                         .collect(Collectors.toList())
         );
@@ -77,7 +78,10 @@ public class TemaControlador {
                 MateriaDto.builder()
                         .id(materia.getId())
                         .nombre(materia.getNombre())
+                        .slug(materia.getSlug())
                         .descripcion(materia.getDescripcion())
+                        .createdAt(materia.getCreatedAt())
+                        .updatedAt(materia.getUpdatedAt())
                         .build()
         );
     }
@@ -86,7 +90,6 @@ public class TemaControlador {
     public ResponseEntity<TemaDto> save(@RequestBody TemaDto temaDto) {
         Tema tema = mapDtoToEntity(temaDto);
 
-        // Asocia con Materia si está presente
         if (temaDto.getIdMateria() != null) {
             tema.setMateria(Materia.builder().id(temaDto.getIdMateria()).build());
         }
@@ -99,7 +102,6 @@ public class TemaControlador {
     public ResponseEntity<TemaDto> update(@PathVariable Integer id, @RequestBody TemaDto temaDto) {
         Tema datosActualizacion = mapDtoToEntity(temaDto);
 
-        // Asocia con Materia
         if (temaDto.getIdMateria() != null) {
             datosActualizacion.setMateria(Materia.builder().id(temaDto.getIdMateria()).build());
         }
@@ -114,20 +116,24 @@ public class TemaControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private TemaDto convertToDto(Tema tema) {
         return TemaDto.builder()
                 .id(tema.getId())
                 .nombre(tema.getNombre())
+                .orden(tema.getOrden())
+                .createdAt(tema.getCreatedAt())
+                .updatedAt(tema.getUpdatedAt())
                 .idMateria(tema.getMateria() != null ? tema.getMateria().getId() : null)
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Tema mapDtoToEntity(TemaDto dto) {
         return Tema.builder()
                 .id(dto.getId())
                 .nombre(dto.getNombre())
+                .orden(dto.getOrden())
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
                 .build();
     }
 }

@@ -1,8 +1,8 @@
 package com.cyberpath.springboot.controlador.recurso;
 
 import com.cyberpath.springboot.dto.recurso.RecursoAdjuntoDto;
-import com.cyberpath.springboot.modelo.recurso.RecursoAdjunto;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
+import com.cyberpath.springboot.modelo.recurso.RecursoAdjunto;
 import com.cyberpath.springboot.modelo.recurso.TipoRecurso;
 import com.cyberpath.springboot.servicio.servicio.recurso.RecursoAdjuntoServicio;
 import lombok.AllArgsConstructor;
@@ -51,7 +51,7 @@ public class RecursoAdjuntoControlador {
             recurso.setSubtema(Subtema.builder().id(recursoDto.getIdSubtema()).build());
         }
         if (recursoDto.getIdTipoRecurso() != null) {
-            recurso.setTipoRecurso(TipoRecurso.builder().idTipoRecurso(recursoDto.getIdTipoRecurso()).build());
+            recurso.setTipoRecurso(TipoRecurso.builder().id(recursoDto.getIdTipoRecurso()).build());
         }
 
         RecursoAdjunto guardado = recursoAdjuntoServicio.save(recurso);
@@ -67,7 +67,7 @@ public class RecursoAdjuntoControlador {
             datosActualizacion.setSubtema(Subtema.builder().id(recursoDto.getIdSubtema()).build());
         }
         if (recursoDto.getIdTipoRecurso() != null) {
-            datosActualizacion.setTipoRecurso(TipoRecurso.builder().idTipoRecurso(recursoDto.getIdTipoRecurso()).build());
+            datosActualizacion.setTipoRecurso(TipoRecurso.builder().id(recursoDto.getIdTipoRecurso()).build());
         }
 
         RecursoAdjunto actualizado = recursoAdjuntoServicio.update(id, datosActualizacion);
@@ -87,9 +87,12 @@ public class RecursoAdjuntoControlador {
                 .orden(recurso.getOrden())
                 .titulo(recurso.getTitulo())
                 .url(recurso.getUrl())
+                .mimeType(recurso.getMimeType())
+                .tamanoBytes(recurso.getTamanoBytes())
                 .descripcion(recurso.getDescripcion())
+                .creadoEn(recurso.getCreadoEn())
                 .idSubtema(recurso.getSubtema() != null ? recurso.getSubtema().getId() : null)
-                .idTipoRecurso(recurso.getTipoRecurso() != null ? recurso.getTipoRecurso().getIdTipoRecurso() : null)
+                .idTipoRecurso(recurso.getTipoRecurso() != null ? recurso.getTipoRecurso().getId() : null)
                 .build();
     }
 
@@ -100,7 +103,10 @@ public class RecursoAdjuntoControlador {
                 .orden(dto.getOrden())
                 .titulo(dto.getTitulo())
                 .url(dto.getUrl())
+                .mimeType(dto.getMimeType())
+                .tamanoBytes(dto.getTamanoBytes())
                 .descripcion(dto.getDescripcion())
+                .creadoEn(dto.getCreadoEn())
                 .build();
     }
 }

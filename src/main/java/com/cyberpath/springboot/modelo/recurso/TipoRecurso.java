@@ -19,7 +19,7 @@ public class TipoRecurso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_recurso")
-    private Integer idTipoRecurso;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;

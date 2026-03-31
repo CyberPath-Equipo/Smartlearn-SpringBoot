@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UltimaConexionDto {
     private Integer id;
-    private String ultimaConexion;
+    private LocalDateTime ultimaConexion;
     private String dispositivo;
 
     private Integer idUsuario;

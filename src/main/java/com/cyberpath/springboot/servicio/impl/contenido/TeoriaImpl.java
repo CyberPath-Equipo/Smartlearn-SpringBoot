@@ -37,10 +37,12 @@ public class TeoriaImpl implements TeoriaServicio {
     @Override
     public Teoria update(Integer id, Teoria teoria) {
         Teoria aux = teoriaRepositorio.findById(id)
-                .orElseThrow(() -> new RuntimeException("Teoría no encontrada"));
+                .orElseThrow(() -> new RuntimeException("Teoria no encontrada"));
 
         aux.setContenido(teoria.getContenido());
         aux.setRevisado(teoria.getRevisado());
+        aux.setFuente(teoria.getFuente());
+        aux.setUpdatedAt(teoria.getUpdatedAt());
         aux.setSubtema(teoria.getSubtema());
 
         return teoriaRepositorio.save(aux);

@@ -63,7 +63,7 @@ public class TipoRecursoControlador {
     // ====================== MÉTODOS DE CONVERSIÓN ======================
     private TipoRecursoDto convertToDto(TipoRecurso tipo) {
         return TipoRecursoDto.builder()
-                .id(tipo.getIdTipoRecurso())
+                .id(tipo.getId())
                 .nombre(tipo.getNombre())
                 .descripcion(tipo.getDescripcion())
                 .build();
@@ -72,7 +72,7 @@ public class TipoRecursoControlador {
     // ====================== MAPEO DTO → ENTIDAD ======================
     private TipoRecurso mapDtoToEntity(TipoRecursoDto dto) {
         return TipoRecurso.builder()
-                .idTipoRecurso(dto.getId())
+                .id(dto.getId())
                 .nombre(dto.getNombre())
                 .descripcion(dto.getDescripcion())
                 .build();

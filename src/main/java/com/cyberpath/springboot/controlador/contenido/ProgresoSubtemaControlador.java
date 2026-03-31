@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 public class ProgresoSubtemaControlador {
-
     private final ProgresoSubtemaServicio progresoSubtemaServicio;
 
     @GetMapping("/progreso-subtema")
@@ -46,7 +45,6 @@ public class ProgresoSubtemaControlador {
     public ResponseEntity<ProgresoSubtemaDto> save(@RequestBody ProgresoSubtemaDto progresoDto) {
         ProgresoSubtema progreso = mapDtoToEntity(progresoDto);
 
-        // Asocia con Usuario y Subtema si están presentes
         if (progresoDto.getIdUsuario() != null) {
             progreso.setUsuario(Usuario.builder().id(progresoDto.getIdUsuario()).build());
         }
@@ -62,7 +60,6 @@ public class ProgresoSubtemaControlador {
     public ResponseEntity<ProgresoSubtemaDto> update(@PathVariable Integer id, @RequestBody ProgresoSubtemaDto progresoDto) {
         ProgresoSubtema datosActualizacion = mapDtoToEntity(progresoDto);
 
-        // Asocia relaciones
         if (progresoDto.getIdUsuario() != null) {
             datosActualizacion.setUsuario(Usuario.builder().id(progresoDto.getIdUsuario()).build());
         }

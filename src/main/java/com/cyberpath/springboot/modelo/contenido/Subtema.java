@@ -6,6 +6,7 @@ import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +22,22 @@ public class Subtema {
     @Column(name = "id_subtema")
     private Integer id;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre", nullable = false, length = 200)
     private String nombre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tema")
+    @Column(name = "orden")
+    private Integer orden;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_tema", nullable = false)
     private Tema tema;
 
-    
     @OneToOne(mappedBy = "subtema", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
     private Teoria teoria;
 

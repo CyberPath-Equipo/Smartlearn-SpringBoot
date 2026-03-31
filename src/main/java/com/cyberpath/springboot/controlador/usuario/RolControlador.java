@@ -65,6 +65,7 @@ public class RolControlador {
         return RolDto.builder()
                 .id(rol.getId())
                 .tipo(rol.getTipo())
+                .descripcion(rol.getDescripcion())
                 .build();
     }
 
@@ -73,6 +74,7 @@ public class RolControlador {
         return Rol.builder()
                 .id(dto.getId())
                 .tipo(dto.getTipo())
+                .descripcion(dto.getDescripcion())
                 .build();
     }
 }

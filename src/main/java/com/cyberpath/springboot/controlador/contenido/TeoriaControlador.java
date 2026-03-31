@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class TeoriaControlador {
-
     private final TeoriaServicio teoriaServicio;
     private final SubtemaServicio subtemaServicio;
 
@@ -81,7 +80,9 @@ public class TeoriaControlador {
         return TeoriaDto.builder()
                 .id(teoria.getId())
                 .contenido(teoria.getContenido())
-                .revisado(teoria.getRevisado())
+                .revisado(Boolean.TRUE.equals(teoria.getRevisado()))
+                .fuente(teoria.getFuente())
+                .updatedAt(teoria.getUpdatedAt())
                 .idSubtema(teoria.getSubtema() != null ? teoria.getSubtema().getId() : null)
                 .build();
     }
@@ -92,6 +93,8 @@ public class TeoriaControlador {
                 .id(dto.getId())
                 .contenido(dto.getContenido())
                 .revisado(dto.isRevisado())
+                .fuente(dto.getFuente())
+                .updatedAt(dto.getUpdatedAt())
                 .build();
     }
 

@@ -5,7 +5,6 @@ import com.cyberpath.springboot.dto.ejercicio.PreguntaDto;
 import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.ejercicio.Opcion;
 import com.cyberpath.springboot.modelo.ejercicio.Pregunta;
-import com.cyberpath.springboot.servicio.servicio.ejercicio.OpcionServicio;
 import com.cyberpath.springboot.servicio.servicio.ejercicio.PreguntaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
 public class PreguntaControlador {
 
     private final PreguntaServicio preguntaServicio;
-    private final OpcionServicio opcionServicio;
 
     @GetMapping("/pregunta")
     public ResponseEntity<List<PreguntaDto>> lista() {
@@ -92,21 +90,26 @@ public class PreguntaControlador {
         return ResponseEntity.ok(dtos);
     }
 
-    private OpcionDto convertOpcionToDto(Opcion opcion) {
-        return OpcionDto.builder()
-                .id(opcion.getId())
-                .texto(opcion.getTexto())
-                .correcta(opcion.getCorrecta())
-                .idPregunta(opcion.getPregunta() != null ? opcion.getPregunta().getId() : null)
-                .build();
-    }
 
     // ====================== MÉTODOS DE CONVERSIÓN ======================
     private PreguntaDto convertToDto(Pregunta pregunta) {
         return PreguntaDto.builder()
                 .id(pregunta.getId())
                 .enunciado(pregunta.getEnunciado())
+                .tipo(pregunta.getTipo())
+                .orden(pregunta.getOrden())
+                .puntos(pregunta.getPuntos())
                 .idEjercicio(pregunta.getEjercicio() != null ? pregunta.getEjercicio().getId() : null)
+                .build();
+    }
+
+    private OpcionDto convertOpcionToDto(Opcion opcion) {
+        return OpcionDto.builder()
+                .id(opcion.getId())
+                .texto(opcion.getTexto())
+                .correcta(Boolean.TRUE.equals(opcion.getCorrecta()))
+                .orden(opcion.getOrden())
+                .idPregunta(opcion.getPregunta() != null ? opcion.getPregunta().getId() : null)
                 .build();
     }
 
@@ -115,6 +118,9 @@ public class PreguntaControlador {
         return Pregunta.builder()
                 .id(dto.getId())
                 .enunciado(dto.getEnunciado())
+                .tipo(dto.getTipo())
+                .orden(dto.getOrden())
+                .puntos(dto.getPuntos())
                 .build();
     }
 }

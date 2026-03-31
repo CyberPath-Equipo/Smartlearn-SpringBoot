@@ -39,6 +39,7 @@ public class TemaImpl implements TemaServicio {
                 .orElseThrow(() -> new RuntimeException("Tema no encontrado"));
 
         aux.setNombre(tema.getNombre());
+        aux.setOrden(tema.getOrden());
         aux.setMateria(tema.getMateria());
 
         return temaRepositorio.save(aux);

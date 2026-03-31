@@ -39,6 +39,7 @@ public class OpcionImpl implements OpcionServicio {
                 .orElseThrow(() -> new RuntimeException("Opcion no encontrada"));
         aux.setTexto(opcion.getTexto());
         aux.setCorrecta(opcion.getCorrecta());
+        aux.setOrden(opcion.getOrden());
         aux.setPregunta(opcion.getPregunta());
 
         return opcionRepositorio.save(aux);

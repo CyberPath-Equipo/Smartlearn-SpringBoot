@@ -1,5 +1,7 @@
 package com.cyberpath.springboot.dto.usuario;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +16,11 @@ public class UsuarioDto {
     private String nombreCuenta;
     private String correo;
     private String contrasena;
+    private String nombreCompleto;
+    private Boolean activo;
+    private Boolean verificado;
+    private LocalDateTime creadoEn;
+    private LocalDateTime actualizadoEn;
 
     private Integer idRol;
-    private Integer idConfiguracion;
-    private Integer idUltimaConexion;
 }

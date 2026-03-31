@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -12,6 +14,8 @@ import lombok.NoArgsConstructor;
 public class TemaDto {
     private Integer id;
     private String nombre;
-
+    private Integer orden;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Integer idMateria;
 }

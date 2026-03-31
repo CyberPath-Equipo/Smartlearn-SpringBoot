@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -30,11 +31,11 @@ public class ProgresoSubtema {
     @Column(name = "ejercicios_totales", nullable = false)
     private Integer ejerciciosTotales;
 
-    @Column(name = "porcentaje", nullable = false)
-    private Double porcentaje;
+    @Column(name = "porcentaje", insertable = false, updatable = false, precision = 5, scale = 2)
+    private BigDecimal porcentaje;
 
-    @Column(name = "ultimo_acceso", nullable = false, length = 50)
-    private LocalDateTime ultimoAcceso = LocalDateTime.now();
+    @Column(name = "ultimo_acceso", nullable = false)
+    private LocalDateTime ultimoAcceso;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_usuario", nullable = false)

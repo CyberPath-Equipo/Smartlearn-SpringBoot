@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -16,9 +17,8 @@ public class ProgresoSubtemaDto {
     private boolean teoriaLeida;
     private Integer ejerciciosCompletados;
     private Integer ejerciciosTotales;
-    private double porcentaje;
+    private BigDecimal porcentaje;
     private LocalDateTime ultimoAcceso;
-
     private Integer idUsuario;
     private Integer idSubtema;
 }

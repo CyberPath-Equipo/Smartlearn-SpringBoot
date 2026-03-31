@@ -39,6 +39,8 @@ public class IntentoEjercicioImpl implements IntentoEjercicioServicio {
                 .orElseThrow(() -> new RuntimeException("IntentoEjercicio no encontrado"));
         aux.setFecha(intentoEjercicio.getFecha());
         aux.setPuntaje(intentoEjercicio.getPuntaje());
+        aux.setDuracionSeg(intentoEjercicio.getDuracionSeg());
+        aux.setEstado(intentoEjercicio.getEstado());
         aux.setUsuario(intentoEjercicio.getUsuario());
         aux.setEjercicio(intentoEjercicio.getEjercicio());
 
