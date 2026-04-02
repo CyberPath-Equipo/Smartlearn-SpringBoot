@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -13,8 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class IntentoEjercicioDto {
     private Integer id;
-    private double puntaje;
+    private BigDecimal puntaje;
+    private Integer duracionSeg;
     private String fecha;
+    private String estado;
 
     private Integer idUsuario;
     private Integer idEjercicio;

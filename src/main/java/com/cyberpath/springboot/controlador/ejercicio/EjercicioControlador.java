@@ -121,7 +121,10 @@ public class EjercicioControlador {
         return EjercicioDto.builder()
                 .id(ejercicio.getId())
                 .nombre(ejercicio.getNombre())
-                .hecho(ejercicio.getHecho())
+                .tipo(ejercicio.getTipo() != null ? ejercicio.getTipo().toString() : "practica")
+                .dificultad(ejercicio.getDificultad())
+                .orden(ejercicio.getOrden())
+                .activo(ejercicio.getActivo())
                 .idSubtema(ejercicio.getSubtema() != null ? ejercicio.getSubtema().getId() : null)
                 .build();
     }
@@ -139,7 +142,10 @@ public class EjercicioControlador {
         return Ejercicio.builder()
                 .id(dto.getId())
                 .nombre(dto.getNombre())
-                .hecho(dto.isHecho())
+                .tipo(dto.getTipo() != null ? Ejercicio.TipoEjercicio.valueOf(dto.getTipo()) : Ejercicio.TipoEjercicio.practica)
+                .dificultad(dto.getDificultad() != null ? dto.getDificultad() : 3)
+                .orden(dto.getOrden() != null ? dto.getOrden() : 0)
+                .activo(dto.getActivo() != null ? dto.getActivo() : true)
                 .build();
     }
 }

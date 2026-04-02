@@ -107,7 +107,10 @@ public class SubtemaControlador {
                 .map(e -> EjercicioDto.builder()
                         .id(e.getId())
                         .nombre(e.getNombre())
-                        .hecho(Boolean.TRUE.equals(e.getHecho()))
+                        .tipo(e.getTipo() != null ? e.getTipo().toString() : "practica")
+                        .dificultad(e.getDificultad())
+                        .orden(e.getOrden())
+                        .activo(e.getActivo())
                         .idSubtema(id)
                         .build()
                 )
@@ -129,7 +132,7 @@ public class SubtemaControlador {
         return ResponseEntity.ok(convertToDto(guardado));
     }
 
-  @PostMapping("/subtema/{id}/ejercicios")
+    @PostMapping("/subtema/{id}/ejercicios")
     public ResponseEntity<EjercicioDto> crearEjercicio(@PathVariable Integer id, @RequestBody EjercicioDto dto) {
 
         Subtema subtema = subtemaServicio.getById(id);
@@ -139,7 +142,10 @@ public class SubtemaControlador {
 
         Ejercicio ejercicio = Ejercicio.builder()
                 .nombre(dto.getNombre())
-                .hecho(false)
+                .tipo(dto.getTipo() != null ? Ejercicio.TipoEjercicio.valueOf(dto.getTipo()) : Ejercicio.TipoEjercicio.practica)
+                .dificultad(dto.getDificultad() != null ? dto.getDificultad() : 3)
+                .orden(dto.getOrden() != null ? dto.getOrden() : 0)
+                .activo(dto.getActivo() != null ? dto.getActivo() : true)
                 .subtema(subtema)
                 .build();
 
@@ -197,6 +203,7 @@ public class SubtemaControlador {
         return SubtemaDto.builder()
                 .id(subtema.getId())
                 .nombre(subtema.getNombre())
+                .orden(subtema.getOrden())
                 .idTema(subtema.getTema() != null ? subtema.getTema().getId() : null)
                 .build();
     }
@@ -205,7 +212,10 @@ public class SubtemaControlador {
         return EjercicioDto.builder()
                 .id(ejercicio.getId())
                 .nombre(ejercicio.getNombre())
-                .hecho(ejercicio.getHecho() != null && ejercicio.getHecho())
+                .tipo(ejercicio.getTipo() != null ? ejercicio.getTipo().toString() : "practica")
+                .dificultad(ejercicio.getDificultad())
+                .orden(ejercicio.getOrden())
+                .activo(ejercicio.getActivo())
                 .idSubtema(ejercicio.getSubtema() != null ? ejercicio.getSubtema().getId() : null)
                 .build();
     }
@@ -215,6 +225,7 @@ public class SubtemaControlador {
         return Subtema.builder()
                 .id(dto.getId())
                 .nombre(dto.getNombre())
+                .orden(dto.getOrden() != null ? dto.getOrden() : 0)
                 .build();
     }
 }

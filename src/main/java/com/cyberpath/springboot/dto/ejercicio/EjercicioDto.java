@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -12,7 +14,10 @@ import lombok.NoArgsConstructor;
 public class EjercicioDto {
     private Integer id;
     private String nombre;
-    private boolean hecho;
+    private String tipo;
+    private Integer dificultad;
+    private Integer orden;
+    private Boolean activo;
 
     private Integer idSubtema;
 }

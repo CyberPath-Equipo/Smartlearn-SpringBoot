@@ -99,6 +99,7 @@ public class MateriaControlador {
         return MateriaDto.builder()
                 .id(materia.getId())
                 .nombre(materia.getNombre())
+                .slug(materia.getSlug())
                 .descripcion(materia.getDescripcion())
                 .build();
     }
@@ -110,6 +111,7 @@ public class MateriaControlador {
         return Materia.builder()
                 .id(dto.getId())
                 .nombre(dto.getNombre())
+                .slug(dto.getSlug())
                 .descripcion(dto.getDescripcion())
                 .build();
     }

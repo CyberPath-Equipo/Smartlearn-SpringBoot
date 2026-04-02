@@ -2,11 +2,11 @@ package com.cyberpath.springboot.modelo.usuario;
 
 import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
-import com.cyberpath.springboot.modelo.relaciones.UsuarioEjercicio;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +22,32 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "nombre_cuenta", length = 100)
+    @Column(name = "nombre_cuenta", length = 100, nullable = false, unique = true)
     private String nombreCuenta;
 
-    @Column(name = "correo", length = 255)
+    @Column(name = "correo", length = 255, nullable = false, unique = true)
     private String correo;
 
-    @Column(name = "contrasena", length = 255)
+    @Column(name = "contrasena", length = 255, nullable = false)
     private String contrasena;
+
+    @Column(name = "nombre_completo", length = 255)
+    private String nombreCompleto;
+
+    @Column(name = "activo")
+    @Builder.Default
+    private Boolean activo = true;
+
+    @Column(name = "verificado")
+    @Builder.Default
+    private Boolean verificado = false;
+
+    @Column(name = "creado_en", nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime creadoEn = LocalDateTime.now();
+
+    @Column(name = "actualizado_en")
+    private LocalDateTime actualizadoEn;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_rol", nullable = false)
@@ -53,9 +71,6 @@ public class Usuario {
     @Builder.Default
     private List<UsuarioMateria> usuariosMaterias = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @Builder.Default
-    private List<UsuarioEjercicio> usuariosEjercicios = new ArrayList<>();
 
     public void addIntentoEjercicio(IntentoEjercicio intentoEjercicio) {
         this.intentoEjercicio.add(intentoEjercicio);

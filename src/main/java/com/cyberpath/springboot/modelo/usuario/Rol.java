@@ -7,9 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,20 +19,9 @@ public class Rol {
     @Column(name = "id_rol")
     private Integer id;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "tipo", nullable = false, unique = true, length = 100)
     private String tipo;
 
-    @OneToMany(mappedBy = "rol", fetch = FetchType.LAZY)
-    @Builder.Default
-    private Set<Usuario> usuarios = new HashSet<>();
-
-    public void addUsuario(Usuario usuario) {
-        this.usuarios.add(usuario);
-        usuario.setRol(this);
-    }
-
-    public void removeUsuario(Usuario usuario) {
-        this.usuarios.remove(usuario);
-        usuario.setRol(null);
-    }
+    @Column(name = "descripcion", length = 255)
+    private String descripcion;
 }

@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @RequestMapping("/smartlearn/api")
 @RestController
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class ConfiguracionControlador {
 
@@ -46,8 +48,8 @@ public class ConfiguracionControlador {
         Configuracion configuracion = mapDtoToEntity(configuracionDto);
 
         // Asocia con Usuario si el idUsuario está presente
-        if (configuracionDto.getId() != null) {
-            configuracion.setUsuario(Usuario.builder().id(configuracionDto.getId()).build());
+        if (configuracionDto.getIdUsuario() != null) {
+            configuracion.setUsuario(Usuario.builder().id(configuracionDto.getIdUsuario()).build());
         }
 
         Configuracion guardada = configuracionServicio.save(configuracion);
@@ -79,7 +81,8 @@ public class ConfiguracionControlador {
                 .modoAudio(configuracion.isModoAudio())
                 .modoOffline(configuracion.isModoOffline())
                 .notificacionesActivadas(configuracion.isNotificacionesActivadas())
-                .tamanoFuente(configuracion.getTamanoFuente())
+                .tamanoFuente(configuracion.getTamanoFuente() != null ? configuracion.getTamanoFuente().name() : Configuracion.TamanoFuente.medio.name())
+                .idUsuario(configuracion.getUsuario() != null ? configuracion.getUsuario().getId() : null)
                 .build();
     }
 
@@ -91,7 +94,18 @@ public class ConfiguracionControlador {
                 .modoAudio(dto.isModoAudio())
                 .modoOffline(dto.isModoOffline())
                 .notificacionesActivadas(dto.isNotificacionesActivadas())
-                .tamanoFuente(dto.getTamanoFuente())
+                .tamanoFuente(parseTamanoFuente(dto.getTamanoFuente()))
                 .build();
+    }
+
+    private Configuracion.TamanoFuente parseTamanoFuente(String tamanoFuente) {
+        if (tamanoFuente == null || tamanoFuente.isBlank()) {
+            return Configuracion.TamanoFuente.medio;
+        }
+        try {
+            return Configuracion.TamanoFuente.valueOf(tamanoFuente.trim().toLowerCase(Locale.ROOT));
+        } catch (IllegalArgumentException ex) {
+            return Configuracion.TamanoFuente.medio;
+        }
     }
 }

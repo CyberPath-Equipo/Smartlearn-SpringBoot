@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,14 +24,24 @@ public class RecursoAdjunto {
     @Column(name = "orden")
     private Integer orden;
 
-    @Column(name = "titulo", length = 100)
+    @Column(name = "titulo", nullable = false, length = 255)
     private String titulo;
 
-    @Column(name = "url", length = 255)
+    @Column(name = "url", length = 1000)
     private String url;
 
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "mime_type", length = 100)
+    private String mimeType;
+
+    @Column(name = "tamano_bytes")
+    private Long tamanoBytes;
+
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
+
+    @Column(name = "creado_en", nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime creadoEn = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_subtema", nullable = false)

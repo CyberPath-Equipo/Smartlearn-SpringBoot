@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +47,7 @@ public class UltimaConexionControlador {
     public ResponseEntity<UltimaConexionDto> save(@RequestBody UltimaConexionDto conexionDto) {
         try {
             UltimaConexion conexion = mapDtoToEntity(conexionDto);
-            System.out.println("DEBUG: Recibido DTO - idUsuario: " + conexionDto.getIdUsuario() + ", idSubtema: " + conexionDto.getIdSubtema());  // Agrega esto
+            System.out.println("DEBUG: Recibido DTO - idUsuario: " + conexionDto.getIdUsuario() + ", idSubtema: " + conexionDto.getIdSubtema());
             if (conexionDto.getIdUsuario() != null) {
                 conexion.setUsuario(Usuario.builder().id(conexionDto.getIdUsuario()).build());
             }
@@ -56,8 +57,8 @@ public class UltimaConexionControlador {
             UltimaConexion guardada = ultimaConexionServicio.save(conexion);
             return ResponseEntity.ok(convertToDto(guardada));
         } catch (Exception e) {
-            System.err.println("ERROR 500 en save: " + e.getMessage());  // Agrega esto
-            e.printStackTrace();  // Muestra el stack trace completo
+            System.err.println("ERROR 500 en save: " + e.getMessage());
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -91,7 +92,7 @@ public class UltimaConexionControlador {
     private UltimaConexionDto convertToDto(UltimaConexion conexion) {
         return UltimaConexionDto.builder()
                 .id(conexion.getId())
-                .ultimaConexion(conexion.getUltimaConexion())
+                .ultimaConexion(conexion.getUltimaConexion() != null ? conexion.getUltimaConexion().toString() : null)
                 .dispositivo(conexion.getDispositivo())
                 .idUsuario(conexion.getUsuario() != null ? conexion.getUsuario().getId() : null)
                 .idSubtema(conexion.getSubtema() != null ? conexion.getSubtema().getId() : null)
@@ -102,7 +103,7 @@ public class UltimaConexionControlador {
     private UltimaConexion mapDtoToEntity(UltimaConexionDto dto) {
         return UltimaConexion.builder()
                 .id(dto.getId())
-                .ultimaConexion(dto.getUltimaConexion())
+                .ultimaConexion(dto.getUltimaConexion() != null ? LocalDateTime.parse(dto.getUltimaConexion()).toString() : java.time.LocalDateTime.now().toString())
                 .dispositivo(dto.getDispositivo())
                 .build();
     }

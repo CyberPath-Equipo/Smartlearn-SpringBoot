@@ -22,6 +22,7 @@ public class Configuracion {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tamano_fuente")
+    @Builder.Default
     private TamanoFuente tamanoFuente = TamanoFuente.medio;
 
     @Column(name = "modo_offline")

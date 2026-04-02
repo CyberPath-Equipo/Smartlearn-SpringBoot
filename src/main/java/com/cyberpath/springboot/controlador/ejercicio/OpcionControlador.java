@@ -80,6 +80,7 @@ public class OpcionControlador {
                 .id(opcion.getId())
                 .texto(opcion.getTexto())
                 .correcta(opcion.getCorrecta())
+                .orden(opcion.getOrden())
                 .idPregunta(opcion.getPregunta() != null ? opcion.getPregunta().getId() : null)
                 .build();
     }
@@ -90,6 +91,7 @@ public class OpcionControlador {
                 .id(dto.getId())
                 .texto(dto.getTexto())
                 .correcta(dto.isCorrecta())
+                .orden(dto.getOrden() != null ? dto.getOrden() : 0)
                 .build();
     }
 }

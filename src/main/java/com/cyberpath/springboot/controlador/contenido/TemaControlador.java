@@ -119,6 +119,7 @@ public class TemaControlador {
         return TemaDto.builder()
                 .id(tema.getId())
                 .nombre(tema.getNombre())
+                .orden(tema.getOrden())
                 .idMateria(tema.getMateria() != null ? tema.getMateria().getId() : null)
                 .build();
     }
@@ -128,6 +129,7 @@ public class TemaControlador {
         return Tema.builder()
                 .id(dto.getId())
                 .nombre(dto.getNombre())
+                .orden(dto.getOrden() != null ? dto.getOrden() : 0)
                 .build();
     }
 }

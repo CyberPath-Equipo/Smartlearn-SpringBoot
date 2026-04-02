@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class RolDto {
     private Integer id;
     private String tipo;
+    private String descripcion;
 }

@@ -114,7 +114,8 @@ public class UsuarioMateriaControlador {
     // ====================== MÉTODOS DE CONVERSIÓN ======================
     private UsuarioMateriaDto convertToDto(UsuarioMateria usuarioMateria) {
         return UsuarioMateriaDto.builder()
-                .id(usuarioMateria.getId())
+                .id(usuarioMateria.getId() != null ? usuarioMateria.getId().getIdUsuario() : null)
+                .suscritoEn(usuarioMateria.getSuscritoEn() != null ? usuarioMateria.getSuscritoEn().toString() : null)
                 .idMateria(usuarioMateria.getMateria() != null ? usuarioMateria.getMateria().getId() : null)
                 .idUsuario(usuarioMateria.getUsuario() != null ? usuarioMateria.getUsuario().getId() : null)
                 .build();
@@ -124,6 +125,7 @@ public class UsuarioMateriaControlador {
         return MateriaDto.builder()
                 .id(materia.getId())
                 .nombre(materia.getNombre())
+                .slug(materia.getSlug())
                 .descripcion(materia.getDescripcion())
                 .build();
     }
@@ -131,7 +133,6 @@ public class UsuarioMateriaControlador {
     // ====================== MAPEO DTO → ENTIDAD ======================
     private UsuarioMateria mapDtoToEntity(UsuarioMateriaDto dto) {
         return UsuarioMateria.builder()
-                .id(dto.getId())
                 .build();
     }
 }

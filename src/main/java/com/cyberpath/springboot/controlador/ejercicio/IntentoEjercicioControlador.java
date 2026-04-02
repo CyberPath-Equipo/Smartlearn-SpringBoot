@@ -83,7 +83,9 @@ public class IntentoEjercicioControlador {
         return IntentoEjercicioDto.builder()
                 .id(intento.getId())
                 .puntaje(intento.getPuntaje())
-                .fecha(intento.getFecha())
+                .duracionSeg(intento.getDuracionSeg())
+                .fecha(intento.getFecha() != null ? intento.getFecha().toString() : null)
+                .estado(intento.getEstado() != null ? intento.getEstado().toString() : "completado")
                 .idUsuario(intento.getUsuario() != null ? intento.getUsuario().getId() : null)
                 .idEjercicio(intento.getEjercicio() != null ? intento.getEjercicio().getId() : null)
                 .build();
@@ -94,7 +96,8 @@ public class IntentoEjercicioControlador {
         return IntentoEjercicio.builder()
                 .id(dto.getId())
                 .puntaje(dto.getPuntaje())
-                .fecha(dto.getFecha())
+                .duracionSeg(dto.getDuracionSeg())
+                .estado(dto.getEstado() != null ? IntentoEjercicio.EstadoIntento.valueOf(dto.getEstado()) : IntentoEjercicio.EstadoIntento.completado)
                 .build();
     }
 }

@@ -13,6 +13,7 @@ public class TeoriaDto {
     private Integer id;
     private String contenido;
     private boolean revisado;
+    private String fuente;
 
     private Integer idSubtema;
 }

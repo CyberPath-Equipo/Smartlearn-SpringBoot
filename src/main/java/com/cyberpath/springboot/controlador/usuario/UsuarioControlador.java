@@ -10,6 +10,7 @@ import com.cyberpath.springboot.modelo.usuario.Configuracion;
 import com.cyberpath.springboot.modelo.usuario.Rol;
 import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
+import com.cyberpath.springboot.servicio.servicio.relaciones.UsuarioMateriaServicio;
 import com.cyberpath.springboot.web.jwt.JwtService;
 import com.cyberpath.springboot.servicio.servicio.usuario.UsuarioServicio;
 import com.cyberpath.springboot.web.login.LoginRequest;
@@ -32,6 +33,7 @@ import java.util.stream.Collectors;
 public class UsuarioControlador {
 
     private final UsuarioServicio usuarioServicio;
+    private final UsuarioMateriaServicio usuarioMateriaServicio;
     private final JwtService jwtService;
     private final PasswordManager passwordManager;
 
@@ -204,16 +206,15 @@ public class UsuarioControlador {
         if (usuario == null) {
             return ResponseEntity.notFound().build();
         }
-        List<MateriaDto> materias = usuario.getUsuariosMaterias()
+
+        List<MateriaDto> materias = usuarioMateriaServicio.getMateriasByUser(id)
                 .stream()
-                .map(um -> {
-                    Materia m = um.getMateria();
-                    return MateriaDto.builder()
-                            .id(m.getId())
-                            .nombre(m.getNombre())
-                            .descripcion(m.getDescripcion())
-                            .build();
-                })
+                .map(m -> MateriaDto.builder()
+                        .id(m.getId())
+                        .nombre(m.getNombre())
+                        .slug(m.getSlug())
+                        .descripcion(m.getDescripcion())
+                        .build())
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(materias);
@@ -279,6 +280,9 @@ public class UsuarioControlador {
                 .nombreCuenta(usuario.getNombreCuenta())
                 .correo(usuario.getCorreo())
                 .contrasena(usuario.getContrasena())
+                .nombreCompleto(usuario.getNombreCompleto())
+                .activo(usuario.getActivo())
+                .verificado(usuario.getVerificado())
                 .idRol(usuario.getRol() != null ? usuario.getRol().getId() : null)
                 .idConfiguracion(usuario.getConfiguracion() != null ? usuario.getConfiguracion().getId() : null)
                 .idUltimaConexion(usuario.getUltimaConexion() != null ? usuario.getUltimaConexion().getId() : null)
@@ -291,7 +295,11 @@ public class UsuarioControlador {
                 .nombreCuenta(dto.getNombreCuenta())
                 .correo(dto.getCorreo())
                 .contrasena(dto.getContrasena())
+                .nombreCompleto(dto.getNombreCompleto())
+                .activo(dto.getActivo())
+                .verificado(dto.getVerificado())
                 .rol(dto.getIdRol() != null ? Rol.builder().id(dto.getIdRol()).build() : null)
                 .build();
     }
 }
+

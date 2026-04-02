@@ -18,11 +18,15 @@ public class Opcion {
     @Column(name = "id_opcion")
     private Integer id;
 
-    @Column(name = "texto", nullable = false, length = 255)
+    @Column(name = "texto", nullable = false, length = 1000)
     private String texto;
 
     @Column(name = "es_correcta")
     private Boolean correcta;
+
+    @Column(name = "orden")
+    @Builder.Default
+    private Integer orden = 0;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_pregunta", nullable = false)

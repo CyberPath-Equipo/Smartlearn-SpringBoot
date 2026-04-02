@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class SubtemaDto {
     private Integer id;
     private String nombre;
+    private Integer orden;
 
     private Integer idTema;
 }

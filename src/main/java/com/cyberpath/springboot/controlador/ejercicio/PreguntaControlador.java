@@ -97,6 +97,7 @@ public class PreguntaControlador {
                 .id(opcion.getId())
                 .texto(opcion.getTexto())
                 .correcta(opcion.getCorrecta())
+                .orden(opcion.getOrden())
                 .idPregunta(opcion.getPregunta() != null ? opcion.getPregunta().getId() : null)
                 .build();
     }
@@ -106,6 +107,9 @@ public class PreguntaControlador {
         return PreguntaDto.builder()
                 .id(pregunta.getId())
                 .enunciado(pregunta.getEnunciado())
+                .tipo(pregunta.getTipo() != null ? pregunta.getTipo().toString() : "opcion_multiple")
+                .orden(pregunta.getOrden())
+                .puntos(pregunta.getPuntos())
                 .idEjercicio(pregunta.getEjercicio() != null ? pregunta.getEjercicio().getId() : null)
                 .build();
     }
@@ -115,6 +119,9 @@ public class PreguntaControlador {
         return Pregunta.builder()
                 .id(dto.getId())
                 .enunciado(dto.getEnunciado())
+                .tipo(dto.getTipo() != null ? Pregunta.TipoPregunta.valueOf(dto.getTipo()) : Pregunta.TipoPregunta.opcion_multiple)
+                .orden(dto.getOrden() != null ? dto.getOrden() : 0)
+                .puntos(dto.getPuntos())
                 .build();
     }
 }

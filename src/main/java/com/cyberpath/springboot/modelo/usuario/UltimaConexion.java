@@ -17,10 +17,11 @@ public class UltimaConexion {
     @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "ultima_conexion")
-    private String ultimaConexion;
+    @Column(name = "ultima_conexion", nullable = false)
+    @Builder.Default
+    private String ultimaConexion = LocalDateTime.now().toString();
 
-    @Column(name = "dispositivo",  length = 255)
+    @Column(name = "dispositivo", length = 255)
     private String dispositivo;
 
     @OneToOne(fetch = FetchType.LAZY)

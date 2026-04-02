@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class MateriaDto {
     private Integer id;
     private String nombre;
+    private String slug;
     private String descripcion;
 }

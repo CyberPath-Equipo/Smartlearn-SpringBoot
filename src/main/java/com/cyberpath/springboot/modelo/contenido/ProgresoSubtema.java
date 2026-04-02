@@ -30,10 +30,11 @@ public class ProgresoSubtema {
     @Column(name = "ejercicios_totales", nullable = false)
     private Integer ejerciciosTotales;
 
-    @Column(name = "porcentaje", nullable = false)
+    @Column(name = "porcentaje", nullable = false, scale = 2)
     private Double porcentaje;
 
-    @Column(name = "ultimo_acceso", nullable = false, length = 50)
+    @Column(name = "ultimo_acceso", nullable = false)
+    @Builder.Default
     private LocalDateTime ultimoAcceso = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

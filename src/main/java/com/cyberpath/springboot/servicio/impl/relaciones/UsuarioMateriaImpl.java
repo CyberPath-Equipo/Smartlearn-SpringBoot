@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.cyberpath.springboot.repositorio.relaciones.UsuarioMateriaRepositorio;
 import com.cyberpath.springboot.servicio.servicio.relaciones.UsuarioMateriaServicio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -31,15 +30,7 @@ public class UsuarioMateriaImpl implements UsuarioMateriaServicio {
 
     @Override
     public List<Materia> getMateriasByUser(Integer userId) {
-        List<UsuarioMateria> usuarioMateriaList = getAll();
-        List<Materia> materiasUsuario = new ArrayList<>();
-
-        for (UsuarioMateria usuario: usuarioMateriaList){
-            if (usuario.getUsuario().getId() == userId){
-                materiasUsuario.add(usuario.getMateria());
-            }
-        }
-        return materiasUsuario;
+        return usuarioMateriaRepositorio.findMateriasByUsuarioId(userId);
     }
 
     @Override

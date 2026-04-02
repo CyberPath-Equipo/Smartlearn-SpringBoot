@@ -14,6 +14,8 @@ public class RecursoAdjuntoDto {
     private Integer orden;
     private String titulo;
     private String url;
+    private String mimeType;
+    private Long tamanoBytes;
     private String descripcion;
 
     private Integer idSubtema;

@@ -44,7 +44,10 @@ public class EjercicioImpl implements EjercicioServicio {
         Ejercicio aux = ejercicioRepositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ejercicio no encontrado"));
         aux.setNombre(ejercicio.getNombre());
-        aux.setHecho(ejercicio.getHecho());
+        aux.setTipo(ejercicio.getTipo());
+        aux.setDificultad(ejercicio.getDificultad());
+        aux.setOrden(ejercicio.getOrden());
+        aux.setActivo(ejercicio.getActivo());
         aux.setSubtema(ejercicio.getSubtema());
 
         return ejercicioRepositorio.save(aux);

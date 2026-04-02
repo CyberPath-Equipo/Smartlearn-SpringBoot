@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -21,11 +22,20 @@ public class IntentoEjercicio {
     @Column(name = "id_intento_ejercicio")
     private Integer id;
 
-    @Column(name = "puntaje", nullable = false)
-    private Double puntaje;
+    @Column(name = "puntaje", scale = 2)
+    private BigDecimal puntaje;
 
-    @Column(name = "fecha", nullable = false)
-    private String fecha = LocalDateTime.now().toString();
+    @Column(name = "duracion_seg")
+    private Integer duracionSeg;
+
+    @Column(name = "fecha", nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime fecha = LocalDateTime.now();
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado")
+    @Builder.Default
+    private EstadoIntento estado = EstadoIntento.completado;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -34,4 +44,8 @@ public class IntentoEjercicio {
     @ManyToOne
     @JoinColumn(name = "id_ejercicio")
     private Ejercicio ejercicio;
+
+    public enum EstadoIntento {
+        completado, en_progreso, abandonado
+    }
 }

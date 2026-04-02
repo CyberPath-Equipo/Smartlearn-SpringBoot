@@ -14,6 +14,9 @@ public class UsuarioDto {
     private String nombreCuenta;
     private String correo;
     private String contrasena;
+    private String nombreCompleto;
+    private Boolean activo;
+    private Boolean verificado;
 
     private Integer idRol;
     private Integer idConfiguracion;

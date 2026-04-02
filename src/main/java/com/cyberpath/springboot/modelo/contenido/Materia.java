@@ -3,6 +3,7 @@ package com.cyberpath.springboot.modelo.contenido;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,17 +19,27 @@ public class Materia {
     @Column(name = "id_materia")
     private Integer id;
 
-    @Column(name = "nombre", nullable = false, length = 255)
+    @Column(name = "nombre", nullable = false, length = 200)
     private String nombre;
 
-    @Column(name = "descripcion")
+    @Column(name = "slug", nullable = false, unique = true, length = 200)
+    private String slug;
+
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private List<UsuarioMateria> usuariosMaterias = new ArrayList<>();
 
-    @OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY) //Relación con Tema
+    @OneToMany(mappedBy = "materia", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private List<Tema> temas = new ArrayList<>();
 

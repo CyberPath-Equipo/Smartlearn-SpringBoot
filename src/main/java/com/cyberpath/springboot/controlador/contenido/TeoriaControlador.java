@@ -82,6 +82,7 @@ public class TeoriaControlador {
                 .id(teoria.getId())
                 .contenido(teoria.getContenido())
                 .revisado(teoria.getRevisado())
+                .fuente(teoria.getFuente())
                 .idSubtema(teoria.getSubtema() != null ? teoria.getSubtema().getId() : null)
                 .build();
     }
@@ -92,6 +93,7 @@ public class TeoriaControlador {
                 .id(dto.getId())
                 .contenido(dto.getContenido())
                 .revisado(dto.isRevisado())
+                .fuente(dto.getFuente())
                 .build();
     }
 
