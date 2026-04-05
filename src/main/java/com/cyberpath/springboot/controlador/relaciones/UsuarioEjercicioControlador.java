@@ -4,7 +4,7 @@ import com.cyberpath.springboot.dto.relaciones.UsuarioEjercicioDto;
 import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioEjercicio;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
-import com.cyberpath.springboot.servicio.servicio.ejercicio.EjercicioServicio; // Asumiendo que existe un servicio similar para Ejercicio
+import com.cyberpath.springboot.servicio.servicio.ejercicio.EjercicioServicio;
 import com.cyberpath.springboot.servicio.servicio.relaciones.UsuarioEjercicioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

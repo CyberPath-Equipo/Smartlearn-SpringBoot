@@ -1,9 +1,9 @@
 package com.cyberpath.springboot.servicio.impl.contenido;
 
-import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.contenido.Materia;
 import com.cyberpath.springboot.repositorio.contenido.MateriaRepositorio;
 import com.cyberpath.springboot.servicio.servicio.contenido.MateriaServicio;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,9 +1,9 @@
 package com.cyberpath.springboot.servicio.impl.recurso;
 
-import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.recurso.TipoRecurso;
 import com.cyberpath.springboot.repositorio.recurso.TipoRecursoRepositorio;
 import com.cyberpath.springboot.servicio.servicio.recurso.TipoRecursoServicio;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

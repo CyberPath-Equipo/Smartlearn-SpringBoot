@@ -2,14 +2,14 @@ package com.cyberpath.springboot.servicio.impl.relaciones;
 
 import com.cyberpath.springboot.dto.relaciones.UsuarioMateriaDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
-import com.cyberpath.springboot.modelo.usuario.Usuario;
-import jakarta.persistence.EntityManager;
-import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.cyberpath.springboot.modelo.usuario.Usuario;
 import com.cyberpath.springboot.repositorio.relaciones.UsuarioMateriaRepositorio;
 import com.cyberpath.springboot.servicio.servicio.relaciones.UsuarioMateriaServicio;
+import jakarta.persistence.EntityManager;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

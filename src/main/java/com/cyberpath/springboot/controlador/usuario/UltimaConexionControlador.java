@@ -92,7 +92,7 @@ public class UltimaConexionControlador {
     private UltimaConexionDto convertToDto(UltimaConexion conexion) {
         return UltimaConexionDto.builder()
                 .id(conexion.getId())
-                .ultimaConexion(conexion.getUltimaConexion() != null ? conexion.getUltimaConexion().toString() : null)
+                .ultimaConexion(conexion.getUltimaConexion() != null ? conexion.getUltimaConexion() : null)
                 .dispositivo(conexion.getDispositivo())
                 .idUsuario(conexion.getUsuario() != null ? conexion.getUsuario().getId() : null)
                 .idSubtema(conexion.getSubtema() != null ? conexion.getSubtema().getId() : null)

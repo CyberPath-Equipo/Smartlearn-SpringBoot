@@ -1,6 +1,5 @@
 package com.cyberpath.springboot.dto.usuario;
 
-import com.cyberpath.springboot.modelo.usuario.Configuracion;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

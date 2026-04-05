@@ -2,8 +2,8 @@ package com.cyberpath.springboot.controlador.ejercicio;
 
 import com.cyberpath.springboot.dto.ejercicio.EjercicioDto;
 import com.cyberpath.springboot.dto.ejercicio.PreguntaDto;
-import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
+import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.ejercicio.Pregunta;
 import com.cyberpath.springboot.servicio.servicio.ejercicio.EjercicioServicio;
 import com.cyberpath.springboot.servicio.servicio.ejercicio.PreguntaServicio;
@@ -59,7 +59,7 @@ public class EjercicioControlador {
         return ResponseEntity.ok(convertToDto(guardado));
     }
 
-	@PostMapping("/ejercicio/{id}/pregunta")
+    @PostMapping("/ejercicio/{id}/pregunta")
     public ResponseEntity<PreguntaDto> crearPregunta(@PathVariable Integer id, @RequestBody PreguntaDto preguntaDto) {
         Ejercicio ejercicio = ejercicioServicio.getById(id);
         if (ejercicio == null) {
@@ -75,6 +75,7 @@ public class EjercicioControlador {
 
         return ResponseEntity.ok(convertToDto(guardado));
     }
+
     @PutMapping("/ejercicio/{id}")
     public ResponseEntity<EjercicioDto> update(@PathVariable Integer id, @RequestBody EjercicioDto ejercicioDto) {
         Ejercicio datosActualizacion = mapDtoToEntity(ejercicioDto);

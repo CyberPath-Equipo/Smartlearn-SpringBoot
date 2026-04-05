@@ -1,12 +1,12 @@
 package com.cyberpath.springboot.servicio.impl.ejercicio;
 
 import com.cyberpath.springboot.dto.ejercicio.OpcionDto;
+import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.ejercicio.Opcion;
 import com.cyberpath.springboot.modelo.ejercicio.Pregunta;
-import lombok.AllArgsConstructor;
-import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.repositorio.ejercicio.EjercicioRepositorio;
 import com.cyberpath.springboot.servicio.servicio.ejercicio.EjercicioServicio;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

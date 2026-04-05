@@ -1,9 +1,9 @@
 package com.cyberpath.springboot.servicio.impl.usuario;
 
-import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
 import com.cyberpath.springboot.repositorio.usuario.UltimaConexionRepositorio;
 import com.cyberpath.springboot.servicio.servicio.usuario.UltimaConexionServicio;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -4,7 +4,10 @@ import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.recurso.RecursoAdjunto;
 import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

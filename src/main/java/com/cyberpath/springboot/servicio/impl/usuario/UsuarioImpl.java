@@ -1,19 +1,19 @@
 package com.cyberpath.springboot.servicio.impl.usuario;
 
 import com.cyberpath.springboot.modelo.contenido.Materia;
+import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
+import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
 import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
+import com.cyberpath.springboot.modelo.usuario.Usuario;
 import com.cyberpath.springboot.repositorio.relaciones.UsuarioEjercicioRepositorio;
 import com.cyberpath.springboot.repositorio.usuario.UltimaConexionRepositorio;
+import com.cyberpath.springboot.repositorio.usuario.UsuarioRepositorio;
 import com.cyberpath.springboot.servicio.servicio.contenido.MateriaServicio;
+import com.cyberpath.springboot.servicio.servicio.usuario.UsuarioServicio;
 import com.cyberpath.springboot.web.PasswordManager;
 import lombok.AllArgsConstructor;
-import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
-import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
-import com.cyberpath.springboot.modelo.usuario.Usuario;
 import org.springframework.stereotype.Service;
-import com.cyberpath.springboot.repositorio.usuario.UsuarioRepositorio;
-import com.cyberpath.springboot.servicio.servicio.usuario.UsuarioServicio;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,8 +38,8 @@ public class UsuarioImpl implements UsuarioServicio {
 
     @Override
     public Usuario getByCorreo(String correo) {
-        for (Usuario usuario : usuarioRepositorio.findAll()){
-            if (usuario.getCorreo().equalsIgnoreCase(correo)){
+        for (Usuario usuario : usuarioRepositorio.findAll()) {
+            if (usuario.getCorreo().equalsIgnoreCase(correo)) {
                 return usuario;
             }
         }
@@ -119,6 +119,7 @@ public class UsuarioImpl implements UsuarioServicio {
     public Long countEjerciciosRealizadosByUsuarioAndMateria(Integer idUsuario, Integer idMateria) {
         return usuarioEjercicioRepositorio.countEjerciciosRealizadosByUsuarioAndMateria(idUsuario, idMateria);
     }
+
     @Override
     public Materia getMateriaById(Integer idMateria) {
         return materiaServicio.getById(idMateria);

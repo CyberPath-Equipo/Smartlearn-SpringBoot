@@ -1,9 +1,9 @@
 package com.cyberpath.springboot.servicio.impl.usuario;
 
-import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.usuario.Configuracion;
 import com.cyberpath.springboot.repositorio.usuario.ConfiguracionRepositorio;
 import com.cyberpath.springboot.servicio.servicio.usuario.ConfiguracionServicio;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

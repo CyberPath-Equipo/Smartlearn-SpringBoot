@@ -1,16 +1,13 @@
 package com.cyberpath.springboot.controlador.contenido;
 
-import com.cyberpath.springboot.dto.contenido.MateriaDto;
 import com.cyberpath.springboot.dto.contenido.SubtemaDto;
 import com.cyberpath.springboot.dto.contenido.TemaDto;
 import com.cyberpath.springboot.dto.contenido.TeoriaDto;
 import com.cyberpath.springboot.dto.ejercicio.EjercicioDto;
-import com.cyberpath.springboot.modelo.contenido.Materia;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
 import com.cyberpath.springboot.modelo.contenido.Tema;
 import com.cyberpath.springboot.modelo.contenido.Teoria;
 import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
-import com.cyberpath.springboot.modelo.usuario.Usuario;
 import com.cyberpath.springboot.servicio.servicio.contenido.SubtemaServicio;
 import com.cyberpath.springboot.servicio.servicio.ejercicio.EjercicioServicio;
 import lombok.AllArgsConstructor;
@@ -71,7 +68,6 @@ public class SubtemaControlador {
                         .build()
         );
     }
-
 
 
     @GetMapping("/subtema/{id}/teoria")
@@ -153,6 +149,7 @@ public class SubtemaControlador {
 
         return ResponseEntity.ok(convertEjercicioToDto(guardado));
     }
+
     @PutMapping("/subtema/{id}")
     public ResponseEntity<SubtemaDto> update(@PathVariable Integer id, @RequestBody SubtemaDto subtemaDto) {
         Subtema datosActualizacion = mapDtoToEntity(subtemaDto);

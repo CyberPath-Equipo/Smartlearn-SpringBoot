@@ -1,24 +1,21 @@
 package com.cyberpath.springboot.controlador.usuario;
 
-import com.cyberpath.springboot.dto.contenido.MateriaDto;
-import com.cyberpath.springboot.dto.ejercicio.EjercicioDto;
-import com.cyberpath.springboot.dto.usuario.UsuarioDto;
 import com.cyberpath.springboot.controlador.usuario.contrasena.CambioPasswordDto;
+import com.cyberpath.springboot.dto.contenido.MateriaDto;
+import com.cyberpath.springboot.dto.usuario.UsuarioDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
-import com.cyberpath.springboot.modelo.ejercicio.Ejercicio;
 import com.cyberpath.springboot.modelo.usuario.Configuracion;
 import com.cyberpath.springboot.modelo.usuario.Rol;
 import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
 import com.cyberpath.springboot.servicio.servicio.relaciones.UsuarioMateriaServicio;
-import com.cyberpath.springboot.web.jwt.JwtService;
 import com.cyberpath.springboot.servicio.servicio.usuario.UsuarioServicio;
+import com.cyberpath.springboot.web.PasswordManager;
+import com.cyberpath.springboot.web.jwt.JwtService;
 import com.cyberpath.springboot.web.login.LoginRequest;
 import com.cyberpath.springboot.web.login.LoginResponse;
-import com.cyberpath.springboot.web.PasswordManager;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,7 +76,7 @@ public class UsuarioControlador {
             //Log.error("Error al guardar usuario: {}", e.getMessage(), e);
             return ResponseEntity.internalServerError().build();
         }
-        }
+    }
 
     @PostMapping("/usuario/login/docente")
     public ResponseEntity<?> loginDocente(@RequestBody LoginRequest request) {
@@ -192,8 +189,8 @@ public class UsuarioControlador {
         }
 
         return ResponseEntity.noContent().build();
-    }        
-             
+    }
+
     @DeleteMapping("/usuario/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         usuarioServicio.delete(id);
@@ -219,6 +216,7 @@ public class UsuarioControlador {
 
         return ResponseEntity.ok(materias);
     }
+
     /*
     @GetMapping("/usuario/{id}/ejercicios")
     public ResponseEntity<List<EjercicioDto>Long> getEjerciciosByUsuario(@PathVariable Integer id) {
@@ -256,7 +254,6 @@ public class UsuarioControlador {
     }
 
 
-    // ====================== METODOS AUXILIARES ========================
     @PostMapping("/usuario/login")
     public ResponseEntity<UsuarioDto> login(@RequestBody UsuarioDto loginRequest) {
         if (loginRequest.getNombreCuenta() == null || loginRequest.getContrasena() == null) {
@@ -264,7 +261,11 @@ public class UsuarioControlador {
         }
 
         Usuario usuario = usuarioServicio.findByNombreCuenta(loginRequest.getNombreCuenta());
-        if (usuario == null || !usuario.getContrasena().equals(loginRequest.getContrasena())) {
+        if (usuario == null) {
+            return ResponseEntity.status(401).build();
+        }
+        // VALIDAR CONTRASEÑA
+        if (!passwordManager.validarContrasena(loginRequest.getContrasena(), usuario.getContrasena())) {
             return ResponseEntity.status(401).build();
         }
 

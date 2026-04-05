@@ -1,10 +1,10 @@
 package com.cyberpath.springboot.servicio.impl.contenido;
 
-import com.cyberpath.springboot.repositorio.contenido.TeoriaRepositorio;
-import lombok.AllArgsConstructor;
 import com.cyberpath.springboot.modelo.contenido.Subtema;
 import com.cyberpath.springboot.repositorio.contenido.SubtemaRepositorio;
+import com.cyberpath.springboot.repositorio.contenido.TeoriaRepositorio;
 import com.cyberpath.springboot.servicio.servicio.contenido.SubtemaServicio;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

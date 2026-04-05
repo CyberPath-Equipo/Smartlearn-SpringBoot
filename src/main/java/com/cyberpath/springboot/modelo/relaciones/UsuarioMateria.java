@@ -3,7 +3,10 @@ package com.cyberpath.springboot.modelo.relaciones;
 import com.cyberpath.springboot.modelo.contenido.Materia;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 

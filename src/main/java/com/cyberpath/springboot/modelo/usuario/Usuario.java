@@ -1,10 +1,13 @@
 package com.cyberpath.springboot.modelo.usuario;
 
-import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.modelo.contenido.ProgresoSubtema;
+import com.cyberpath.springboot.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.springboot.modelo.relaciones.UsuarioMateria;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

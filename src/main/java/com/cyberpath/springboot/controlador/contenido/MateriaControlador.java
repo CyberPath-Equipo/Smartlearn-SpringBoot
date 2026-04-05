@@ -3,8 +3,6 @@ package com.cyberpath.springboot.controlador.contenido;
 import com.cyberpath.springboot.dto.contenido.MateriaDto;
 import com.cyberpath.springboot.dto.contenido.TemaDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
-import com.cyberpath.springboot.modelo.contenido.Tema;
-import com.cyberpath.springboot.modelo.usuario.Usuario;
 import com.cyberpath.springboot.servicio.servicio.contenido.MateriaServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -103,7 +101,6 @@ public class MateriaControlador {
                 .descripcion(materia.getDescripcion())
                 .build();
     }
-
 
 
     // ====================== MAPEO DTO → ENTIDAD ======================
