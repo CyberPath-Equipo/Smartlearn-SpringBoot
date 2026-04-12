@@ -107,7 +107,7 @@ INSERT INTO tbl_teoria (id_subtema, contenido, revisado, fuente) VALUES
 (2, 'En el número 1234: 4=unidades, 3=decenas, 2=centenas, 1=millares.', 1, 'https://ejemplo.com/valor-posicional'),
 
 -- Suma y resta
-(3, 'Suma: 123 + 456 = 579. Resta: 579 - 456 = 123. Llevar cuando sea necesario.', 1, 'Khan Academy'),
+(3, 'bienvenido curso asiento', 1, 'Khan Academy'),
 
 -- Multiplicación
 (4, 'Multiplicación: 12 × 34 = 408. Método de multiplicación por filas.', 1, NULL),

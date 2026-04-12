@@ -1,19 +1,18 @@
--- smartlearn_schema_mejorado.sql
--- Requiere MySQL 8.0+ (por utf8mb4_0900_ai_ci, GENERATED columns, SIGNAL en triggers)
+-- smartlearn_schema_final.sql
+-- MySQL 8.0+ - 100% compatible con Hibernate - Sin Float/Double
 
 DROP DATABASE IF EXISTS smartlearn;
 CREATE DATABASE smartlearn CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE smartlearn;
 
 -- ============================================================
--- 0. CONVENCIÓN: usar INT UNSIGNED para IDs, timestamps de auditoría,
--- y nombres/constraints consistentes.
+-- 0. CONVENCIÓN: INT UNSIGNED, DECIMAL para precisión, timestamps
 -- ============================================================
 
 CREATE TABLE tbl_materia (
   id_materia INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(200) NOT NULL,
-  slug VARCHAR(200) NOT NULL,                        -- para URLs/ búsquedas
+  slug VARCHAR(200) NOT NULL,
   descripcion TEXT,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -50,7 +49,7 @@ CREATE TABLE tbl_subtema (
     REFERENCES tbl_tema(id_tema) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Teoría: 1:1 con subtema (clave primaria compartida)
+-- Teoría 1:1 con subtema
 CREATE TABLE tbl_teoria (
   id_subtema INT UNSIGNED NOT NULL,
   contenido TEXT NOT NULL,
@@ -59,8 +58,7 @@ CREATE TABLE tbl_teoria (
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_subtema),
   CONSTRAINT fk_teoria_subtema FOREIGN KEY (id_subtema)
-    REFERENCES tbl_subtema(id_subtema) ON DELETE CASCADE ON UPDATE CASCADE,
-  FULLTEXT KEY ft_teoria_contenido (contenido)
+    REFERENCES tbl_subtema(id_subtema) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE tbl_tipo_recurso (
@@ -80,7 +78,7 @@ CREATE TABLE tbl_rol (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ============================================================
--- 2. CONTENIDO EDUCATIVO
+-- CONTENIDO EDUCATIVO
 -- ============================================================
 
 CREATE TABLE tbl_ejercicio (
@@ -88,7 +86,7 @@ CREATE TABLE tbl_ejercicio (
   id_subtema INT UNSIGNED NOT NULL,
   nombre VARCHAR(255) NOT NULL,
   tipo ENUM('practica','evaluacion','repaso') DEFAULT 'practica',
-  dificultad TINYINT UNSIGNED DEFAULT 3, -- 1-5
+  dificultad TINYINT UNSIGNED DEFAULT 3,
   orden SMALLINT UNSIGNED DEFAULT 0,
   activo TINYINT(1) DEFAULT 1,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -104,12 +102,11 @@ CREATE TABLE tbl_pregunta (
   enunciado TEXT NOT NULL,
   tipo ENUM('opcion_multiple','abierta','verdadero_falso') DEFAULT 'opcion_multiple',
   orden SMALLINT UNSIGNED DEFAULT 0,
-  puntos DECIMAL(6,2) DEFAULT 1.00,
+  puntos DECIMAL(6,2) DEFAULT 1.00,  -- ✅ DECIMAL
   PRIMARY KEY (id_pregunta),
   INDEX idx_pregunta_ejercicio (id_ejercicio),
   CONSTRAINT fk_pregunta_ejercicio FOREIGN KEY (id_ejercicio)
-    REFERENCES tbl_ejercicio(id_ejercicio) ON DELETE CASCADE ON UPDATE CASCADE,
-  FULLTEXT KEY ft_pregunta_enunciado (enunciado)
+    REFERENCES tbl_ejercicio(id_ejercicio) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE tbl_opcion (
@@ -121,8 +118,7 @@ CREATE TABLE tbl_opcion (
   PRIMARY KEY (id_opcion),
   INDEX idx_opcion_pregunta (id_pregunta),
   CONSTRAINT fk_opcion_pregunta FOREIGN KEY (id_pregunta)
-    REFERENCES tbl_pregunta(id_pregunta) ON DELETE CASCADE ON UPDATE CASCADE,
-  CHECK (es_correcta IN (0,1))
+    REFERENCES tbl_pregunta(id_pregunta) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE tbl_recurso_adjunto (
@@ -138,7 +134,6 @@ CREATE TABLE tbl_recurso_adjunto (
   creado_en DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id_recurso),
   INDEX idx_recurso_subtema_orden (id_subtema, orden),
-  INDEX idx_recurso_tipo (id_tipo_recurso),
   CONSTRAINT fk_recurso_subtema FOREIGN KEY (id_subtema)
     REFERENCES tbl_subtema(id_subtema) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_recurso_tipo FOREIGN KEY (id_tipo_recurso)
@@ -146,14 +141,14 @@ CREATE TABLE tbl_recurso_adjunto (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ============================================================
--- 3. USUARIOS Y RELACIONES
+-- USUARIOS Y RELACIONES
 -- ============================================================
 
 CREATE TABLE tbl_usuario (
   id_usuario INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nombre_cuenta VARCHAR(100) NOT NULL,
   correo VARCHAR(255) NOT NULL,
-  contrasena VARCHAR(255) NOT NULL, -- almacenar hash (bcrypt/argon2) en la capa de aplicación
+  contrasena VARCHAR(255) NOT NULL,
   nombre_completo VARCHAR(255),
   activo TINYINT(1) NOT NULL DEFAULT 1,
   verificado TINYINT(1) NOT NULL DEFAULT 0,
@@ -168,8 +163,6 @@ CREATE TABLE tbl_usuario (
     REFERENCES tbl_rol(id_rol) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Relación many-to-many: usuario <-> materia
--- usar PK compuesta para evitar id artificial innecesario
 CREATE TABLE tbl_usuariomateria (
   id_usuario INT UNSIGNED NOT NULL,
   id_materia INT UNSIGNED NOT NULL,
@@ -183,20 +176,20 @@ CREATE TABLE tbl_usuariomateria (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ============================================================
--- 4. PROGRESO Y ACTIVIDAD
+-- PROGRESO Y ACTIVIDAD
 -- ============================================================
 
 CREATE TABLE tbl_intento_ejercicio (
   id_intento_ejercicio INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_usuario INT UNSIGNED NOT NULL,
   id_ejercicio INT UNSIGNED NOT NULL,
-  puntaje DECIMAL(6,2),
+  puntaje DECIMAL(6,2),  -- ✅ DECIMAL (0.00 - 100.00)
   duracion_seg INT UNSIGNED,
   fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   estado ENUM('completado','en_progreso','abandonado') DEFAULT 'completado',
   PRIMARY KEY (id_intento_ejercicio),
   INDEX idx_intento_usuario_fecha (id_usuario, fecha),
-  INDEX idx_intento_ejercicio_puntaje (id_ejercicio, puntaje),
+  INDEX idx_intento_ejercicio_puntaje (id_ejercicio, puntaje DESC),
   CONSTRAINT fk_intento_usuario FOREIGN KEY (id_usuario)
     REFERENCES tbl_usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_intento_ejercicio FOREIGN KEY (id_ejercicio)
@@ -211,9 +204,9 @@ CREATE TABLE tbl_progreso_subtema (
   ejercicios_completados INT UNSIGNED DEFAULT 0,
   ejercicios_totales INT UNSIGNED DEFAULT 0,
   porcentaje DECIMAL(5,2) GENERATED ALWAYS AS (
-    CASE WHEN ejercicios_totales = 0 THEN 0
+    CASE WHEN ejercicios_totales = 0 THEN 0.00
          ELSE (ejercicios_completados * 100.0 / ejercicios_totales) END
-  ) STORED,
+  ) STORED,  -- ✅ DECIMAL generado
   ultimo_acceso DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_progreso),
   UNIQUE KEY uq_progreso_usuario_subtema (id_usuario, id_subtema),
@@ -237,10 +230,6 @@ CREATE TABLE tbl_ultima_conexion (
     REFERENCES tbl_subtema(id_subtema) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- ============================================================
--- 5. CONFIGURACIÓN PERSONAL
--- ============================================================
-
 CREATE TABLE tbl_configuracion (
   id_usuario INT UNSIGNED NOT NULL,
   modo_audio TINYINT(1) NOT NULL DEFAULT 0,
@@ -253,34 +242,58 @@ CREATE TABLE tbl_configuracion (
     REFERENCES tbl_usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+CREATE TABLE tbl_usuario_ejercicio (
+  id_usuario_ejercicio INT UNSIGNED NOT NULL AUTO_INCREMENT,
+
+  -- FKs obligatorias
+  id_usuario INT UNSIGNED NOT NULL,
+  id_ejercicio INT UNSIGNED NOT NULL,
+
+  -- Estado del ejercicio para el usuario
+  hecho TINYINT(1) NOT NULL DEFAULT 0,
+
+  -- Auditoría
+  creado_en DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  actualizado_en DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (id_usuario_ejercicio),
+
+  -- UNIQUE para evitar duplicados (un usuario solo puede "hacer" un ejercicio una vez)
+  UNIQUE KEY uq_usuario_ejercicio (id_usuario, id_ejercicio),
+
+  -- Índices para queries comunes
+  INDEX idx_usuario (id_usuario),
+  INDEX idx_ejercicio (id_ejercicio),
+  INDEX idx_hecho_usuario (id_usuario, hecho),
+
+  -- Foreign Keys
+  CONSTRAINT fk_ue_usuario
+    FOREIGN KEY (id_usuario)
+    REFERENCES tbl_usuario(id_usuario)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+
+  CONSTRAINT fk_ue_ejercicio
+    FOREIGN KEY (id_ejercicio)
+    REFERENCES tbl_ejercicio(id_ejercicio)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- ============================================================
--- Reglas/Triggers adicionales recomendados
--- 1) Asegurar que por pregunta solo haya UNA opción correcta (en caso de opción múltiple).
+-- TRIGGERS (opcional - para integridad)
 -- ============================================================
 
 DELIMITER $$
 
-CREATE TRIGGER trg_opcion_before_insert
+CREATE TRIGGER trg_opcion_unique_correcta_insert
 BEFORE INSERT ON tbl_opcion
 FOR EACH ROW
 BEGIN
   IF NEW.es_correcta = 1 THEN
-    IF (SELECT COUNT(*) FROM tbl_opcion WHERE id_pregunta = NEW.id_pregunta AND es_correcta = 1) >= 1 THEN
-      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Ya existe una opción correcta para esa pregunta.';
-    END IF;
-  END IF;
-END$$
-
-CREATE TRIGGER trg_opcion_before_update
-BEFORE UPDATE ON tbl_opcion
-FOR EACH ROW
-BEGIN
-  IF NEW.es_correcta = 1 AND NOT (OLD.es_correcta = 1) THEN
-    IF (SELECT COUNT(*) FROM tbl_opcion WHERE id_pregunta = NEW.id_pregunta AND es_correcta = 1 AND id_opcion <> OLD.id_opcion) >= 1 THEN
-      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Ya existe una opción correcta para esa pregunta.';
+    IF EXISTS (SELECT 1 FROM tbl_opcion WHERE id_pregunta = NEW.id_pregunta AND es_correcta = 1) THEN
+      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Solo una opción correcta por pregunta';
     END IF;
   END IF;
 END$$
 
 DELIMITER ;
-
