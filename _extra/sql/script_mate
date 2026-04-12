@@ -1,0 +1,259 @@
+/* MATEMÁTICAS */
+
+-- Script completo para poblar la base de datos smartlearn con datos de Matemáticas básicas (Nivel Básico)
+-- Basado en la estructura proporcionada, adaptando la información educativa a las tablas.
+
+USE smartlearn
+
+-- Materia
+INSERT INTO tbl_materia (nombre, descripcion) VALUES
+('Matemáticas básicas', 'Curso básico de matemáticas, cubriendo operaciones básicas figuras y medidas.');
+
+-- Temas (Bloques)
+INSERT INTO tbl_tema (id_materia, nombre) VALUES
+(2, 'Bloque 1: Los números y su uso cotidiano'),
+(2, 'Bloque 2: Suma y resta'),
+(2, 'Bloque 3: Multiplicación'),
+(2, 'Bloque 4: División'),
+(2, 'Bloque 5: Fracciones básicas'),
+(2, 'Bloque 6: Figuras geométricas'),
+(2, 'Bloque 7: Medidas'),
+(2, 'Bloque 8: Resolución de problemas');
+
+-- Subtemas (Uno por tema, correspondiente al bloque)
+INSERT INTO tbl_subtema (id_tema, nombre) VALUES
+(9, 'Los números y su uso cotidiano'),
+(10, 'Suma y resta'),
+(11, 'Multiplicación'),
+(12, 'División'),
+(13, 'Fracciones básicas'),
+(14, 'Figuras geométricas'),
+(15, 'Medidas'),
+(16, 'Resolución de problemas');
+
+-- Teoría (Contenido de cada bloque)
+INSERT INTO tbl_teoria (id_subtema, contenido, revisado) VALUES
+(9, '¿Qué son los números? Los números son símbolos que utilizamos para contar, ordenar y medir. Nos permiten saber cuántos objetos hay, en qué posición se encuentra algo o cuánto vale una cantidad. Para las personas con discapacidad visual, los números pueden aprenderse mediante audio, material táctil, ejercicios orales y lectores de pantalla, facilitando su comprensión de forma clara y accesible. ¿Para qué usamos los números en la vida diaria? Usamos los números todos los días: para saber la hora, contar dinero, decir nuestra edad, medir distancias o cantidades de comida. Números naturales. Los números naturales son aquellos que usamos para contar: 1, 2, 3, 4, 5… No incluyen fracciones ni números negativos. Comparar cantidades. Comparar es observar qué cantidad es: Mayor que (>), Menor que (<), Igual (=). Ejemplo: 5 > 3 → cinco es mayor que tres.', 0),
+(10, '¿Qué es la suma? La suma es una operación matemática que sirve para juntar cantidades. Ejemplo: 2 + 3 = 5. ¿Qué es la resta? La resta sirve para quitar o comparar cantidades. Ejemplo: 5 − 2 = 3. Sumas simples. Restas simples. Uso de suma y resta en la vida diaria. La suma se usa cuando agregamos algo (más dinero, más objetos). La resta se usa cuando quitamos o perdemos algo.', 0),
+(11, '¿Qué es la multiplicación? La multiplicación es una forma rápida de sumar el mismo número varias veces. Ejemplo: 3 × 4 significa sumar 3 cuatro veces: 3 + 3 + 3 + 3 = 12. Multiplicar como suma repetida. Tablas de multiplicar (1 al 5). Multiplicación en la vida diaria. Se usa cuando hay grupos iguales, por ejemplo: 4 bolsas con 2 manzanas cada una.', 0),
+(12, '¿Qué es la división? La división sirve para repartir una cantidad en partes iguales. Ejemplo: 6 ÷ 2 = 3. Repartir en partes iguales. División exacta. División en la vida diaria. La usamos cuando compartimos comida, dinero o materiales entre varias personas.', 0),
+(13, '¿Qué es una fracción? Una fracción representa una parte de un todo. Ejemplo: ½ significa una de dos partes iguales. Partes de un todo. Mitad y cuarta parte. Fracciones en la vida diaria. Cuando partimos una pizza, un pastel o una barra de chocolate.', 0),
+(14, '¿Qué es una figura geométrica? Las figuras geométricas tienen forma y tamaño. Círculo: no tiene lados. Cuadrado: 4 lados iguales. Triángulo: 3 lados. Rectángulo: 4 lados, dos largos y dos cortos. Para personas con discapacidad visual, estas figuras pueden explorarse con materiales táctiles.', 0),
+(15, 'Medir longitud. Medir peso. Medir tiempo. Medidas en la vida diaria. Medir es comparar algo con una unidad. Longitud: metros. Peso: kilos. Tiempo: horas, minutos.', 0),
+(16, '¿Qué es un problema matemático? Es una situación de la vida diaria que se resuelve usando números y operaciones. Leer y comprender el problema. Elegir la operación correcta. Resolver paso a paso. Ejemplo: Si tienes 5 dulces y regalas 2, ¿cuántos te quedan?', 0);
+
+-- Ejercicios (Uno por subtema, con preguntas basadas en el contenido)
+INSERT INTO tbl_ejercicio (id_subtema, nombre, hecho) VALUES
+(9, 'Ejercicio Bloque 1: Los números y su uso cotidiano', 0),
+(10, 'Ejercicio Bloque 2: Suma y resta', 0),
+(11, 'Ejercicio Bloque 3: Multiplicación', 0),
+(12, 'Ejercicio Bloque 4: División', 0),
+(13, 'Ejercicio Bloque 5: Fracciones básicas', 0),
+(14, 'Ejercicio Bloque 6: Figuras geométricas', 0),
+(15, 'Ejercicio Bloque 7: Medidas', 0),
+(16, 'Ejercicio Bloque 8: Resolución de problemas', 0);
+
+-- Preguntas y opciones para Bloque 1 (basado en el proporcionado)
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(9, '¿Para qué sirven los números?'),
+(9, '¿Cuál es un número natural?'),
+(9, '¿Qué son los números?'),
+(9, 'Menciona un uso de los números en la vida diaria.');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(64, 'Para decorar', 0),
+(64, 'Para contar y medir', 1),
+(64, 'Para dibujar', 0),
+(64, 'Para cantar', 0),
+(65, '−2', 0),
+(65, '½', 0),
+(65, '5', 1),
+(65, '0.5', 0);
+-- Nota: Las preguntas abiertas no tienen opciones, pero se incluyen en preguntas.
+
+-- Preguntas y opciones para Bloque 2 (creadas basadas en contenido)
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(10, '¿Qué es la suma?'),
+(10, '¿Qué es la resta?'),
+(10, '¿Cuál es el resultado de 2 + 3?'),
+(10, '¿Cuál es el resultado de 5 − 2?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(66, 'Una operación para quitar cantidades', 0),
+(66, 'Una operación para juntar cantidades', 1),
+(66, 'Una forma de multiplicar', 0),
+(66, 'Una medida de tiempo', 0),
+(67, 'Una operación para juntar cantidades', 0),
+(67, 'Una operación para quitar o comparar cantidades', 1),
+(67, 'Una forma de dividir', 0),
+(67, 'Una figura geométrica', 0),
+(68, '4', 0),
+(68, '5', 1),
+(68, '6', 0),
+(68, '7', 0),
+(69, '2', 0),
+(69, '3', 1),
+(69, '4', 0),
+(69, '5', 0);
+
+-- Preguntas y opciones para Bloque 3
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(11, '¿Qué es la multiplicación?'),
+(11, '¿Cuál es el resultado de 3 × 4?'),
+(11, '¿Cómo se puede ver la multiplicación?'),
+(11, '¿Cuál es el resultado de 2 × 5?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(70, 'Una forma de sumar el mismo número varias veces', 1),
+(70, 'Una operación para quitar cantidades', 0),
+(70, 'Una medida de longitud', 0),
+(70, 'Una fracción', 0),
+(71, '10', 0),
+(71, '12', 1),
+(71, '14', 0),
+(71, '16', 0),
+(72, 'Como resta repetida', 0),
+(72, 'Como suma repetida', 1),
+(72, 'Como división', 0),
+(72, 'Como comparación', 0),
+(73, '7', 0),
+(73, '10', 1),
+(73, '12', 0),
+(73, '15', 0);
+
+-- Preguntas y opciones para Bloque 4
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(12, '¿Qué es la división?'),
+(12, '¿Cuál es el resultado de 6 ÷ 2?'),
+(12, '¿Para qué se usa la división?'),
+(12, '¿Cuál es el resultado de 8 ÷ 4?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(74, 'Repartir una cantidad en partes iguales', 1),
+(74, 'Juntar cantidades', 0),
+(74, 'Medir tiempo', 0),
+(74, 'Comparar figuras', 0),
+(75, '2', 0),
+(75, '3', 1),
+(75, '4', 0),
+(75, '6', 0),
+(76, 'Para sumar números', 0),
+(76, 'Para repartir en partes iguales', 1),
+(76, 'Para medir peso', 0),
+(76, 'Para dibujar círculos', 0),
+(77, '1', 0),
+(77, '2', 1),
+(77, '3', 0),
+(77, '4', 0);
+
+-- Preguntas y opciones para Bloque 5
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(13, '¿Qué es una fracción?'),
+(13, '¿Qué representa ½?'),
+(13, '¿Cuál es una parte de un todo?'),
+(13, '¿Cómo se usa una fracción en la vida diaria?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(78, 'Una parte de un todo', 1),
+(78, 'Un número natural', 0),
+(78, 'Una figura geométrica', 0),
+(78, 'Una medida de tiempo', 0),
+(79, 'Una de dos partes iguales', 1),
+(79, 'Una de tres partes', 0),
+(79, 'Un número entero', 0),
+(79, 'Una suma', 0),
+(80, 'Una fracción', 1),
+(80, 'Una multiplicación', 0),
+(80, 'Una resta', 0),
+(80, 'Una división', 0),
+(81, 'Para medir longitud', 0),
+(81, 'Cuando partimos una pizza', 1),
+(81, 'Para contar dinero', 0),
+(81, 'Para comparar números', 0);
+
+-- Preguntas y opciones para Bloque 6
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(14, '¿Qué es una figura geométrica?'),
+(14, '¿Cuántos lados tiene un cuadrado?'),
+(14, '¿Cuántos lados tiene un triángulo?'),
+(14, '¿Qué figura no tiene lados?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(82, 'Tiene forma y tamaño', 1),
+(82, 'Es un número', 0),
+(82, 'Es una operación', 0),
+(82, 'Es una medida', 0),
+(83, '3', 0),
+(83, '4', 1),
+(83, '5', 0),
+(83, '0', 0),
+(84, '3', 1),
+(84, '4', 0),
+(84, '5', 0),
+(84, '0', 0),
+(85, 'Cuadrado', 0),
+(85, 'Triángulo', 0),
+(85, 'Rectángulo', 0),
+(85, 'Círculo', 1);
+
+-- Preguntas y opciones para Bloque 7
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(15, '¿Qué es medir?'),
+(15, '¿Qué unidad se usa para medir longitud?'),
+(15, '¿Qué unidad se usa para medir peso?'),
+(15, '¿Qué unidad se usa para medir tiempo?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(86, 'Comparar algo con una unidad', 1),
+(86, 'Sumar números', 0),
+(86, 'Dibujar figuras', 0),
+(86, 'Repartir cantidades', 0),
+(87, 'Kilos', 0),
+(87, 'Metros', 1),
+(87, 'Horas', 0),
+(87, 'Litros', 0),
+(88, 'Metros', 0),
+(88, 'Kilos', 1),
+(88, 'Horas', 0),
+(88, 'Centímetros', 0),
+(89, 'Metros', 0),
+(89, 'Kilos', 0),
+(89, 'Horas', 1),
+(89, 'Gramos', 0);
+
+-- Preguntas y opciones para Bloque 8
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado) VALUES
+(16, '¿Qué es un problema matemático?'),
+(16, '¿Qué se debe hacer primero al resolver un problema?'),
+(16, '¿Cuál operación usarías para saber cuántos dulces quedan si regalas 2 de 5?'),
+(16, '¿Qué es resolver paso a paso?');
+
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta) VALUES
+(90, 'Una situación de la vida diaria con números', 1),
+(90, 'Una figura geométrica', 0),
+(90, 'Una medida de tiempo', 0),
+(90, 'Una fracción', 0),
+(91, 'Elegir la operación', 0),
+(91, 'Leer y comprender el problema', 1),
+(91, 'Sumar números', 0),
+(91, 'Dibujar', 0),
+(92, 'Suma', 0),
+(92, 'Resta', 1),
+(92, 'Multiplicación', 0),
+(92, 'División', 0),
+(93, 'Resolver de una vez', 0),
+(93, 'Resolver en pasos', 1),
+(93, 'Ignorar el problema', 0),
+(93, 'Usar solo suma', 0);
+
+-- Recursos adjuntos (placeholders, ya que no se proporcionaron enlaces específicos)
+INSERT INTO tbl_recurso_adjunto (id_subtema, id_tipo_recurso, orden, titulo, url, descripcion) VALUES
+(9, 2, 1, 'Introducción a los números', '', 'Texto adicional sobre números.'),
+(10, 2, 1, 'Operaciones básicas: suma y resta', '', 'Texto sobre suma y resta.'),
+(11, 2, 1, 'Aprendiendo multiplicación', '', 'Texto sobre multiplicación.'),
+(12, 2, 1, 'Conceptos de división', '', 'Texto sobre división.'),
+(13, 2, 1, 'Fracciones simples', '', 'Texto sobre fracciones.'),
+(14, 2, 1, 'Figuras geométricas básicas', '', 'Texto sobre figuras.'),
+(15, 2, 1, 'Medidas y unidades', '', 'Texto sobre medidas.'),
+(16, 2, 1, 'Resolviendo problemas', '', 'Texto sobre resolución de problemas.');
+
