@@ -82,17 +82,16 @@ public class MateriaControlador {
 
     @GetMapping("/materia/{id}/total-ejercicios")
     public ResponseEntity<Long> getTotalEjerciciosByMateria(@PathVariable Integer id) {
-        // Verifica si la materia existe
+
         Materia materia = materiaServicio.getById(id);
         if (materia == null) {
             return ResponseEntity.notFound().build();
         }
-        // Obtiene el conteo de ejercicios
+
         Long totalEjercicios = materiaServicio.countEjerciciosByMateriaId(id);
         return ResponseEntity.ok(totalEjercicios);
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private MateriaDto convertToDto(Materia materia) {
         return MateriaDto.builder()
                 .id(materia.getId())
@@ -102,8 +101,6 @@ public class MateriaControlador {
                 .build();
     }
 
-
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Materia mapDtoToEntity(MateriaDto dto) {
         return Materia.builder()
                 .id(dto.getId())

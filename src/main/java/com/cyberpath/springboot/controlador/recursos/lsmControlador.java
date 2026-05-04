@@ -5,19 +5,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
-import org.springframework.http.MediaTypeFactory;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.*;
 import java.time.Duration;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/smartlearn/api/lsm")
-@CrossOrigin // opcional; no necesario para peticiones desde apps Android, pero útil en pruebas web
+@CrossOrigin
 public class lsmControlador {
 
     @Value("${lsm.basePath:/var/www/lsm}")
@@ -60,7 +59,6 @@ public class lsmControlador {
             }
             Resource resource = new FileSystemResource(file.toFile());
 
-            // Intentamos detectar tipo MIME
             Optional<MediaType> mediaType = MediaTypeFactory.getMediaType(filename);
 
             MediaType contentType = mediaType.orElse(MediaType.APPLICATION_OCTET_STREAM);
@@ -97,7 +95,8 @@ public class lsmControlador {
     public ResponseEntity<String> uploadMapping(@RequestParam("lessonId") String lessonId,
                                                 @RequestBody String mappingJson) {
         try {
-            if (lessonId == null || lessonId.trim().isEmpty()) return ResponseEntity.badRequest().body("lessonId required");
+            if (lessonId == null || lessonId.trim().isEmpty())
+                return ResponseEntity.badRequest().body("lessonId required");
             Path target = mappingsDir.resolve(lessonId + ".json").normalize();
             if (!target.startsWith(mappingsDir)) return ResponseEntity.badRequest().body("Invalid lessonId");
             Files.write(target, mappingJson.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);

@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,8 +21,8 @@ public class IntentoEjercicio {
     @Column(name = "id_intento_ejercicio")
     private Integer id;
 
-    @Column(name = "puntaje", scale = 2)
-    private BigDecimal puntaje;
+    @Column(name = "puntaje")
+    private Double puntaje;
 
     @Column(name = "duracion_seg")
     private Integer duracionSeg;

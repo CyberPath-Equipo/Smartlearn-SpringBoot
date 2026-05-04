@@ -119,7 +119,6 @@ public class SubtemaControlador {
     public ResponseEntity<SubtemaDto> save(@RequestBody SubtemaDto subtemaDto) {
         Subtema subtema = mapDtoToEntity(subtemaDto);
 
-        // Asocia con Tema si está presente
         if (subtemaDto.getIdTema() != null) {
             subtema.setTema(Tema.builder().id(subtemaDto.getIdTema()).build());
         }
@@ -195,7 +194,6 @@ public class SubtemaControlador {
     }
      */
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private SubtemaDto convertToDto(Subtema subtema) {
         return SubtemaDto.builder()
                 .id(subtema.getId())
@@ -217,7 +215,6 @@ public class SubtemaControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Subtema mapDtoToEntity(SubtemaDto dto) {
         return Subtema.builder()
                 .id(dto.getId())

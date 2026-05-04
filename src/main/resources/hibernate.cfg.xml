@@ -9,18 +9,19 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">n0m3l0</property>
         <property name="hibernate.default_schema">smartlearn</property>
-        <!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property> -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool.size">1</property>
         <property name="current_session_context_class">thread</property>
-        <!-- Disable the second-level cache  -->
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
-        <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">false</property>
-        <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">none</property>
         <property name="hibernate.transform_hbm_xml.enabled">true</property>
+
+        <mapping class="com.cyberpath.springboot.modelo.contenido.Materia"/>
+        <mapping class="com.cyberpath.springboot.modelo.contenido.ProgresoSubtema"/>
+        <mapping class="com.cyberpath.springboot.modelo.contenido.Subtema"/>
+        <mapping class="com.cyberpath.springboot.modelo.contenido.Tema"/>
+        <mapping class="com.cyberpath.springboot.modelo.contenido.Teoria"/>
 
         <mapping class="com.cyberpath.springboot.modelo.usuario.Usuario"/>
         <mapping class="com.cyberpath.springboot.modelo.usuario.Rol"/>

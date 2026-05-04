@@ -50,7 +50,6 @@ public class EjercicioControlador {
     public ResponseEntity<EjercicioDto> save(@RequestBody EjercicioDto ejercicioDto) {
         Ejercicio ejercicio = mapDtoToEntity(ejercicioDto);
 
-        // Asocia con Subtema si está presente en el DTO
         if (ejercicioDto.getIdSubtema() != null) {
             ejercicio.setSubtema(Subtema.builder().id(ejercicioDto.getIdSubtema()).build());
         }
@@ -80,7 +79,6 @@ public class EjercicioControlador {
     public ResponseEntity<EjercicioDto> update(@PathVariable Integer id, @RequestBody EjercicioDto ejercicioDto) {
         Ejercicio datosActualizacion = mapDtoToEntity(ejercicioDto);
 
-        // Asocia con Subtema usando el id del path si no se proporciona
         if (ejercicioDto.getIdSubtema() != null) {
             datosActualizacion.setSubtema(Subtema.builder().id(ejercicioDto.getIdSubtema()).build());
         }
@@ -117,7 +115,6 @@ public class EjercicioControlador {
                 .build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private EjercicioDto convertToDto(Ejercicio ejercicio) {
         return EjercicioDto.builder()
                 .id(ejercicio.getId())
@@ -138,7 +135,6 @@ public class EjercicioControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Ejercicio mapDtoToEntity(EjercicioDto dto) {
         return Ejercicio.builder()
                 .id(dto.getId())

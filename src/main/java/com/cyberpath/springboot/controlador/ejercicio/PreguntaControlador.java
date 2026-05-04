@@ -50,7 +50,6 @@ public class PreguntaControlador {
     public ResponseEntity<PreguntaDto> save(@RequestBody PreguntaDto preguntaDto) {
         Pregunta pregunta = mapDtoToEntity(preguntaDto);
 
-        // Asocia con Ejercicio si está presente
         if (preguntaDto.getIdEjercicio() != null) {
             pregunta.setEjercicio(Ejercicio.builder().id(preguntaDto.getIdEjercicio()).build());
         }
@@ -63,7 +62,6 @@ public class PreguntaControlador {
     public ResponseEntity<PreguntaDto> update(@PathVariable Integer id, @RequestBody PreguntaDto preguntaDto) {
         Pregunta datosActualizacion = mapDtoToEntity(preguntaDto);
 
-        // Asocia con Ejercicio
         if (preguntaDto.getIdEjercicio() != null) {
             datosActualizacion.setEjercicio(Ejercicio.builder().id(preguntaDto.getIdEjercicio()).build());
         }
@@ -102,7 +100,6 @@ public class PreguntaControlador {
                 .build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private PreguntaDto convertToDto(Pregunta pregunta) {
         return PreguntaDto.builder()
                 .id(pregunta.getId())
@@ -114,7 +111,6 @@ public class PreguntaControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Pregunta mapDtoToEntity(PreguntaDto dto) {
         return Pregunta.builder()
                 .id(dto.getId())

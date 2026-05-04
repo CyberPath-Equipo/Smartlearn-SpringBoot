@@ -4,22 +4,22 @@ import com.cyberpath.springboot.controlador.usuario.contrasena.CambioPasswordDto
 import com.cyberpath.springboot.dto.contenido.MateriaDto;
 import com.cyberpath.springboot.dto.usuario.UsuarioDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
-import com.cyberpath.springboot.modelo.usuario.Configuracion;
 import com.cyberpath.springboot.modelo.usuario.Rol;
-import com.cyberpath.springboot.modelo.usuario.UltimaConexion;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
 import com.cyberpath.springboot.servicio.servicio.relaciones.UsuarioMateriaServicio;
 import com.cyberpath.springboot.servicio.servicio.usuario.UsuarioServicio;
-import com.cyberpath.springboot.web.PasswordManager;
-import com.cyberpath.springboot.web.jwt.JwtService;
-import com.cyberpath.springboot.web.login.LoginRequest;
-import com.cyberpath.springboot.web.login.LoginResponse;
+import com.cyberpath.springboot.configuracion.seguridad.jwt.JwtService;
+import com.cyberpath.springboot.configuracion.seguridad.login.LoginRequest;
+import com.cyberpath.springboot.configuracion.seguridad.login.LoginResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,49 +27,105 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
+@Slf4j
 public class UsuarioControlador {
-
     private final UsuarioServicio usuarioServicio;
     private final UsuarioMateriaServicio usuarioMateriaServicio;
     private final JwtService jwtService;
-    private final PasswordManager passwordManager;
+    private final PasswordEncoder passwordEncoder;
 
-    // ============== METODOS PRINCIPALES ===================
+    @PostMapping("/usuario/registro")
+    public ResponseEntity<UsuarioDto> save(@Valid @RequestBody UsuarioDto usuarioDto) {
+        Usuario usuarioGuardar = usuarioServicio.save(usuarioDto);
+        return ResponseEntity.ok(convertToDto(usuarioGuardar));
+    }
+
+    @PutMapping("/usuario/{id}")
+    public ResponseEntity<UsuarioDto> update(@PathVariable Integer id, @RequestBody UsuarioDto usuarioDto) {
+        Usuario usuarioActualizar = usuarioServicio.update(id, usuarioDto);
+        if(usuarioActualizar == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(convertToDto(usuarioActualizar));
+    }
+
+    @DeleteMapping("/usuario/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        usuarioServicio.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/usuario")
-    public ResponseEntity<List<UsuarioDto>> lista() {
+    public ResponseEntity<List<UsuarioDto>> getAll() {
         List<Usuario> usuarios = usuarioServicio.getAll();
         if (usuarios == null || usuarios.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        List<UsuarioDto> dtos = usuarios.stream()
+        List<UsuarioDto> usuariosDto = usuarios.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
+        return ResponseEntity.ok(usuariosDto);
     }
 
     @GetMapping("/usuario/{id}")
-    public ResponseEntity<UsuarioDto> getById(@PathVariable Integer id) {
-        Usuario usuario = usuarioServicio.getById(id);
+    public ResponseEntity<UsuarioDto> findById(@PathVariable Integer id, Principal principal) {
+        Usuario usuarioSolicitante = usuarioServicio.findByCorreo(principal.getName());
+        if (usuarioSolicitante == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        if (!usuarioSolicitante.getRol().getTipo().equalsIgnoreCase("ADMIN")
+                && !usuarioSolicitante.getId().equals(id)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        Usuario usuario = usuarioServicio.findById(id);
         if (usuario == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(convertToDto(usuario));
     }
 
+
+    @PostMapping("/usuario/login")
+    public ResponseEntity<?> login(@RequestBody UsuarioDto loginRequest) {
+        if (loginRequest.getNombreCuenta() == null || loginRequest.getContrasena() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Usuario usuario = usuarioServicio.findByNombreCuenta(loginRequest.getNombreCuenta());
+        if (usuario == null) {
+            return ResponseEntity.status(401).build();
+        }
+
+        if (!passwordEncoder.matches(loginRequest.getContrasena(), usuario.getContrasena())) {
+            return ResponseEntity.status(401).build();
+        }
+
+        String token = jwtService.generarToken(usuario.getCorreo());
+        LoginResponse response = new LoginResponse(
+                token,
+                usuario.getId(),
+                usuario.getNombreCuenta(),
+                usuario.getRol().getId()
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
+
     @PostMapping("/usuario/login/docente")
     public ResponseEntity<?> loginDocente(@RequestBody LoginRequest request) {
 
-        Usuario usuario = usuarioServicio.getByCorreo(request.getCorreo());
-        if (usuario == null) { // Usuario con el correo no existe
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no encontrado"); // Reporta que el correo no está registrado
+        Usuario usuario = usuarioServicio.findByCorreo(request.getCorreo());
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no encontrado");
         }
 
-        // VALIDAR CONTRASEÑA
-        if (!passwordManager.validarContrasena(request.getContrasena(), usuario.getContrasena())) {
+        if (!passwordEncoder.matches(request.getContrasena(), usuario.getContrasena())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
         }
 
-        String token = jwtService.generarToken(usuario.getCorreo()); // Genera un Token JWT para manejar el acceso y la comunicación entre el usuario y el servidor
+        String token = jwtService.generarToken(usuario.getCorreo());
 
         LoginResponse response = new LoginResponse(
                 token,
@@ -81,100 +137,21 @@ public class UsuarioControlador {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/usuario/registro")
-    public ResponseEntity<UsuarioDto> registrarUsuario(@RequestBody UsuarioDto newUser) {
-
-        Usuario usuario = new Usuario();
-        usuario.setNombreCuenta(newUser.getNombreCuenta());
-        usuario.setNombreCompleto(newUser.getNombreCompleto());
-        usuario.setCorreo(newUser.getCorreo());
-
-        // Contraseña encriptada
-        String passwordEncriptada = passwordManager.encode(newUser.getContrasena());
-        usuario.setContrasena(passwordEncriptada);
-
-        // Rol asignado desde el front
-        if (newUser.getIdRol() != null) {
-            usuario.setRol(Rol.builder().id(newUser.getIdRol()).build());
-        }
-
-        // Asocia configuracion si hay idConfiguracion
-        if (newUser.getIdConfiguracion() != null) {
-            Configuracion configuracion = Configuracion.builder()
-                    .id(newUser.getIdConfiguracion())
-                    .build();
-            configuracion.setUsuario(usuario);
-            usuario.setConfiguracion(configuracion);
-        }
-
-        // Asocia ultimaConexion si hay idUltimaConexion
-        if (newUser.getIdUltimaConexion() != null) {
-            UltimaConexion ultimaConexion = UltimaConexion.builder()
-                    .id(newUser.getIdUltimaConexion())
-                    .ultimaConexion(LocalDateTime.now().toString())  // Valor por defecto si no se proporciona
-                    .build();
-            ultimaConexion.setUsuario(usuario);
-            usuario.setUltimaConexion(ultimaConexion);
-        }
-
-        Usuario guardado = usuarioServicio.save(usuario);
-
-        return ResponseEntity.ok(convertToDto(guardado));
-    }
-
-    @PutMapping("/usuario/{id}")
-    public ResponseEntity<UsuarioDto> updateUsuario(@PathVariable Integer id, @RequestBody UsuarioDto usuarioDto) {
-        Usuario existente = usuarioServicio.getById(id);
-        if (existente == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // Actualizar solo campos que vienen no-null en el DTO
-        if (usuarioDto.getNombreCuenta() != null) existente.setNombreCuenta(usuarioDto.getNombreCuenta());
-        if (usuarioDto.getCorreo() != null) existente.setCorreo(usuarioDto.getCorreo());
-        if (usuarioDto.getNombreCompleto() != null) existente.setNombreCompleto(usuarioDto.getNombreCompleto());
-        if (usuarioDto.getActivo() != null) existente.setActivo(usuarioDto.getActivo());
-        if (usuarioDto.getVerificado() != null) existente.setVerificado(usuarioDto.getVerificado());
-
-        // Password: solo actualizar si viene en el DTO (y en el front se envía la nueva)
-        if (usuarioDto.getContrasena() != null && !usuarioDto.getContrasena().isEmpty()) {
-            String passwordEncriptada = passwordManager.encode(usuarioDto.getContrasena());
-            existente.setContrasena(passwordEncriptada);
-        }
-
-        // Rol, configuración y ultimaConexion si es necesario
-        if (usuarioDto.getIdRol() != null) {
-            existente.setRol(Rol.builder().id(usuarioDto.getIdRol()).build());
-        }
-
-        Usuario actualizado = usuarioServicio.update(id, existente);
-        return ResponseEntity.ok(convertToDto(actualizado));
-    }
-
     @PutMapping("/usuario/{id}/password")
     public ResponseEntity<Void> updatePassword(@PathVariable Integer id, @RequestBody CambioPasswordDto dto) {
         boolean actualizado = usuarioServicio.cambiarPassword(id, dto.getPasswordActual(), dto.getPasswordNueva());
-
         if (!actualizado) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping("/usuario/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        usuarioServicio.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("usuario/{id}/materias")
     public ResponseEntity<List<MateriaDto>> getMateriasByUsuario(@PathVariable Integer id) {
-        Usuario usuario = usuarioServicio.getById(id);
+        Usuario usuario = usuarioServicio.findById(id);
         if (usuario == null) {
             return ResponseEntity.notFound().build();
         }
-
         List<MateriaDto> materias = usuarioMateriaServicio.getMateriasByUser(id)
                 .stream()
                 .map(m -> MateriaDto.builder()
@@ -190,48 +167,25 @@ public class UsuarioControlador {
 
     @GetMapping("/usuario/{idUsuario}/materia/{idMateria}/ejercicios-realizados")
     public ResponseEntity<Long> getEjerciciosRealizadosByUsuarioAndMateria(@PathVariable Integer idUsuario, @PathVariable Integer idMateria) {
-        Usuario usuario = usuarioServicio.getById(idUsuario);
+        Usuario usuario = usuarioServicio.findById(idUsuario);
         if (usuario == null) {
             return ResponseEntity.notFound().build();
         }
-        // Verifica que la materia exista (opcional, pero recomendado)
-        Materia materia = usuarioServicio.getMateriaById(idMateria); // Asume que tienes este método en UsuarioServicio o usa MateriaServicio
+
+        Materia materia = usuarioServicio.getMateriaById(idMateria);
         if (materia == null) {
             return ResponseEntity.notFound().build();
         }
-        // Cuenta los ejercicios realizados (hecho = true) para este usuario y materia
+
         Long cantidad = usuarioServicio.countEjerciciosRealizadosByUsuarioAndMateria(idUsuario, idMateria);
         return ResponseEntity.ok(cantidad);
     }
 
-
-    @PostMapping("/usuario/login")
-    public ResponseEntity<UsuarioDto> login(@RequestBody UsuarioDto loginRequest) {
-        if (loginRequest.getNombreCuenta() == null || loginRequest.getContrasena() == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        Usuario usuario = usuarioServicio.findByNombreCuenta(loginRequest.getNombreCuenta());
-        if (usuario == null) {
-            return ResponseEntity.status(401).build();
-        }
-        // VALIDAR CONTRASEÑA
-        if (!passwordManager.validarContrasena(loginRequest.getContrasena(), usuario.getContrasena())) {
-            return ResponseEntity.status(401).build();
-        }
-
-        UsuarioDto response = convertToDto(usuario);
-        response.setContrasena(null);
-        return ResponseEntity.ok(response);
-    }
-
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private UsuarioDto convertToDto(Usuario usuario) {
         return UsuarioDto.builder()
                 .id(usuario.getId())
                 .nombreCuenta(usuario.getNombreCuenta())
                 .correo(usuario.getCorreo())
-                .contrasena(usuario.getContrasena())
                 .nombreCompleto(usuario.getNombreCompleto())
                 .activo(usuario.getActivo())
                 .verificado(usuario.getVerificado())
@@ -241,7 +195,6 @@ public class UsuarioControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Usuario mapDtoToEntity(UsuarioDto dto) {
         return Usuario.builder()
                 .nombreCuenta(dto.getNombreCuenta())
@@ -254,4 +207,3 @@ public class UsuarioControlador {
                 .build();
     }
 }
-

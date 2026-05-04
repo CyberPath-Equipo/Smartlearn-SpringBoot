@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "tbl_usuariomateria")
+@Table(name = "tbl_usuario_materia")
 public class UsuarioMateria {
 
     @EmbeddedId

@@ -46,7 +46,6 @@ public class ProgresoSubtemaControlador {
     public ResponseEntity<ProgresoSubtemaDto> save(@RequestBody ProgresoSubtemaDto progresoDto) {
         ProgresoSubtema progreso = mapDtoToEntity(progresoDto);
 
-        // Asocia con Usuario y Subtema si están presentes
         if (progresoDto.getIdUsuario() != null) {
             progreso.setUsuario(Usuario.builder().id(progresoDto.getIdUsuario()).build());
         }
@@ -62,7 +61,6 @@ public class ProgresoSubtemaControlador {
     public ResponseEntity<ProgresoSubtemaDto> update(@PathVariable Integer id, @RequestBody ProgresoSubtemaDto progresoDto) {
         ProgresoSubtema datosActualizacion = mapDtoToEntity(progresoDto);
 
-        // Asocia relaciones
         if (progresoDto.getIdUsuario() != null) {
             datosActualizacion.setUsuario(Usuario.builder().id(progresoDto.getIdUsuario()).build());
         }
@@ -80,7 +78,6 @@ public class ProgresoSubtemaControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private ProgresoSubtemaDto convertToDto(ProgresoSubtema progreso) {
         return ProgresoSubtemaDto.builder()
                 .id(progreso.getId())
@@ -94,7 +91,6 @@ public class ProgresoSubtemaControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private ProgresoSubtema mapDtoToEntity(ProgresoSubtemaDto dto) {
         return ProgresoSubtema.builder()
                 .id(dto.getId())

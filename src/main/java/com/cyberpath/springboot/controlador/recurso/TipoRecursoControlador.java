@@ -61,7 +61,6 @@ public class TipoRecursoControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private TipoRecursoDto convertToDto(TipoRecurso tipo) {
         return TipoRecursoDto.builder()
                 .id(tipo.getId())
@@ -70,7 +69,6 @@ public class TipoRecursoControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private TipoRecurso mapDtoToEntity(TipoRecursoDto dto) {
         return TipoRecurso.builder()
                 .id(dto.getId())

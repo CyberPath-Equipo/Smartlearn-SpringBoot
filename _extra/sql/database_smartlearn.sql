@@ -1,12 +1,10 @@
--- smartlearn_schema_final.sql
--- MySQL 8.0+ - 100% compatible con Hibernate - Sin Float/Double
-
+-- smartlearndb.sql
 DROP DATABASE IF EXISTS smartlearn;
 CREATE DATABASE smartlearn CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE smartlearn;
 
 -- ============================================================
--- 0. CONVENCIÓN: INT UNSIGNED, DECIMAL para precisión, timestamps
+-- CONTENIDO
 -- ============================================================
 
 CREATE TABLE tbl_materia (
@@ -25,7 +23,7 @@ CREATE TABLE tbl_tema (
   id_tema INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_materia INT UNSIGNED NOT NULL,
   nombre VARCHAR(200) NOT NULL,
-  orden SMALLINT UNSIGNED DEFAULT 0,
+  orden INT DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_tema),
@@ -39,7 +37,7 @@ CREATE TABLE tbl_subtema (
   id_subtema INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_tema INT UNSIGNED NOT NULL,
   nombre VARCHAR(200) NOT NULL,
-  orden SMALLINT UNSIGNED DEFAULT 0,
+  orden INT DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_subtema),
@@ -52,7 +50,7 @@ CREATE TABLE tbl_subtema (
 -- Teoría 1:1 con subtema
 CREATE TABLE tbl_teoria (
   id_subtema INT UNSIGNED NOT NULL,
-  contenido TEXT NOT NULL,
+  contenido TEXT,
   revisado TINYINT(1) NOT NULL DEFAULT 0,
   fuente VARCHAR(500),
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -86,8 +84,8 @@ CREATE TABLE tbl_ejercicio (
   id_subtema INT UNSIGNED NOT NULL,
   nombre VARCHAR(255) NOT NULL,
   tipo ENUM('practica','evaluacion','repaso') DEFAULT 'practica',
-  dificultad TINYINT UNSIGNED DEFAULT 3,
-  orden SMALLINT UNSIGNED DEFAULT 0,
+  dificultad INT DEFAULT 3,
+  orden INT DEFAULT 0,
   activo TINYINT(1) DEFAULT 1,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id_ejercicio),
@@ -98,11 +96,11 @@ CREATE TABLE tbl_ejercicio (
 
 CREATE TABLE tbl_pregunta (
   id_pregunta INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  id_ejercicio INT UNSIGNED NOT NULL,
-  enunciado TEXT NOT NULL,
+  id_ejercicio INT UNSIGNED,
+  enunciado TEXT,
   tipo ENUM('opcion_multiple','abierta','verdadero_falso') DEFAULT 'opcion_multiple',
-  orden SMALLINT UNSIGNED DEFAULT 0,
-  puntos DECIMAL(6,2) DEFAULT 1.00,  -- ✅ DECIMAL
+  orden INT DEFAULT 0,
+  puntos DOUBLE DEFAULT 1.00,
   PRIMARY KEY (id_pregunta),
   INDEX idx_pregunta_ejercicio (id_ejercicio),
   CONSTRAINT fk_pregunta_ejercicio FOREIGN KEY (id_ejercicio)
@@ -114,7 +112,7 @@ CREATE TABLE tbl_opcion (
   id_pregunta INT UNSIGNED NOT NULL,
   texto VARCHAR(1000) NOT NULL,
   es_correcta TINYINT(1) NOT NULL DEFAULT 0,
-  orden SMALLINT UNSIGNED DEFAULT 0,
+  orden INT DEFAULT 0,
   PRIMARY KEY (id_opcion),
   INDEX idx_opcion_pregunta (id_pregunta),
   CONSTRAINT fk_opcion_pregunta FOREIGN KEY (id_pregunta)
@@ -122,17 +120,17 @@ CREATE TABLE tbl_opcion (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE tbl_recurso_adjunto (
-  id_recurso INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_recurso_adjunto INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_subtema INT UNSIGNED NOT NULL,
   id_tipo_recurso INT UNSIGNED NOT NULL,
-  orden SMALLINT UNSIGNED DEFAULT 0,
+  orden INT DEFAULT 0,
   titulo VARCHAR(255) NOT NULL,
   url VARCHAR(1000),
   mime_type VARCHAR(100),
   tamano_bytes BIGINT UNSIGNED,
   descripcion TEXT,
   creado_en DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id_recurso),
+  PRIMARY KEY (id_recurso_adjunto),
   INDEX idx_recurso_subtema_orden (id_subtema, orden),
   CONSTRAINT fk_recurso_subtema FOREIGN KEY (id_subtema)
     REFERENCES tbl_subtema(id_subtema) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -163,7 +161,7 @@ CREATE TABLE tbl_usuario (
     REFERENCES tbl_rol(id_rol) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE tbl_usuariomateria (
+CREATE TABLE tbl_usuario_materia (
   id_usuario INT UNSIGNED NOT NULL,
   id_materia INT UNSIGNED NOT NULL,
   suscrito_en DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -183,7 +181,7 @@ CREATE TABLE tbl_intento_ejercicio (
   id_intento_ejercicio INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_usuario INT UNSIGNED NOT NULL,
   id_ejercicio INT UNSIGNED NOT NULL,
-  puntaje DECIMAL(6,2),  -- ✅ DECIMAL (0.00 - 100.00)
+  puntaje DOUBLE,
   duracion_seg INT UNSIGNED,
   fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   estado ENUM('completado','en_progreso','abandonado') DEFAULT 'completado',
@@ -203,10 +201,10 @@ CREATE TABLE tbl_progreso_subtema (
   teoria_leida TINYINT(1) DEFAULT 0,
   ejercicios_completados INT UNSIGNED DEFAULT 0,
   ejercicios_totales INT UNSIGNED DEFAULT 0,
-  porcentaje DECIMAL(5,2) GENERATED ALWAYS AS (
+  porcentaje DOUBLE GENERATED ALWAYS AS (
     CASE WHEN ejercicios_totales = 0 THEN 0.00
          ELSE (ejercicios_completados * 100.0 / ejercicios_totales) END
-  ) STORED,  -- ✅ DECIMAL generado
+  ) STORED,
   ultimo_acceso DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_progreso),
   UNIQUE KEY uq_progreso_usuario_subtema (id_usuario, id_subtema),
@@ -219,7 +217,7 @@ CREATE TABLE tbl_progreso_subtema (
 
 CREATE TABLE tbl_ultima_conexion (
   id_usuario INT UNSIGNED NOT NULL,
-  ultima_conexion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  ultima_conexion VARCHAR(255),
   dispositivo VARCHAR(255),
   id_subtema INT UNSIGNED,
   PRIMARY KEY (id_usuario),

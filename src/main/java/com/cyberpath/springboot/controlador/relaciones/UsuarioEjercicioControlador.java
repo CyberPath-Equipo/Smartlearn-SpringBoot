@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UsuarioEjercicioControlador {
     private final UsuarioEjercicioServicio usuarioEjercicioServicio;
-    private final EjercicioServicio ejercicioServicio; // Cambiado de MateriaServicio a EjercicioServicio
+    private final EjercicioServicio ejercicioServicio;
 
     @GetMapping("/usuario-ejercicio")
     public ResponseEntity<List<UsuarioEjercicioDto>> lista() {
@@ -34,11 +34,10 @@ public class UsuarioEjercicioControlador {
         return ResponseEntity.ok(dtos);
     }
 
-    @PostMapping("/usuario-ejercicio") // Cambiado de /usuario-materia a /usuario-ejercicio
+    @PostMapping("/usuario-ejercicio")
     public ResponseEntity<UsuarioEjercicioDto> save(@RequestBody UsuarioEjercicioDto usuarioEjercicioDto) {
         UsuarioEjercicio usuarioEjercicio = mapDtoToEntity(usuarioEjercicioDto);
 
-        // Asocia con Ejercicio y Usuario si están presentes
         if (usuarioEjercicioDto.getIdEjercicio() != null) {
             usuarioEjercicio.setEjercicio(Ejercicio.builder().id(usuarioEjercicioDto.getIdEjercicio()).build());
         }
@@ -50,11 +49,10 @@ public class UsuarioEjercicioControlador {
         return ResponseEntity.ok(convertToDto(guardada));
     }
 
-    @PutMapping("/usuario-ejercicio/{id}") // Cambiado de /usuario-materia a /usuario-ejercicio
+    @PutMapping("/usuario-ejercicio/{id}")
     public ResponseEntity<UsuarioEjercicioDto> update(@PathVariable Integer id, @RequestBody UsuarioEjercicioDto usuarioEjercicioDto) {
         UsuarioEjercicio datosActualizacion = mapDtoToEntity(usuarioEjercicioDto);
 
-        // Asocia relaciones
         if (usuarioEjercicioDto.getIdEjercicio() != null) {
             datosActualizacion.setEjercicio(Ejercicio.builder().id(usuarioEjercicioDto.getIdEjercicio()).build());
         }
@@ -66,27 +64,25 @@ public class UsuarioEjercicioControlador {
         return ResponseEntity.ok(convertToDto(actualizada));
     }
 
-    @DeleteMapping("/usuario-ejercicio/{id}") // Cambiado de /usuario-materia a /usuario-ejercicio
+    @DeleteMapping("/usuario-ejercicio/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         usuarioEjercicioServicio.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private UsuarioEjercicioDto convertToDto(UsuarioEjercicio usuarioEjercicio) {
         return UsuarioEjercicioDto.builder()
                 .id(usuarioEjercicio.getId())
-                .idEjercicio(usuarioEjercicio.getEjercicio() != null ? usuarioEjercicio.getEjercicio().getId() : null) // Cambiado de idMateria a idEjercicio
+                .idEjercicio(usuarioEjercicio.getEjercicio() != null ? usuarioEjercicio.getEjercicio().getId() : null)
                 .idUsuario(usuarioEjercicio.getUsuario() != null ? usuarioEjercicio.getUsuario().getId() : null)
-                .hecho(usuarioEjercicio.getHecho() != null ? usuarioEjercicio.getHecho() : false) // Agregado el campo hecho
+                .hecho(usuarioEjercicio.getHecho() != null ? usuarioEjercicio.getHecho() : false)
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private UsuarioEjercicio mapDtoToEntity(UsuarioEjercicioDto dto) {
         return UsuarioEjercicio.builder()
                 .id(dto.getId())
-                .hecho(dto.isHecho()) // Agregado el campo hecho
+                .hecho(dto.isHecho())
                 .build();
     }
 }

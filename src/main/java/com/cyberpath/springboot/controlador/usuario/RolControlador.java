@@ -34,7 +34,7 @@ public class RolControlador {
 
     @GetMapping("/rol/{id}")
     public ResponseEntity<RolDto> getById(@PathVariable Integer id) {
-        Rol rol = rolServicio.getById(id);
+        Rol rol = rolServicio.findById(id);
         if (rol == null) {
             return ResponseEntity.notFound().build();
         }
@@ -61,7 +61,6 @@ public class RolControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private RolDto convertToDto(Rol rol) {
         return RolDto.builder()
                 .id(rol.getId())
@@ -70,7 +69,6 @@ public class RolControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Rol mapDtoToEntity(RolDto dto) {
         return Rol.builder()
                 .id(dto.getId())

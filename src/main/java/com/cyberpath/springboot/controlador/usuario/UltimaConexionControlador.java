@@ -93,18 +93,16 @@ public class UltimaConexionControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private UltimaConexionDto convertToDto(UltimaConexion conexion) {
         return UltimaConexionDto.builder()
                 .id(conexion.getId())
-                .ultimaConexion(conexion.getUltimaConexion())   // String directamente
+                .ultimaConexion(conexion.getUltimaConexion())
                 .dispositivo(conexion.getDispositivo())
                 .idUsuario(conexion.getUsuario() != null ? conexion.getUsuario().getId() : null)
                 .idSubtema(conexion.getSubtema() != null ? conexion.getSubtema().getId() : null)
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private UltimaConexion mapDtoToEntity(UltimaConexionDto dto) {
         String fechaStr = dto.getUltimaConexion();
 

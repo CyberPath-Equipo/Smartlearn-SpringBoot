@@ -24,24 +24,24 @@ public class ProgresoSubtema {
     @Column(name = "teoria_leida")
     private Boolean teoriaLeida;
 
-    @Column(name = "ejercicios_completados", nullable = false)
+    @Column(name = "ejercicios_completados")
     private Integer ejerciciosCompletados;
 
-    @Column(name = "ejercicios_totales", nullable = false)
+    @Column(name = "ejercicios_totales")
     private Integer ejerciciosTotales;
 
-    @Column(name = "porcentaje", nullable = false, scale = 2)
+    @Column(name = "porcentaje")
     private Double porcentaje;
 
-    @Column(name = "ultimo_acceso", nullable = false)
+    @Column(name = "ultimo_acceso")
     @Builder.Default
     private LocalDateTime ultimoAcceso = LocalDateTime.now();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_subtema", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_subtema")
     private Subtema subtema;
 }

@@ -52,7 +52,7 @@ public class Usuario {
     @Column(name = "actualizado_en")
     private LocalDateTime actualizadoEn;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_rol", nullable = false)
     private Rol rol;
 

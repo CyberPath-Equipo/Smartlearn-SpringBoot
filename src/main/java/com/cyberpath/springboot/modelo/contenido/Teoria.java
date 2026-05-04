@@ -24,7 +24,7 @@ public class Teoria {
     @JoinColumn(name = "id_subtema")
     private Subtema subtema;
 
-    @Column(name = "contenido", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "contenido")
     private String contenido;
 
     @Column(name = "revisado")

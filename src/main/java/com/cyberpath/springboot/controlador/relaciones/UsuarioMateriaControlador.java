@@ -77,7 +77,6 @@ public class UsuarioMateriaControlador {
     public ResponseEntity<UsuarioMateriaDto> save(@RequestBody UsuarioMateriaDto usuarioMateriaDto) {
         UsuarioMateria usuarioMateria = mapDtoToEntity(usuarioMateriaDto);
 
-        // Asocia con Materia y Usuario si están presentes
         if (usuarioMateriaDto.getIdMateria() != null) {
             usuarioMateria.setMateria(Materia.builder().id(usuarioMateriaDto.getIdMateria()).build());
         }
@@ -93,7 +92,6 @@ public class UsuarioMateriaControlador {
     public ResponseEntity<UsuarioMateriaDto> update(@PathVariable Integer id, @RequestBody UsuarioMateriaDto usuarioMateriaDto) {
         UsuarioMateria datosActualizacion = mapDtoToEntity(usuarioMateriaDto);
 
-        // Asocia relaciones
         if (usuarioMateriaDto.getIdMateria() != null) {
             datosActualizacion.setMateria(Materia.builder().id(usuarioMateriaDto.getIdMateria()).build());
         }
@@ -111,7 +109,6 @@ public class UsuarioMateriaControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private UsuarioMateriaDto convertToDto(UsuarioMateria usuarioMateria) {
         return UsuarioMateriaDto.builder()
                 .id(usuarioMateria.getId() != null ? usuarioMateria.getId().getIdUsuario() : null)
@@ -130,7 +127,6 @@ public class UsuarioMateriaControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private UsuarioMateria mapDtoToEntity(UsuarioMateriaDto dto) {
         return UsuarioMateria.builder()
                 .build();

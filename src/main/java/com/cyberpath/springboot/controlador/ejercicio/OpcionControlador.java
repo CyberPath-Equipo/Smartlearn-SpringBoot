@@ -46,7 +46,6 @@ public class OpcionControlador {
     public ResponseEntity<OpcionDto> save(@RequestBody OpcionDto opcionDto) {
         Opcion opcion = mapDtoToEntity(opcionDto);
 
-        // Asocia con Pregunta si está presente
         if (opcionDto.getIdPregunta() != null) {
             opcion.setPregunta(Pregunta.builder().id(opcionDto.getIdPregunta()).build());
         }
@@ -59,7 +58,6 @@ public class OpcionControlador {
     public ResponseEntity<OpcionDto> update(@PathVariable Integer id, @RequestBody OpcionDto opcionDto) {
         Opcion datosActualizacion = mapDtoToEntity(opcionDto);
 
-        // Asocia con Pregunta
         if (opcionDto.getIdPregunta() != null) {
             datosActualizacion.setPregunta(Pregunta.builder().id(opcionDto.getIdPregunta()).build());
         }
@@ -74,7 +72,6 @@ public class OpcionControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private OpcionDto convertToDto(Opcion opcion) {
         return OpcionDto.builder()
                 .id(opcion.getId())
@@ -85,7 +82,6 @@ public class OpcionControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Opcion mapDtoToEntity(OpcionDto dto) {
         return Opcion.builder()
                 .id(dto.getId())

@@ -86,7 +86,6 @@ public class TemaControlador {
     public ResponseEntity<TemaDto> save(@RequestBody TemaDto temaDto) {
         Tema tema = mapDtoToEntity(temaDto);
 
-        // Asocia con Materia si está presente
         if (temaDto.getIdMateria() != null) {
             tema.setMateria(Materia.builder().id(temaDto.getIdMateria()).build());
         }
@@ -99,7 +98,6 @@ public class TemaControlador {
     public ResponseEntity<TemaDto> update(@PathVariable Integer id, @RequestBody TemaDto temaDto) {
         Tema datosActualizacion = mapDtoToEntity(temaDto);
 
-        // Asocia con Materia
         if (temaDto.getIdMateria() != null) {
             datosActualizacion.setMateria(Materia.builder().id(temaDto.getIdMateria()).build());
         }
@@ -114,7 +112,6 @@ public class TemaControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private TemaDto convertToDto(Tema tema) {
         return TemaDto.builder()
                 .id(tema.getId())
@@ -124,7 +121,6 @@ public class TemaControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Tema mapDtoToEntity(TemaDto dto) {
         return Tema.builder()
                 .id(dto.getId())

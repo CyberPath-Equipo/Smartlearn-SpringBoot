@@ -46,7 +46,6 @@ public class RecursoAdjuntoControlador {
     public ResponseEntity<RecursoAdjuntoDto> save(@RequestBody RecursoAdjuntoDto recursoDto) {
         RecursoAdjunto recurso = mapDtoToEntity(recursoDto);
 
-        // Asocia con Subtema y TipoRecurso si están presentes
         if (recursoDto.getIdSubtema() != null) {
             recurso.setSubtema(Subtema.builder().id(recursoDto.getIdSubtema()).build());
         }
@@ -62,7 +61,6 @@ public class RecursoAdjuntoControlador {
     public ResponseEntity<RecursoAdjuntoDto> update(@PathVariable Integer id, @RequestBody RecursoAdjuntoDto recursoDto) {
         RecursoAdjunto datosActualizacion = mapDtoToEntity(recursoDto);
 
-        // Asocia relaciones
         if (recursoDto.getIdSubtema() != null) {
             datosActualizacion.setSubtema(Subtema.builder().id(recursoDto.getIdSubtema()).build());
         }
@@ -80,7 +78,6 @@ public class RecursoAdjuntoControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private RecursoAdjuntoDto convertToDto(RecursoAdjunto recurso) {
         return RecursoAdjuntoDto.builder()
                 .id(recurso.getId())
@@ -95,7 +92,6 @@ public class RecursoAdjuntoControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private RecursoAdjunto mapDtoToEntity(RecursoAdjuntoDto dto) {
         return RecursoAdjunto.builder()
                 .id(dto.getId())

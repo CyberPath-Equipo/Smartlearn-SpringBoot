@@ -36,7 +36,7 @@ public class RecursoAdjunto {
     @Column(name = "tamano_bytes")
     private Long tamanoBytes;
 
-    @Column(name = "descripcion", columnDefinition = "TEXT")
+    @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "creado_en", nullable = false, updatable = false)

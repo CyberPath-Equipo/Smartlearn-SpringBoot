@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +26,7 @@ public class Rol {
 
     @Column(name = "descripcion", length = 255)
     private String descripcion;
+
+    @OneToMany(mappedBy = "rol", fetch = FetchType.LAZY)
+    private List<Usuario> usuarios;
 }

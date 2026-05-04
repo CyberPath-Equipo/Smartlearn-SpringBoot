@@ -8,7 +8,7 @@ TRUNCATE TABLE tbl_configuracion;
 TRUNCATE TABLE tbl_ultima_conexion;
 TRUNCATE TABLE tbl_progreso_subtema;
 TRUNCATE TABLE tbl_intento_ejercicio;
-TRUNCATE TABLE tbl_usuariomateria;
+TRUNCATE TABLE tbl_usuario_materia;
 TRUNCATE TABLE tbl_usuario;
 TRUNCATE TABLE tbl_recurso_adjunto;
 TRUNCATE TABLE tbl_opcion;
@@ -28,9 +28,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 -- Roles
 INSERT INTO tbl_rol (tipo, descripcion) VALUES
-('Estudiante', 'Usuario que estudia las materias'),
-('Profesor', 'Crea y gestiona contenido'),
-('Administrador', 'Gestión completa del sistema');
+('ESTUDIANTE', 'Usuario que estudia las materias'),
+('PROFESOR', 'Crea y gestiona contenido'),
+('ADMIN', 'Gestión completa del sistema');
 
 -- Tipos de recursos
 INSERT INTO tbl_tipo_recurso (nombre, descripcion) VALUES
@@ -130,7 +130,7 @@ INSERT INTO tbl_ejercicio (id_subtema, nombre, tipo, dificultad, orden) VALUES
 (4, 'Multiplicación de 2 dígitos', 'evaluacion', 4, 2);
 
 -- ============================================================
--- 7. PREGUNTAS
+-- PREGUNTAS
 -- ============================================================
 
 -- Ejercicio suma básica (ID=1)
@@ -143,7 +143,7 @@ INSERT INTO tbl_pregunta (id_ejercicio, enunciado, tipo, orden, puntos) VALUES
 (4, '¿Cuánto es 7 × 8?', 'opcion_multiple', 1, 1.00);
 
 -- ============================================================
--- 8. OPCIONES
+-- OPCIONES
 -- ============================================================
 
 -- Pregunta 15+27 (ID=1)
@@ -164,10 +164,6 @@ INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta, orden) VALUES
 (3, '48', 0, 2),
 (3, '65', 0, 3);
 
--- ============================================================
--- 9. RECURSOS ADJUNTOS
--- ============================================================
-
 INSERT INTO tbl_recurso_adjunto (id_subtema, id_tipo_recurso, orden, titulo, url, mime_type, tamano_bytes, descripcion) VALUES
 -- Suma y resta
 (3, 1, 1, 'Ficha de sumas', 'https://ejemplo.com/sumas.pdf', 'application/pdf', 1024000, 'Fichas imprimibles'),
@@ -176,61 +172,63 @@ INSERT INTO tbl_recurso_adjunto (id_subtema, id_tipo_recurso, orden, titulo, url
 -- Multiplicación
 (4, 4, 1, 'Tabla del 7', 'https://ejemplo.com/tabla7.png', 'image/png', 25000, 'Imagen tabla multiplicar');
 
--- ============================================================
--- 10. USUARIOS Y SUSCRIPCIONES
--- ============================================================
-
-INSERT INTO tbl_usuario (nombre_cuenta, correo, contrasena, nombre_completo, activo, id_rol) VALUES
-('7ElIron7', 'iron@example.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Iron Man', 1, 1),
-('profeMaria', 'maria@escuela.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'María García', 1, 2),
-('admin', 'admin@smartlearn.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrador', 1, 3);
-
--- Suscripciones
-INSERT INTO tbl_usuariomateria (id_usuario, id_materia) VALUES
-(1, 1), -- Iron → Matemáticas Básicas
-(1, 2), -- Iron → Álgebra
-(2, 1), -- Profe → Matemáticas Básicas
-(3, 1); -- Admin → Matemáticas Básicas
-
--- ============================================================
--- 11. CONFIGURACIÓN Y ÚLTIMA CONEXIÓN
--- ============================================================
-
-INSERT INTO tbl_configuracion (id_usuario, modo_audio, cuenta_creada, notificaciones_activadas, tamano_fuente, modo_offline) VALUES
-(1, 1, 1, 1, 'grande', 0),
-(2, 0, 1, 1, 'medio', 0),
-(3, 0, 1, 1, 'medio', 0);
-
-INSERT INTO tbl_ultima_conexion (id_usuario, ultima_conexion, dispositivo, id_subtema) VALUES
-(1, NOW(), 'Chrome Desktop', 3),
-(2, NOW(), 'Firefox Mobile', NULL);
-
--- ============================================================
--- 12. PROGRESO DE USUARIO
--- ============================================================
-
-INSERT INTO tbl_progreso_subtema (id_usuario, id_subtema, teoria_leida, ejercicios_completados, ejercicios_totales) VALUES
-(1, 1, 1, 0, 0), -- Iron: Clasificación números
-(1, 3, 1, 2, 3), -- Iron: Suma/resta (66%)
-(1, 4, 0, 0, 2); -- Iron: Multiplicación
-
--- ============================================================
--- 13. INTENTOS DE EJERCICIO
--- ============================================================
-
-INSERT INTO tbl_intento_ejercicio (id_usuario, id_ejercicio, puntaje, duracion_seg, estado) VALUES
-(1, 1, 2.00, 45, 'completado'), -- Iron: Suma básica
-(1, 2, 0.00, 120, 'abandonado'), -- Iron: Resta (abandonado)
-(1, 3, 1.00, 30, 'completado');  -- Iron: Evaluación suma/resta
-
--- ============================================================
--- 14. VERIFICACIÓN FINAL
--- ============================================================
-
 SELECT 'Datos cargados correctamente' AS mensaje;
 SELECT COUNT(*) AS total_materias FROM tbl_materia;
 SELECT COUNT(*) AS total_temas FROM tbl_tema;
 SELECT COUNT(*) AS total_subtemas FROM tbl_subtema;
 SELECT COUNT(*) AS total_ejercicios FROM tbl_ejercicio;
 SELECT COUNT(*) AS total_preguntas FROM tbl_pregunta;
-SELECT COUNT(*) AS total_usuarios FROM tbl_usuario;
+SELECT COUNT(*) AS total_usuarios FROM tbl_usuario;
+
+-- Paso 1: Agregar tema Literatura (ID=6 automático)
+INSERT INTO tbl_tema (id_materia, nombre, orden) VALUES (4, 'Literatura', 3);
+SET @id_tema_literatura = LAST_INSERT_ID();
+
+-- Paso 2: Agregar subtema Poemas (ID automático)
+INSERT INTO tbl_subtema (id_tema, nombre, orden) VALUES (@id_tema_literatura, 'Poemas en español', 1);
+SET @id_subtema_poemas = LAST_INSERT_ID();
+
+-- Paso 3: Agregar teoría (USANDO ID REAL del subtema)
+INSERT INTO tbl_teoria (id_subtema, contenido, revisado, fuente) VALUES
+(@id_subtema_poemas, 'Los poemas son textos literarios que usan ritmo, rima y figuras literarias. Ejemplo sencillo:\n\n"Estrellita dónde estás\nMe pregunto qué serás\nEn el cielo y en el mar\nUn diamante de verdad."\n\nEste poema tiene rima (estás/serás) y ritmo.', 1, 'Poesía infantil básica');
+
+-- Paso 4: Agregar ejercicio
+INSERT INTO tbl_ejercicio (id_subtema, nombre, tipo, dificultad, orden) VALUES
+(@id_subtema_poemas, 'Identifica la rima en el poema', 'practica', 1, 1);
+SET @id_ejercicio_poemas = LAST_INSERT_ID();
+
+-- Paso 5: Agregar pregunta (TEXTO CORREGIDO Y MÁS CORTO)
+INSERT INTO tbl_pregunta (id_ejercicio, enunciado, tipo, orden, puntos) VALUES
+(@id_ejercicio_poemas, '¿Qué palabras riman en el siguiente poema?\n"Estrellita dónde estás\nMe pregunto qué serás"', 'opcion_multiple', 1, 1.00);
+SET @id_pregunta_poemas = LAST_INSERT_ID();
+
+-- Paso 6: Agregar opciones
+INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta, orden) VALUES
+(@id_pregunta_poemas, 'estás - serás', 1, 1),
+(@id_pregunta_poemas, 'dónde - pregunto', 0, 2),
+(@id_pregunta_poemas, 'estrellita - me', 0, 3);
+
+-- Paso 7: Agregar recurso
+INSERT INTO tbl_recurso_adjunto (id_subtema, id_tipo_recurso, orden, titulo, url, mime_type, tamano_bytes, descripcion) VALUES
+(@id_subtema_poemas, 4, 1, 'Imagen poema estrellita', 'https://ejemplo.com/estrellita.png', 'image/png', 15000, 'Ilustración del poema Estrellita');
+
+-- VERIFICACIÓN FINAL 🎉
+SELECT 'Poemas agregado (Quitar indicador)' AS mensaje;
+SELECT
+    s.id_subtema,
+    s.nombre AS subtema,
+    t.nombre AS tema,
+    m.nombre AS materia,
+    e.nombre AS ejercicio
+FROM tbl_subtema s
+JOIN tbl_tema t ON s.id_tema = t.id_tema
+JOIN tbl_materia m ON t.id_materia = m.id_materia
+JOIN tbl_ejercicio e ON s.id_subtema = e.id_subtema
+WHERE s.nombre = 'Poemas en español';
+
+-- Mostrar la pregunta corregida
+SELECT 'Pregunta corregida:' AS info, enunciado FROM tbl_pregunta
+WHERE enunciado LIKE '%Estrellita dónde estás%';
+
+select * from tbl_rol;
+select * from tbl_usuario;

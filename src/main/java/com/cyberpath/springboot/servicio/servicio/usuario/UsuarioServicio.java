@@ -1,24 +1,25 @@
 package com.cyberpath.springboot.servicio.servicio.usuario;
 
+import com.cyberpath.springboot.dto.usuario.UsuarioDto;
 import com.cyberpath.springboot.modelo.contenido.Materia;
 import com.cyberpath.springboot.modelo.usuario.Usuario;
 
 import java.util.List;
 
 public interface UsuarioServicio {
-    List<Usuario> getAll();
+    Usuario save(UsuarioDto usuarioDto);
 
-    Usuario getById(Integer id);
-
-    Usuario getByCorreo(String correo);
-
-    Usuario save(Usuario usuario);
+    Usuario update(Integer id, UsuarioDto usuarioDto);
 
     void delete(Integer id);
 
-    Usuario update(Integer id, Usuario usuario);
+    List<Usuario> getAll();
+
+    Usuario findById(Integer id);
 
     Usuario findByNombreCuenta(String nombre);
+
+    Usuario findByCorreo(String correo);
 
     Long countEjerciciosRealizadosByUsuarioAndMateria(Integer idUsuario, Integer idMateria);
 

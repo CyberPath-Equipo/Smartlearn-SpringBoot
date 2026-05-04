@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -16,7 +15,7 @@ public class PreguntaDto {
     private String enunciado;
     private String tipo;
     private Integer orden;
-    private BigDecimal puntos;
+    private Double puntos;
 
     private Integer idEjercicio;
 }

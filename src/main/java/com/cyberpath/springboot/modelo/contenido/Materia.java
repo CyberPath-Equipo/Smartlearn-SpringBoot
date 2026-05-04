@@ -23,13 +23,13 @@ public class Materia {
     @Column(name = "id_materia")
     private Integer id;
 
-    @Column(name = "nombre", nullable = false, length = 200)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "slug", nullable = false, unique = true, length = 200)
+    @Column(name = "slug", nullable = false, unique = true)
     private String slug;
 
-    @Column(name = "descripcion", columnDefinition = "TEXT")
+    @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "created_at", nullable = false, updatable = false)

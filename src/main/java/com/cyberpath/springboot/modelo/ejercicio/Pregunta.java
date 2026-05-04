@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,21 +21,18 @@ public class Pregunta {
     @Column(name = "id_pregunta")
     private Integer id;
 
-    @Column(name = "enunciado", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "enunciado")
     private String enunciado;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
-    @Builder.Default
     private TipoPregunta tipo = TipoPregunta.opcion_multiple;
 
     @Column(name = "orden")
-    @Builder.Default
     private Integer orden = 0;
 
-    @Column(name = "puntos", scale = 2)
-    @Builder.Default
-    private BigDecimal puntos = BigDecimal.ONE;
+    @Column(name = "puntos")
+    private Double puntos;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ejercicio", nullable = false)

@@ -7,7 +7,7 @@ import java.util.List;
 public interface RolServicio {
     List<Rol> getAll();
 
-    Rol getById(Integer id);
+    Rol findById(Integer id);
 
     Rol save(Rol rol);
 

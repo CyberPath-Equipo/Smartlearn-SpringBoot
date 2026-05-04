@@ -47,7 +47,6 @@ public class ConfiguracionControlador {
     public ResponseEntity<ConfiguracionDto> save(@RequestBody ConfiguracionDto configuracionDto) {
         Configuracion configuracion = mapDtoToEntity(configuracionDto);
 
-        // Asocia con Usuario si el idUsuario está presente
         if (configuracionDto.getIdUsuario() != null) {
             configuracion.setUsuario(Usuario.builder().id(configuracionDto.getIdUsuario()).build());
         }
@@ -60,7 +59,6 @@ public class ConfiguracionControlador {
     public ResponseEntity<ConfiguracionDto> update(@PathVariable Integer id, @RequestBody ConfiguracionDto configuracionDto) {
         Configuracion datosActualizacion = mapDtoToEntity(configuracionDto);
 
-        // Asocia con Usuario usando el id del path
         datosActualizacion.setUsuario(Usuario.builder().id(id).build());
 
         Configuracion actualizada = configuracionServicio.update(id, datosActualizacion);
@@ -73,7 +71,6 @@ public class ConfiguracionControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private ConfiguracionDto convertToDto(Configuracion configuracion) {
         return ConfiguracionDto.builder()
                 .id(configuracion.getId())
@@ -86,7 +83,6 @@ public class ConfiguracionControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Configuracion mapDtoToEntity(ConfiguracionDto dto) {
         return Configuracion.builder()
                 .id(dto.getId())

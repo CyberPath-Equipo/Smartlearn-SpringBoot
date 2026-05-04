@@ -48,7 +48,6 @@ public class TeoriaControlador {
     public ResponseEntity<TeoriaDto> save(@RequestBody TeoriaDto teoriaDto) {
         Teoria teoria = mapDtoToEntity(teoriaDto);
 
-        // Asocia con Subtema si está presente
         if (teoriaDto.getIdSubtema() != null) {
             teoria.setSubtema(Subtema.builder().id(teoriaDto.getIdSubtema()).build());
         }
@@ -61,7 +60,6 @@ public class TeoriaControlador {
     public ResponseEntity<TeoriaDto> update(@PathVariable Integer id, @RequestBody TeoriaDto teoriaDto) {
         Teoria datosActualizacion = mapDtoToEntity(teoriaDto);
 
-        // Asocia con Subtema
         if (teoriaDto.getIdSubtema() != null) {
             datosActualizacion.setSubtema(Subtema.builder().id(teoriaDto.getIdSubtema()).build());
         }
@@ -76,7 +74,6 @@ public class TeoriaControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private TeoriaDto convertToDto(Teoria teoria) {
         return TeoriaDto.builder()
                 .id(teoria.getId())
@@ -87,7 +84,6 @@ public class TeoriaControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private Teoria mapDtoToEntity(TeoriaDto dto) {
         return Teoria.builder()
                 .id(dto.getId())
@@ -102,7 +98,6 @@ public class TeoriaControlador {
         Teoria teoria = mapDtoToEntity(teoriaDto);
         Subtema subtema = subtemaServicio.getById(teoriaDto.getIdSubtema());
 
-        // Asocia con Subtema si está presente
         if (teoriaDto.getIdSubtema() != null) {
             teoria.setSubtema(subtema);
         }

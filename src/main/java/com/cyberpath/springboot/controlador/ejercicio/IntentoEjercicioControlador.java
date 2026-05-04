@@ -78,7 +78,6 @@ public class IntentoEjercicioControlador {
         return ResponseEntity.noContent().build();
     }
 
-    // ====================== MÉTODOS DE CONVERSIÓN ======================
     private IntentoEjercicioDto convertToDto(IntentoEjercicio intento) {
         return IntentoEjercicioDto.builder()
                 .id(intento.getId())
@@ -91,7 +90,6 @@ public class IntentoEjercicioControlador {
                 .build();
     }
 
-    // ====================== MAPEO DTO → ENTIDAD ======================
     private IntentoEjercicio mapDtoToEntity(IntentoEjercicioDto dto) {
         return IntentoEjercicio.builder()
                 .id(dto.getId())
