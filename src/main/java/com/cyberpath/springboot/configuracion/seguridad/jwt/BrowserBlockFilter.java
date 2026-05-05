@@ -16,10 +16,13 @@ public class BrowserBlockFilter extends OncePerRequestFilter {
     private static final String ALLOWED_BROWSER_GET = "/smartlearn/api/usuario";
 
     private boolean isBrowserUserAgent(HttpServletRequest request) {
+        // si viene de la app movil explícita, no considerar navegador
+        String clientType = request.getHeader("X-Client-Type");
+        if ("mobile".equalsIgnoreCase(clientType)) return false;
+
         String ua = request.getHeader("User-Agent");
         if (ua == null) return false;
         ua = ua.toLowerCase(Locale.ROOT);
-        // patrones básicos para detectar navegadores; puedes ampliarlos si lo deseas
         return ua.contains("mozilla") || ua.contains("chrome") || ua.contains("safari")
                 || ua.contains("firefox") || ua.contains("edge") || ua.contains("opera");
     }
@@ -28,6 +31,12 @@ public class BrowserBlockFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.toLowerCase().startsWith("bearer ")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String path = request.getRequestURI();
         // Normalizar para quitar parámetros de query si los hay
@@ -52,23 +61,29 @@ public class BrowserBlockFilter extends OncePerRequestFilter {
                     "<head>\n" +
                     "  <meta charset=\"utf-8\">\n" +
                     "  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n" +
-                    "  <title>Página protegida</title>\n" +
+                    "  <title>Acceso Restringido</title>\n" +
                     "  <style>\n" +
                     "    body { font-family: Arial, Helvetica, sans-serif; background:#f8f9fa; color:#212529; display:flex; align-items:center; justify-content:center; height:100vh; margin:0 }\n" +
-                    "    .card { background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.08); padding:24px; max-width:520px; text-align:center }\n" +
-                    "    h1 { margin:0 0 8px; font-size:1.4rem }\n" +
-                    "    p { margin:0 0 16px; color:#495057 }\n" +
-                    "    a.button { display:inline-block; padding:10px 16px; background:#0d6efd; color:#fff; text-decoration:none; border-radius:6px }\n" +
+                    "    .card { background:#fff; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1); padding:40px 30px; max-width:480px; text-align:center }\n" +
+                    "    .icon { font-size:3.5rem; margin-bottom:16px }\n" +
+                    "    h1 { margin:0 0 12px; font-size:1.6rem; color:#2c3e50 }\n" +
+                    "    p { margin:0 0 24px; color:#495057; line-height:1.5 }\n" +
+                    "    a.button { display:inline-block; padding:12px 24px; background:#0d6efd; color:#fff; text-decoration:none; border-radius:8px; font-weight:500; margin:8px }\n" +
                     "    a.button:hover { background:#0b5ed7 }\n" +
-                    "    .small { margin-top:8px; color:#6c757d; font-size:0.9rem }\n" +
+                    "    a.button-secondary { background:#6c757d }\n" +
+                    "    a.button-secondary:hover { background:#5a6268 }\n" +
+                    "    .small { margin-top:20px; color:#6c757d; font-size:0.9rem }\n" +
                     "  </style>\n" +
                     "</head>\n" +
                     "<body>\n" +
                     "  <div class=\"card\">\n" +
-                    "    <h1>Acceso restringido</h1>\n" +
-                    "    <p>Esta página está protegida.</p>\n" +
-                    "    <a class=\"button\" href=\"/login\">Iniciar sesión</a>\n" +
-                    "    <div class=\"small\">Si crees que deberías tener acceso, inicia sesión con una cuenta con los permisos adecuados.</div>\n" +
+                    "    <div class=\"icon\">🔒</div>\n" +
+                    "    <h1>Acceso Restringido</h1>\n" +
+                    "    <p>No tienes permiso para acceder a esta página o tu sesión ha expirado.</p>\n" +
+                    "    \n" +
+                    "    <a class=\"button\" href=\"javascript:history.back()\">← Regresar</a>\n" +
+                    "    \n" +
+                    "    <div class=\"small\">Si crees que deberías tener acceso, inicia sesión con una cuenta autorizada.</div>\n" +
                     "  </div>\n" +
                     "</body>\n" +
                     "</html>";

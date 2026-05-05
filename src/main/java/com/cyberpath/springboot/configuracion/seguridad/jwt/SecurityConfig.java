@@ -61,29 +61,21 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, UsuarioServicio usuarioServicio) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                // keep sessions if required for form login, pero el filtro bloqueará el acceso desde navegadores a ciertas rutas
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/smartlearn/api/usuario/login",
-                                "/smartlearn/api/usuario/registro",
-                                "/smartlearn/api/usuario/login/docente").permitAll()
+                                "/smartlearn/api/usuario/login/docente",
+                                "/smartlearn/api/usuario/registro").permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/smartlearn/api/usuario").permitAll()
-
-                        .requestMatchers(HttpMethod.GET,
-                                "/smartlearn/api/materia",
-                                "/smartlearn/api/materia/**",
-                                "/smartlearn/api/materia/{id}/total-ejercicios"
-                        ).permitAll()
-
-                        // El resto requiere autenticación
+                        .requestMatchers(HttpMethod.GET, "/smartlearn/api/usuario").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
-                // Insertamos el filtro que bloquea GET desde navegadores a rutas no permitidas
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/smartlearn/api/usuario", true)
+                        .permitAll()
+        )
                 .addFilterBefore(browserBlockFilter(), UsernamePasswordAuthenticationFilter.class)
-                // tu filtro JWT sigue después (para autenticar peticiones que usen Bearer)
                 .addFilterBefore(jwtAuthFilter(usuarioServicio), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
