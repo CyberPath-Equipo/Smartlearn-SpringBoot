@@ -17,16 +17,16 @@
         <property name="hbm2ddl.auto">none</property>
         <property name="hibernate.transform_hbm_xml.enabled">true</property>
 
-        <mapping class="com.cyberpath.springboot.modelo.contenido.Materia"/>
-        <mapping class="com.cyberpath.springboot.modelo.contenido.ProgresoSubtema"/>
-        <mapping class="com.cyberpath.springboot.modelo.contenido.Subtema"/>
-        <mapping class="com.cyberpath.springboot.modelo.contenido.Tema"/>
-        <mapping class="com.cyberpath.springboot.modelo.contenido.Teoria"/>
+        <mapping class="com.cyberpath.smartlearn.modelo.contenido.Materia"/>
+        <mapping class="com.cyberpath.smartlearn.modelo.contenido.ProgresoSubtema"/>
+        <mapping class="com.cyberpath.smartlearn.modelo.contenido.Subtema"/>
+        <mapping class="com.cyberpath.smartlearn.modelo.contenido.Tema"/>
+        <mapping class="com.cyberpath.smartlearn.modelo.contenido.Teoria"/>
 
-        <mapping class="com.cyberpath.springboot.modelo.usuario.Usuario"/>
-        <mapping class="com.cyberpath.springboot.modelo.usuario.Rol"/>
-        <mapping class="com.cyberpath.springboot.modelo.usuario.Configuracion"/>
-        <mapping class="com.cyberpath.springboot.modelo.usuario.UltimaConexion"/>
+        <mapping class="com.cyberpath.smartlearn.modelo.usuario.Usuario"/>
+        <mapping class="com.cyberpath.smartlearn.modelo.usuario.Rol"/>
+        <mapping class="com.cyberpath.smartlearn.modelo.usuario.Configuracion"/>
+        <mapping class="com.cyberpath.smartlearn.modelo.usuario.UltimaConexion"/>
 
     </session-factory>
 </hibernate-configuration>
