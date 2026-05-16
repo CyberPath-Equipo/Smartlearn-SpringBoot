@@ -43,7 +43,7 @@ public class Subtema {
     @JoinColumn(name = "id_tema")
     private Tema tema;
 
-    @OneToOne(mappedBy = "subtema", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    @OneToOne(mappedBy = "subtema", fetch = FetchType.LAZY, optional = true)
     private Teoria teoria;
 
     @OneToMany(mappedBy = "subtema", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
