@@ -61,7 +61,8 @@ public class TeoriaControlador {
         Teoria datosActualizacion = mapDtoToEntity(teoriaDto);
 
         if (teoriaDto.getIdSubtema() != null) {
-            datosActualizacion.setSubtema(Subtema.builder().id(teoriaDto.getIdSubtema()).build());
+            Subtema subtema = subtemaServicio.findById(teoriaDto.getIdSubtema());
+            datosActualizacion.setSubtema(subtema);
         }
 
         Teoria actualizada = teoriaServicio.update(id, datosActualizacion);
