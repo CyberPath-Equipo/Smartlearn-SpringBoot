@@ -44,15 +44,15 @@ VALUES ('PDF', 'Documento en formato PDF descargable'),
 -- ============================================================
 -- 2. MATERIAS
 -- id_materia: 1=Matemáticas Básicas  2=Álgebra  3=Geometría
---             4=Español  5=Historia de México  6=Matemáticas básicas
+--             4=Español  5=Historia de México
 -- ============================================================
 
 INSERT INTO tbl_materia (nombre, slug, descripcion)
 VALUES ('Matemáticas Básicas', 'matematicas-basicas', 'Conceptos fundamentales de matemáticas'),
-       ('Historia de México', 'historia-de-mexico', 'Curso básico de historia de México'),
        ('Álgebra', 'algebra', 'Operaciones algebraicas y ecuaciones'),
        ('Geometría', 'geometria', 'Figuras geométricas y teoremas'),
-       ('Español', 'espanol', 'Gramática y literatura española');
+       ('Español', 'espanol', 'Gramática y literatura española'),
+       ('Historia de México', 'historia-de-mexico', 'Curso básico de historia de México');
 
 -- ============================================================
 -- 3. TEMAS
@@ -75,14 +75,6 @@ VALUES ('Matemáticas Básicas', 'matematicas-basicas', 'Conceptos fundamentales
 --  16  Bloque 6: La independencia             (mat 5)
 --  17  Bloque 7: El México libre              (mat 5)
 --  18  Bloque 8: Porfiriato y Revolución      (mat 5)
---  19  Bloque 1: Los números y su uso         (mat 6)
---  20  Bloque 2: Suma y resta                 (mat 6)
---  21  Bloque 3: Multiplicación               (mat 6)
---  22  Bloque 4: División                     (mat 6)
---  23  Bloque 5: Fracciones básicas           (mat 6)
---  24  Bloque 6: Figuras geométricas          (mat 6)
---  25  Bloque 7: Medidas                      (mat 6)
---  26  Bloque 8: Resolución de problemas      (mat 6)
 -- ============================================================
 
 -- Matemáticas Básicas (mat 1)
@@ -118,17 +110,6 @@ VALUES (5, 'Bloque 1: Conociendo el pasado'),
        (5, 'Bloque 7: El México libre y sus luchas'),
        (5, 'Bloque 8: Porfiriato y Revolución Mexicana');
 
--- Matemáticas básicas (mat 6)
-INSERT INTO tbl_tema (id_materia, nombre)
-VALUES (6, 'Bloque 1: Los números y su uso cotidiano'),
-       (6, 'Bloque 2: Suma y resta'),
-       (6, 'Bloque 3: Multiplicación'),
-       (6, 'Bloque 4: División'),
-       (6, 'Bloque 5: Fracciones básicas'),
-       (6, 'Bloque 6: Figuras geométricas'),
-       (6, 'Bloque 7: Medidas'),
-       (6, 'Bloque 8: Resolución de problemas');
-
 -- ============================================================
 -- 4. SUBTEMAS
 -- id_subtema:
@@ -148,14 +129,6 @@ VALUES (6, 'Bloque 1: Los números y su uso cotidiano'),
 --  14  La independencia de México (tema 16)
 --  15  El México libre y sus luchas(tema 17)
 --  16  Porfiriato y Revolución    (tema 18)
---  17  Los números y su uso       (tema 19)
---  18  Suma y resta (mat6)        (tema 20)
---  19  Multiplicación (mat6)      (tema 21)
---  20  División (mat6)            (tema 22)
---  21  Fracciones básicas         (tema 23)
---  22  Figuras geométricas        (tema 24)
---  23  Medidas                    (tema 25)
---  24  Resolución de problemas    (tema 26)
 -- ============================================================
 
 -- Números Naturales (tema 1)
@@ -188,17 +161,6 @@ VALUES (11, 'Conociendo el pasado'),
        (16, 'La independencia de México'),
        (17, 'El México libre y sus luchas'),
        (18, 'Porfiriato y Revolución Mexicana');
-
--- Matemáticas básicas — un subtema por bloque (temas 19..26)
-INSERT INTO tbl_subtema (id_tema, nombre)
-VALUES (19, 'Los números y su uso cotidiano'),
-       (20, 'Suma y resta'),
-       (21, 'Multiplicación'),
-       (22, 'División'),
-       (23, 'Fracciones básicas'),
-       (24, 'Figuras geométricas'),
-       (25, 'Medidas'),
-       (26, 'Resolución de problemas');
 
 -- ============================================================
 -- 5. TEORÍA
@@ -251,33 +213,6 @@ VALUES (9,
         'El Porfiriato. El Porfiriato fue el periodo en el que Porfirio Díaz gobernó México, desde 1876 hasta 1911, con una breve interrupción entre 1880 y 1884. Durante estos años, el país experimentó un notable crecimiento económico y estabilidad política. Se construyeron más de 19,000 kilómetros de vías férreas, se modernizó la infraestructura y se promovió la inversión extranjera en sectores como la minería, la agricultura y la industria. Sin embargo, este progreso tuvo un alto costo social. La riqueza se concentró en manos de unos pocos, mientras que la mayoría de la población vivía en condiciones de pobreza y marginación. La represión política, la censura y la falta de libertades civiles caracterizaron el régimen de Díaz, quien se mantuvo en el poder mediante elecciones fraudulentas y el uso de la fuerza. Causas y estallido de la Revolución Mexicana. El descontento social acumulado durante el Porfiriato llevó al surgimiento de movimientos opositores. En 1910, Francisco I. Madero, un político y empresario del norte del país, lanzó el Plan de San Luis, en el que llamaba a la población a levantarse en armas el 20 de noviembre de ese año para derrocar a Díaz. La Revolución Mexicana comenzó como una insurrección contra la dictadura de Porfirio Díaz y continuó como una lucha entre diversas facciones revolucionarias. Las principales causas del conflicto fueron la crisis del Porfiriato, la desigualdad social en el campo y las campañas opositoras de Francisco Madero. Etapas y líderes de la Revolución. Tras la renuncia de Díaz en 1911, Madero asumió la presidencia, pero su gobierno enfrentó la oposición de diversos grupos. En 1913, un golpe de Estado conocido como la Decena Trágica resultó en el asesinato de Madero y el ascenso al poder de Victoriano Huerta. La oposición a Huerta unió a líderes revolucionarios como Venustiano Carranza, Francisco Villa y Emiliano Zapata. En 1914, Villa y Zapata se encontraron en la Ciudad de México, uniendo sus fuerzas en una histórica entrada a la capital. Sin embargo, las diferencias entre las facciones revolucionarias llevaron a nuevos conflictos internos. La Constitución de 1917 y el fin del conflicto armado. En 1917, bajo el liderazgo de Carranza, se promulgó una nueva Constitución que incorporó demandas sociales y políticas surgidas de la Revolución. La Constitución de 1917 fue la primera en el mundo por su contenido político y social, estableciendo derechos laborales, la propiedad de la tierra y la educación laica y gratuita. Aunque la promulgación de la Constitución marcó un hito importante, la violencia continuó en los años siguientes. Líderes como Zapata y Villa fueron asesinados en 1919 y 1923, respectivamente. No existe un consenso sobre cuándo terminó el proceso revolucionario; algunas fuentes lo sitúan en 1920 con la presidencia de Adolfo de la Huerta, mientras que otras lo extienden hasta los años 1940.',
         0);
 
--- Matemáticas básicas (subtemas 17..24)
-INSERT INTO tbl_teoria (id_subtema, contenido, revisado)
-VALUES (17,
-        '¿Qué son los números? Los números son símbolos que utilizamos para contar, ordenar y medir. Nos permiten saber cuántos objetos hay, en qué posición se encuentra algo o cuánto vale una cantidad. Para las personas con discapacidad visual, los números pueden aprenderse mediante audio, material táctil, ejercicios orales y lectores de pantalla, facilitando su comprensión de forma clara y accesible. ¿Para qué usamos los números en la vida diaria? Usamos los números todos los días: para saber la hora, contar dinero, decir nuestra edad, medir distancias o cantidades de comida. Números naturales. Los números naturales son aquellos que usamos para contar: 1, 2, 3, 4, 5… No incluyen fracciones ni números negativos. Comparar cantidades. Comparar es observar qué cantidad es: Mayor que (>), Menor que (<), Igual (=). Ejemplo: 5 > 3 → cinco es mayor que tres.',
-        0),
-       (18,
-        '¿Qué es la suma? La suma es una operación matemática que sirve para juntar cantidades. Ejemplo: 2 + 3 = 5. ¿Qué es la resta? La resta sirve para quitar o comparar cantidades. Ejemplo: 5 − 2 = 3. Sumas simples. Restas simples. Uso de suma y resta en la vida diaria. La suma se usa cuando agregamos algo (más dinero, más objetos). La resta se usa cuando quitamos o perdemos algo.',
-        0),
-       (19,
-        '¿Qué es la multiplicación? La multiplicación es una forma rápida de sumar el mismo número varias veces. Ejemplo: 3 × 4 significa sumar 3 cuatro veces: 3 + 3 + 3 + 3 = 12. Multiplicar como suma repetida. Tablas de multiplicar (1 al 5). Multiplicación en la vida diaria. Se usa cuando hay grupos iguales, por ejemplo: 4 bolsas con 2 manzanas cada una.',
-        0),
-       (20,
-        '¿Qué es la división? La división sirve para repartir una cantidad en partes iguales. Ejemplo: 6 ÷ 2 = 3. Repartir en partes iguales. División exacta. División en la vida diaria. La usamos cuando compartimos comida, dinero o materiales entre varias personas.',
-        0),
-       (21,
-        '¿Qué es una fracción? Una fracción representa una parte de un todo. Ejemplo: ½ significa una de dos partes iguales. Partes de un todo. Mitad y cuarta parte. Fracciones en la vida diaria. Cuando partimos una pizza, un pastel o una barra de chocolate.',
-        0),
-       (22,
-        '¿Qué es una figura geométrica? Las figuras geométricas tienen forma y tamaño. Círculo: no tiene lados. Cuadrado: 4 lados iguales. Triángulo: 3 lados. Rectángulo: 4 lados, dos largos y dos cortos. Para personas con discapacidad visual, estas figuras pueden explorarse con materiales táctiles.',
-        0),
-       (23,
-        'Medir longitud. Medir peso. Medir tiempo. Medidas en la vida diaria. Medir es comparar algo con una unidad. Longitud: metros. Peso: kilos. Tiempo: horas, minutos.',
-        0),
-       (24,
-        '¿Qué es un problema matemático? Es una situación de la vida diaria que se resuelve usando números y operaciones. Leer y comprender el problema. Elegir la operación correcta. Resolver paso a paso. Ejemplo: Si tienes 5 dulces y regalas 2, ¿cuántos te quedan?',
-        0);
-
 -- ============================================================
 -- 6. EJERCICIOS
 -- id_ejercicio:
@@ -325,24 +260,12 @@ VALUES (9, 'Ejercicio Bloque 1: Conociendo el pasado', 'practica', 1, 1),
        (15, 'Ejercicio Bloque 7: El México libre y sus luchas', 'practica', 1, 1),
        (16, 'Ejercicio Bloque 8: Porfiriato y Revolución Mexicana', 'practica', 1, 1);
 
--- Matemáticas básicas (subtemas 17..24)
-INSERT INTO tbl_ejercicio (id_subtema, nombre, tipo, dificultad, orden)
-VALUES (17, 'Ejercicio Bloque 1: Los números y su uso cotidiano', 'practica', 1, 1),
-       (18, 'Ejercicio Bloque 2: Suma y resta', 'practica', 1, 1),
-       (19, 'Ejercicio Bloque 3: Multiplicación', 'practica', 1, 1),
-       (20, 'Ejercicio Bloque 4: División', 'practica', 1, 1),
-       (21, 'Ejercicio Bloque 5: Fracciones básicas', 'practica', 1, 1),
-       (22, 'Ejercicio Bloque 6: Figuras geométricas', 'practica', 1, 1),
-       (23, 'Ejercicio Bloque 7: Medidas', 'practica', 1, 1),
-       (24, 'Ejercicio Bloque 8: Resolución de problemas', 'practica', 1, 1);
-
 -- ============================================================
 -- 7. PREGUNTAS
 -- Los id_ejercicio ahora correctos; los IDs de pregunta se asignan en orden.
 --
 -- Ejers 1-6  (script 1 + poemas)   → preguntas  1..4
 -- Ejers 7-14 (Historia)            → preguntas  5..68
--- Ejers 15-22 (Mat básicas)        → preguntas 69..100
 -- ============================================================
 
 -- Ejercicio 1: suma básica
@@ -446,62 +369,6 @@ VALUES (14, '¿Cuántos años gobernó Porfirio Díaz, aproximadamente, durante 
        (14, '¿Qué líderes revolucionarios se encontraron en la Ciudad de México en 1914?'),
        (14, '¿Qué estableció la Constitución de 1917?');
 
--- Matemáticas básicas — Ejercicio 15 (Bloque 1)
-INSERT INTO tbl_pregunta (id_ejercicio, enunciado)
-VALUES (15, '¿Para qué sirven los números?'),
-       (15, '¿Cuál es un número natural?'),
-       (15, '¿Qué son los números?'),
-       (15, 'Menciona un uso de los números en la vida diaria.');
-
--- Matemáticas básicas — Ejercicio 16 (Bloque 2)
-INSERT INTO tbl_pregunta (id_ejercicio, enunciado)
-VALUES (16, '¿Qué es la suma?'),
-       (16, '¿Qué es la resta?'),
-       (16, '¿Cuál es el resultado de 2 + 3?'),
-       (16, '¿Cuál es el resultado de 5 − 2?');
-
--- Matemáticas básicas — Ejercicio 17 (Bloque 3)
-INSERT INTO tbl_pregunta (id_ejercicio, enunciado)
-VALUES (17, '¿Qué es la multiplicación?'),
-       (17, '¿Cuál es el resultado de 3 × 4?'),
-       (17, '¿Cómo se puede ver la multiplicación?'),
-       (17, '¿Cuál es el resultado de 2 × 5?');
-
--- Matemáticas básicas — Ejercicio 18 (Bloque 4)
-INSERT INTO tbl_pregunta (id_ejercicio, enunciado)
-VALUES (18, '¿Qué es la división?'),
-       (18, '¿Cuál es el resultado de 6 ÷ 2?'),
-       (18, '¿Para qué se usa la división?'),
-       (18, '¿Cuál es el resultado de 8 ÷ 4?');
-
--- Matemáticas básicas — Ejercicio 19 (Bloque 5)
-INSERT INTO tbl_pregunta (id_ejercicio, enunciado)
-VALUES (19, '¿Qué es una fracción?'),
-       (19, '¿Qué representa ½?'),
-       (19, '¿Cuál es una parte de un todo?'),
-       (19, '¿Cómo se usa una fracción en la vida diaria?');
-
--- Matemáticas básicas — Ejercicio 20 (Bloque 6)
-INSERT INTO tbl_pregunta (id_ejercicio, enunciado)
-VALUES (20, '¿Qué es una figura geométrica?'),
-       (20, '¿Cuántos lados tiene un cuadrado?'),
-       (20, '¿Cuántos lados tiene un triángulo?'),
-       (20, '¿Qué figura no tiene lados?');
-
--- Matemáticas básicas — Ejercicio 21 (Bloque 7)
-INSERT INTO tbl_pregunta (id_ejercicio, enunciado)
-VALUES (21, '¿Qué es medir?'),
-       (21, '¿Qué unidad se usa para medir longitud?'),
-       (21, '¿Qué unidad se usa para medir peso?'),
-       (21, '¿Qué unidad se usa para medir tiempo?');
-
--- Matemáticas básicas — Ejercicio 22 (Bloque 8)
-INSERT INTO tbl_pregunta (id_ejercicio, enunciado)
-VALUES (22, '¿Qué es un problema matemático?'),
-       (22, '¿Qué se debe hacer primero al resolver un problema?'),
-       (22, '¿Cuál operación usarías para saber cuántos dulces quedan si regalas 2 de 5?'),
-       (22, '¿Qué es resolver paso a paso?');
-
 -- ============================================================
 -- 8. OPCIONES
 -- El id_pregunta se asigna en orden de inserción.
@@ -514,14 +381,6 @@ VALUES (22, '¿Qué es un problema matemático?'),
 -- Preguntas 45-51: Historia Bloque 6
 -- Preguntas 52-59: Historia Bloque 7
 -- Preguntas 60-67: Historia Bloque 8
--- Preguntas 68-71: Mat básicas Bloque 1
--- Preguntas 72-75: Mat básicas Bloque 2
--- Preguntas 76-79: Mat básicas Bloque 3
--- Preguntas 80-83: Mat básicas Bloque 4
--- Preguntas 84-87: Mat básicas Bloque 5
--- Preguntas 88-91: Mat básicas Bloque 6
--- Preguntas 92-95: Mat básicas Bloque 7
--- Preguntas 96-99: Mat básicas Bloque 8
 -- ============================================================
 
 -- Pregunta 1: 15+27
@@ -713,9 +572,7 @@ VALUES (29, '1517', 0),
        (36, 'La esclavitud ritual', 0),
        (36, 'Las lenguas y tradiciones', 1),
        (36, 'El tributo al tlatoani', 0);
-
 -- ---- HISTORIA BLOQUE 5 (preguntas 37..44) ----
-
 INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta)
 VALUES (37, 'Veracruz', 0),
        (37, 'Tenochtitlán', 0),
@@ -853,210 +710,6 @@ VALUES (60, '10 años', 0),
        (67, 'Supremacía de la Iglesia', 0),
        (67, 'Derechos laborales y propiedad de la tierra', 1),
        (67, 'Retorno al centralismo', 0);
-
--- ---- MATEMÁTICAS BÁSICAS BLOQUE 1 (preguntas 68..71) ----
-
-INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta)
-VALUES (68, 'Para decorar', 0),
-       (68, 'Para contar y medir', 1),
-       (68, 'Para dibujar', 0),
-       (68, 'Para cantar', 0),
-       (69, '−2', 0),
-       (69, '½', 0),
-       (69, '5', 1),
-       (69, '0.5', 0);
--- Las preguntas 70 y 71 son abiertas (no tienen opciones por ser de respuesta abierta)
-
--- ---- MATEMÁTICAS BÁSICAS BLOQUE 2 (preguntas 72..75) ----
-
-INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta)
-VALUES (72, 'Una operación para quitar cantidades', 0),
-       (72, 'Una operación para juntar cantidades', 1),
-       (72, 'Una forma de multiplicar', 0),
-       (72, 'Una medida de tiempo', 0),
-       (73, 'Una operación para juntar cantidades', 0),
-       (73, 'Una operación para quitar o comparar cantidades', 1),
-       (73, 'Una forma de dividir', 0),
-       (73, 'Una figura geométrica', 0),
-       (74, '4', 0),
-       (74, '5', 1),
-       (74, '6', 0),
-       (74, '7', 0),
-       (75, '2', 0),
-       (75, '3', 1),
-       (75, '4', 0),
-       (75, '5', 0);
-
--- ---- MATEMÁTICAS BÁSICAS BLOQUE 3 (preguntas 76..79) ----
-
-INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta)
-VALUES (76, 'Una forma de sumar el mismo número varias veces', 1),
-       (76, 'Una operación para quitar cantidades', 0),
-       (76, 'Una medida de longitud', 0),
-       (76, 'Una fracción', 0),
-       (77, '10', 0),
-       (77, '12', 1),
-       (77, '14', 0),
-       (77, '16', 0),
-       (78, 'Como resta repetida', 0),
-       (78, 'Como suma repetida', 1),
-       (78, 'Como división', 0),
-       (78, 'Como comparación', 0),
-       (79, '7', 0),
-       (79, '10', 1),
-       (79, '12', 0),
-       (79, '15', 0);
-
--- ---- MATEMÁTICAS BÁSICAS BLOQUE 4 (preguntas 80..83) ----
-
-INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta)
-VALUES (80, 'Repartir una cantidad en partes iguales', 1),
-       (80, 'Juntar cantidades', 0),
-       (80, 'Medir tiempo', 0),
-       (80, 'Comparar figuras', 0),
-       (81, '2', 0),
-       (81, '3', 1),
-       (81, '4', 0),
-       (81, '6', 0),
-       (82, 'Para sumar números', 0),
-       (82, 'Para repartir en partes iguales', 1),
-       (82, 'Para medir peso', 0),
-       (82, 'Para dibujar círculos', 0),
-       (83, '1', 0),
-       (83, '2', 1),
-       (83, '3', 0),
-       (83, '4', 0);
-
--- ---- MATEMÁTICAS BÁSICAS BLOQUE 5 (preguntas 84..87) ----
-
-INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta)
-VALUES (84, 'Una parte de un todo', 1),
-       (84, 'Un número natural', 0),
-       (84, 'Una figura geométrica', 0),
-       (84, 'Una medida de tiempo', 0),
-       (85, 'Una de dos partes iguales', 1),
-       (85, 'Una de tres partes', 0),
-       (85, 'Un número entero', 0),
-       (85, 'Una suma', 0),
-       (86, 'Una fracción', 1),
-       (86, 'Una multiplicación', 0),
-       (86, 'Una resta', 0),
-       (86, 'Una división', 0),
-       (87, 'Para medir longitud', 0),
-       (87, 'Cuando partimos una pizza', 1),
-       (87, 'Para contar dinero', 0),
-       (87, 'Para comparar números', 0);
-
--- ---- MATEMÁTICAS BÁSICAS BLOQUE 6 (preguntas 88..91) ----
-
-INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta)
-VALUES (88, 'Tiene forma y tamaño', 1),
-       (88, 'Es un número', 0),
-       (88, 'Es una operación', 0),
-       (88, 'Es una medida', 0),
-       (89, '3', 0),
-       (89, '4', 1),
-       (89, '5', 0),
-       (89, '0', 0),
-       (90, '3', 1),
-       (90, '4', 0),
-       (90, '5', 0),
-       (90, '0', 0),
-       (91, 'Cuadrado', 0),
-       (91, 'Triángulo', 0),
-       (91, 'Rectángulo', 0),
-       (91, 'Círculo', 1);
-
--- ---- MATEMÁTICAS BÁSICAS BLOQUE 7 (preguntas 92..95) ----
-
-INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta)
-VALUES (92, 'Comparar algo con una unidad', 1),
-       (92, 'Sumar números', 0),
-       (92, 'Dibujar figuras', 0),
-       (92, 'Repartir cantidades', 0),
-       (93, 'Kilos', 0),
-       (93, 'Metros', 1),
-       (93, 'Horas', 0),
-       (93, 'Litros', 0),
-       (94, 'Metros', 0),
-       (94, 'Kilos', 1),
-       (94, 'Horas', 0),
-       (94, 'Centímetros', 0),
-       (95, 'Metros', 0),
-       (95, 'Kilos', 0),
-       (95, 'Horas', 1),
-       (95, 'Gramos', 0);
-
--- ---- MATEMÁTICAS BÁSICAS BLOQUE 8 (preguntas 96..99) ----
-
-INSERT INTO tbl_opcion (id_pregunta, texto, es_correcta)
-VALUES (96, 'Una situación de la vida diaria con números', 1),
-       (96, 'Una figura geométrica', 0),
-       (96, 'Una medida de tiempo', 0),
-       (96, 'Una fracción', 0),
-       (97, 'Elegir la operación', 0),
-       (97, 'Leer y comprender el problema', 1),
-       (97, 'Sumar números', 0),
-       (97, 'Dibujar', 0),
-       (98, 'Suma', 0),
-       (98, 'Resta', 1),
-       (98, 'Multiplicación', 0),
-       (98, 'División', 0),
-       (99, 'Resolver de una vez', 0),
-       (99, 'Resolver en pasos', 1),
-       (99, 'Ignorar el problema', 0),
-       (99, 'Usar solo suma', 0);
-
--- ============================================================
--- 9. RECURSOS ADJUNTOS
--- ============================================================
-
-INSERT INTO tbl_recurso_adjunto (id_subtema, id_tipo_recurso, orden, titulo, url, mime_type, tamano_bytes, descripcion)
-VALUES
--- Script 1 originals (subtemas 3 y 4)
-(3, 1, 1, 'Ficha de sumas', 'https://ejemplo.com/sumas.pdf', 'application/pdf', 1024000, 'Fichas imprimibles'),
-(3, 2, 2, 'Video sumas', 'https://youtube.com/watch?v=123', 'video/youtube', NULL, 'Video explicativo'),
-(4, 4, 1, 'Tabla del 7', 'https://ejemplo.com/tabla7.png', 'image/png', 25000, 'Imagen tabla multiplicar'),
--- Poemas (subtema 8)
-(8, 4, 1, 'Imagen poema estrellita', 'https://ejemplo.com/estrellita.png', 'image/png', 15000,
- 'Ilustración del poema Estrellita');
-
-INSERT INTO tbl_recurso_adjunto (id_subtema, id_tipo_recurso, orden, titulo, url, descripcion)
-VALUES
--- Historia (subtemas 9..16)
-(9, 1, 1, 'Historia de México desde la época prehispánica hasta la colonia',
- 'https://www.valledefiladelfia.net/historia-de-meacutexico.html', 'Recurso adicional sobre la historia de México.'),
-(10, 1, 1, 'La prehistoria de los primeros seres humanos a las primeras sociedades urbanas',
- 'https://nuevaescuelamexicana.sep.gob.mx/contenido/coleccion/la-prehistoria-de-los-primeros-seres-humanos-a-las-primeras-sociedades-urbanas-2/',
- 'Información sobre la prehistoria en México.'),
-(11, 1, 1, 'Personajes del México prehispánico',
- 'https://quizlet.com/mx/213918526/historia-personajes-del-mexico-prehispanico-flash-cards/',
- 'Flashcards sobre personajes prehispánicos.'),
-(12, 1, 1, 'Educación en México desde la época prehispánica hasta la colonia',
- 'https://www.timetoast.com/timelines/educacion-en-mexico-desde-la-epoca-prehispanica-hasta-la-colonia',
- 'Línea de tiempo educativa.'),
-(13, 1, 1, 'Historia de México', 'https://es.wikipedia.org/wiki/Historia_de_M%C3%A9xico',
- 'Artículo de Wikipedia sobre la historia de México.'),
-(14, 1, 1, 'Historia de México prehispánico', 'https://culturacientifica.utpl.edu.ec/historia-mexico-prehispanico/',
- 'Recurso sobre historia prehispánica.'),
-(15, 1, 1, 'Independencia de México: lo más relevante',
- 'https://ciencia.unam.mx/leer/1039/independencia-de-mexico-lo-mas-relevante-de-la-lucha-que-inicio-el-16-de-septiembre-de-1810',
- 'Detalles sobre la independencia.'),
-(16, 1, 1, 'Porfiriato', 'https://es.m.wikipedia.org/wiki/Porfiriato', 'Información sobre el Porfiriato.'),
-(9, 1, 2, 'Libro de historia de México', 'https://libros.conaliteg.gob.mx/2022/P4HIA.htm',
- 'Libro oficial de historia.');
-
-INSERT INTO tbl_recurso_adjunto (id_subtema, id_tipo_recurso, orden, titulo, url, descripcion)
-VALUES
--- Matemáticas básicas (subtemas 17..24)
-(17, 2, 1, 'Introducción a los números', '', 'Texto adicional sobre números.'),
-(18, 2, 1, 'Operaciones básicas: suma y resta', '', 'Texto sobre suma y resta.'),
-(19, 2, 1, 'Aprendiendo multiplicación', '', 'Texto sobre multiplicación.'),
-(20, 2, 1, 'Conceptos de división', '', 'Texto sobre división.'),
-(21, 2, 1, 'Fracciones simples', '', 'Texto sobre fracciones.'),
-(22, 2, 1, 'Figuras geométricas básicas', '', 'Texto sobre figuras.'),
-(23, 2, 1, 'Medidas y unidades', '', 'Texto sobre medidas.'),
-(24, 2, 1, 'Resolviendo problemas', '', 'Texto sobre resolución de problemas.');
 
 -- ============================================================
 -- VERIFICACIÓN FINAL
