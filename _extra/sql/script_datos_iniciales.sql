@@ -49,13 +49,10 @@ VALUES ('PDF', 'Documento en formato PDF descargable'),
 
 INSERT INTO tbl_materia (nombre, slug, descripcion)
 VALUES ('Matemáticas Básicas', 'matematicas-basicas', 'Conceptos fundamentales de matemáticas'),
+       ('Historia de México', 'historia-de-mexico', 'Curso básico de historia de México'),
        ('Álgebra', 'algebra', 'Operaciones algebraicas y ecuaciones'),
        ('Geometría', 'geometria', 'Figuras geométricas y teoremas'),
        ('Español', 'espanol', 'Gramática y literatura española');
-
-INSERT INTO tbl_materia (nombre, descripcion)
-VALUES ('Historia de México', 'Curso básico de historia de México'),
-       ('Matemáticas básicas', 'Curso básico de matemáticas, cubriendo operaciones básicas figuras y medidas.');
 
 -- ============================================================
 -- 3. TEMAS
