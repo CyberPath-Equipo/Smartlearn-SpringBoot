@@ -17,6 +17,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -58,18 +63,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, UsuarioServicio usuarioServicio) throws Exception {
         http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/smartlearn/api/usuario/login",
                                 "/smartlearn/api/usuario/login/docente",
+                                "/smartlearn/api/usuario/token/refresh",
                                 "/smartlearn/api/usuario/registro",
                                 "/smartlearn/api/usuario/registro/verificar",
                                 "/smartlearn/api/usuario/registro/reenviar",
                                 "/smartlearn/api/usuario/2fa/verify",
                                 "/smartlearn/api/usuario/2fa/resend",
-                                "/smartlearn/api/test").permitAll()
+                                "/smartlearn/api/test",
+                                "/smartlearn/api/lsm/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/smartlearn/api/usuario").hasRole("ADMIN")
                         .anyRequest().authenticated()
@@ -82,6 +90,20 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter(usuarioServicio), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOriginPatterns(List.of("*"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setExposedHeaders(List.of("X-New-Access-Token"));
+        configuration.setAllowCredentials(false);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean

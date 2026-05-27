@@ -38,8 +38,8 @@ public class EjercicioControlador {
     }
 
     @GetMapping("/ejercicio/{id}")
-    public ResponseEntity<EjercicioDto> getById(@PathVariable Integer id) {
-        Ejercicio ejercicio = ejercicioServicio.getById(id);
+    public ResponseEntity<EjercicioDto> findById(@PathVariable Integer id) {
+        Ejercicio ejercicio = ejercicioServicio.findById(id);
         if (ejercicio == null) {
             return ResponseEntity.notFound().build();
         }
@@ -60,7 +60,7 @@ public class EjercicioControlador {
 
     @PostMapping("/ejercicio/{id}/pregunta")
     public ResponseEntity<PreguntaDto> crearPregunta(@PathVariable Integer id, @RequestBody PreguntaDto preguntaDto) {
-        Ejercicio ejercicio = ejercicioServicio.getById(id);
+        Ejercicio ejercicio = ejercicioServicio.findById(id);
         if (ejercicio == null) {
             return ResponseEntity.notFound().build();
         }
@@ -95,7 +95,7 @@ public class EjercicioControlador {
 
     @GetMapping("/ejercicio/{id}/preguntas")
     public ResponseEntity<List<PreguntaDto>> getPreguntasByEjercicio(@PathVariable Integer id) {
-        Ejercicio ejercicio = ejercicioServicio.getById(id);
+        Ejercicio ejercicio = ejercicioServicio.findById(id);
         if (ejercicio == null) {
             return ResponseEntity.notFound().build();
         }

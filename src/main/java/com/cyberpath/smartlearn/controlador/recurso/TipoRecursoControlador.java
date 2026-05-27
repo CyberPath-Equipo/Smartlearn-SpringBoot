@@ -33,8 +33,8 @@ public class TipoRecursoControlador {
     }
 
     @GetMapping("/tipo-recurso/{id}")
-    public ResponseEntity<TipoRecursoDto> getById(@PathVariable Integer id) {
-        TipoRecurso tipo = tipoRecursoServicio.getById(id);
+    public ResponseEntity<TipoRecursoDto> findById(@PathVariable Integer id) {
+        TipoRecurso tipo = tipoRecursoServicio.findById(id);
         if (tipo == null) {
             return ResponseEntity.notFound().build();
         }

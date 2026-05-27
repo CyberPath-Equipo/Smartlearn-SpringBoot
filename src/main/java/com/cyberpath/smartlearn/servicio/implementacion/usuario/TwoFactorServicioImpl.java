@@ -226,6 +226,7 @@ public class TwoFactorServicioImpl implements TwoFactorServicio {
         transactionRepositorio.save(transaction);
 
         String token = jwtService.generarToken(usuario.getCorreo());
+        String refreshToken = jwtService.generarRefreshToken(usuario.getCorreo());
 
         String trustedDeviceToken = null;
         if (request.isRememberDevice()) {
@@ -245,6 +246,7 @@ public class TwoFactorServicioImpl implements TwoFactorServicio {
 
         return LoginResponse.builder()
                 .token(token)
+                .refreshToken(refreshToken)
                 .idUsuario(usuario.getId())
                 .nombreCuenta(usuario.getNombreCuenta())
                 .idRol(usuario.getRol().getId())

@@ -7,7 +7,7 @@ import java.util.List;
 public interface MateriaServicio {
     List<Materia> getAll();
 
-    Materia getById(Integer id);
+    Materia findById(Integer id);
 
     Materia save(Materia materia);
 

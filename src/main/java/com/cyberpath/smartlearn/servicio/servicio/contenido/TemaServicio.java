@@ -7,7 +7,7 @@ import java.util.List;
 public interface TemaServicio {
     List<Tema> getAll();
 
-    Tema getById(Integer id);
+    Tema findById(Integer id);
 
     Tema save(Tema tema);
 

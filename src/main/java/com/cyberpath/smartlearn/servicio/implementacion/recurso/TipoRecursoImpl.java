@@ -19,7 +19,7 @@ public class TipoRecursoImpl implements TipoRecursoServicio {
     }
 
     @Override
-    public TipoRecurso getById(Integer id) {
+    public TipoRecurso findById(Integer id) {
         return tipoRecursoRepositorio.findById(id).orElse(null);
     }
 

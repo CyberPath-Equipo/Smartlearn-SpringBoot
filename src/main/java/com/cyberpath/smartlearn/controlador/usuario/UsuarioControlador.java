@@ -14,6 +14,7 @@ import com.cyberpath.smartlearn.servicio.servicio.usuario.TwoFactorServicio;
 import com.cyberpath.smartlearn.configuracion.seguridad.jwt.JwtService;
 import com.cyberpath.smartlearn.configuracion.seguridad.login.LoginRequest;
 import com.cyberpath.smartlearn.configuracion.seguridad.login.LoginResponse;
+import com.cyberpath.smartlearn.configuracion.seguridad.login.RefreshTokenRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -164,15 +165,7 @@ public class UsuarioControlador {
                     .build());
         }
 
-        String token = jwtService.generarToken(usuario.getCorreo());
-        LoginResponse response = new LoginResponse();
-        response.setToken(token);
-        response.setIdUsuario(usuario.getId());
-        response.setNombreCuenta(usuario.getNombreCuenta());
-        response.setIdRol(usuario.getRol().getId());
-        response.setRequires2fa(false);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(buildLoginResponse(usuario));
     }
 
 
@@ -208,16 +201,28 @@ public class UsuarioControlador {
         }
 
         // Login normal sin 2FA
-        String token = jwtService.generarToken(usuario.getCorreo());
+        return ResponseEntity.ok(buildLoginResponse(usuario));
+    }
 
-        LoginResponse response = new LoginResponse();
-        response.setToken(token);
-        response.setIdUsuario(usuario.getId());
-        response.setNombreCuenta(usuario.getNombreCuenta());
-        response.setIdRol(usuario.getRol().getId());
-        response.setRequires2fa(false);
+    @PostMapping("/usuario/token/refresh")
+    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest request) {
+        if (request.getRefreshToken() == null || request.getRefreshToken().isBlank()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "refreshToken es obligatorio"));
+        }
 
-        return ResponseEntity.ok(response);
+        if (!jwtService.isRefreshTokenValid(request.getRefreshToken())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Refresh token inválido o expirado"));
+        }
+
+        String correo = jwtService.obtenerSubject(request.getRefreshToken());
+        Usuario usuario = usuarioServicio.findByCorreo(correo);
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Usuario no encontrado"));
+        }
+
+        return ResponseEntity.ok(buildLoginResponse(usuario, request.getRefreshToken()));
     }
 
     @PutMapping("/usuario/{id}/password")
@@ -275,6 +280,21 @@ public class UsuarioControlador {
                 .idRol(usuario.getRol() != null ? usuario.getRol().getId() : null)
                 .idConfiguracion(usuario.getConfiguracion() != null ? usuario.getConfiguracion().getId() : null)
                 .idUltimaConexion(usuario.getUltimaConexion() != null ? usuario.getUltimaConexion().getId() : null)
+                .build();
+    }
+
+    private LoginResponse buildLoginResponse(Usuario usuario) {
+        return buildLoginResponse(usuario, jwtService.generarRefreshToken(usuario.getCorreo()));
+    }
+
+    private LoginResponse buildLoginResponse(Usuario usuario, String refreshToken) {
+        return LoginResponse.builder()
+                .token(jwtService.generarToken(usuario.getCorreo()))
+                .refreshToken(refreshToken)
+                .idUsuario(usuario.getId())
+                .nombreCuenta(usuario.getNombreCuenta())
+                .idRol(usuario.getRol().getId())
+                .requires2fa(false)
                 .build();
     }
 

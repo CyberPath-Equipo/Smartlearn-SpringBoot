@@ -19,7 +19,7 @@ public class MateriaImpl implements MateriaServicio {
     }
 
     @Override
-    public Materia getById(Integer id) {
+    public Materia findById(Integer id) {
         return materiaRepositorio.findById(id).orElse(null);
     }
 

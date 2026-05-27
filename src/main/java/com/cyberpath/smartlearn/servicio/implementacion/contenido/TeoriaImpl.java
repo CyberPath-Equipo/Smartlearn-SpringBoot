@@ -20,7 +20,7 @@ public class TeoriaImpl implements TeoriaServicio {
     }
 
     @Override
-    public Teoria getById(Integer id) {
+    public Teoria findById(Integer id) {
         return teoriaRepositorio.findById(id).orElse(null);
     }
 

@@ -34,8 +34,8 @@ public class IntentoEjercicioControlador {
     }
 
     @GetMapping("/intento-ejercicio/{id}")
-    public ResponseEntity<IntentoEjercicioDto> getById(@PathVariable Integer id) {
-        IntentoEjercicio intento = intentoEjercicioServicio.getById(id);
+    public ResponseEntity<IntentoEjercicioDto> findById(@PathVariable Integer id) {
+        IntentoEjercicio intento = intentoEjercicioServicio.findById(id);
         if (intento == null) {
             return ResponseEntity.notFound().build();
         }

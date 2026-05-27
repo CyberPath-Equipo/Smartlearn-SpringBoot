@@ -38,8 +38,8 @@ public class UltimaConexionControlador {
     }
 
     @GetMapping("/ultima-conexion/{id}")
-    public ResponseEntity<UltimaConexionDto> getById(@PathVariable Integer id) {
-        UltimaConexion conexion = ultimaConexionServicio.getById(id);
+    public ResponseEntity<UltimaConexionDto> findById(@PathVariable Integer id) {
+        UltimaConexion conexion = ultimaConexionServicio.findById(id);
         if (conexion == null) {
             return ResponseEntity.notFound().build();
         }

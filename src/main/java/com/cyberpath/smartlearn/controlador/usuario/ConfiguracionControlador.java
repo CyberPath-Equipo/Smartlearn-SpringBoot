@@ -35,8 +35,8 @@ public class ConfiguracionControlador {
     }
 
     @GetMapping("/configuracion/{id}")
-    public ResponseEntity<ConfiguracionDto> getById(@PathVariable Integer id) {
-        Configuracion configuracion = configuracionServicio.getById(id);
+    public ResponseEntity<ConfiguracionDto> findById(@PathVariable Integer id) {
+        Configuracion configuracion = configuracionServicio.findById(id);
         if (configuracion == null) {
             return ResponseEntity.notFound().build();
         }

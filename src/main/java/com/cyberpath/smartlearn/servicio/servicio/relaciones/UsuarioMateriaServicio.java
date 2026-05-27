@@ -9,7 +9,7 @@ import java.util.List;
 public interface UsuarioMateriaServicio {
     List<UsuarioMateria> getAll();
 
-    UsuarioMateria getById(Integer id);
+    UsuarioMateria findById(Integer id);
 
     List<Materia> getMateriasByUser(Integer userId);
 

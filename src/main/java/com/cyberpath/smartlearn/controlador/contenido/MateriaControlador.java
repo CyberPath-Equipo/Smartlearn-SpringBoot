@@ -34,8 +34,8 @@ public class MateriaControlador {
     }
 
     @GetMapping("/materia/{id}")
-    public ResponseEntity<MateriaDto> getById(@PathVariable Integer id) {
-        Materia materia = materiaServicio.getById(id);
+    public ResponseEntity<MateriaDto> findById(@PathVariable Integer id) {
+        Materia materia = materiaServicio.findById(id);
         if (materia == null) {
             return ResponseEntity.notFound().build();
         }
@@ -44,7 +44,7 @@ public class MateriaControlador {
 
     @GetMapping("/materia/{id}/temas")
     public ResponseEntity<List<TemaDto>> getTemasByMateria(@PathVariable Integer id) {
-        Materia materia = materiaServicio.getById(id);
+        Materia materia = materiaServicio.findById(id);
         if (materia == null) {
             return ResponseEntity.notFound().build();
         }
@@ -83,7 +83,7 @@ public class MateriaControlador {
     @GetMapping("/materia/{id}/total-ejercicios")
     public ResponseEntity<Long> getTotalEjerciciosByMateria(@PathVariable Integer id) {
 
-        Materia materia = materiaServicio.getById(id);
+        Materia materia = materiaServicio.findById(id);
         if (materia == null) {
             return ResponseEntity.notFound().build();
         }

@@ -7,7 +7,7 @@ import java.util.List;
 public interface UltimaConexionServicio {
     List<UltimaConexion> getAll();
 
-    UltimaConexion getById(Integer id);
+    UltimaConexion findById(Integer id);
 
     UltimaConexion save(UltimaConexion ultimaConexion);
 

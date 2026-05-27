@@ -7,7 +7,7 @@ import java.util.List;
 public interface ConfiguracionServicio {
     List<Configuracion> getAll();
 
-    Configuracion getById(Integer id);
+    Configuracion findById(Integer id);
 
     Configuracion save(Configuracion configuracion);
 

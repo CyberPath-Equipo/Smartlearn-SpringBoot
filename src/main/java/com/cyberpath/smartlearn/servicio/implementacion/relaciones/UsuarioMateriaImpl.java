@@ -24,7 +24,7 @@ public class UsuarioMateriaImpl implements UsuarioMateriaServicio {
     }
 
     @Override
-    public UsuarioMateria getById(Integer id) {
+    public UsuarioMateria findById(Integer id) {
         return usuarioMateriaRepositorio.findById(id).orElse(null);
     }
 

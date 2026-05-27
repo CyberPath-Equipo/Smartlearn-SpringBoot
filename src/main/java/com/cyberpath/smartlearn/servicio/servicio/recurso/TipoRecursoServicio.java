@@ -7,7 +7,7 @@ import java.util.List;
 public interface TipoRecursoServicio {
     List<TipoRecurso> getAll();
 
-    TipoRecurso getById(Integer id);
+    TipoRecurso findById(Integer id);
 
     TipoRecurso save(TipoRecurso tipoRecurso);
 

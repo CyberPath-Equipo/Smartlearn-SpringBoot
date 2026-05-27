@@ -7,7 +7,7 @@ import java.util.List;
 public interface TeoriaServicio {
     List<Teoria> getAll();
 
-    Teoria getById(Integer id);
+    Teoria findById(Integer id);
 
     Teoria save(Teoria teoria);
 

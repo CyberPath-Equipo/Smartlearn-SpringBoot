@@ -20,7 +20,7 @@ public class UltimaConexionImpl implements UltimaConexionServicio {
     }
 
     @Override
-    public UltimaConexion getById(Integer idUsuario) {
+    public UltimaConexion findById(Integer idUsuario) {
         return repositorio.findById(idUsuario).orElse(null);
     }
 

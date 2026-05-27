@@ -41,8 +41,8 @@ public class SubtemaControlador {
     }
 
     @GetMapping("/subtema/{id}")
-    public ResponseEntity<SubtemaDto> getById(@PathVariable Integer id) {
-        Subtema subtema = subtemaServicio.getById(id);
+    public ResponseEntity<SubtemaDto> findById(@PathVariable Integer id) {
+        Subtema subtema = subtemaServicio.findById(id);
         if (subtema == null) {
             return ResponseEntity.notFound().build();
         }
@@ -51,7 +51,7 @@ public class SubtemaControlador {
 
     @GetMapping("/subtema/{id}/tema")
     public ResponseEntity<TemaDto> getTema(@PathVariable Integer id) {
-        Subtema subtema = subtemaServicio.getById(id);
+        Subtema subtema = subtemaServicio.findById(id);
         if (subtema == null) {
             return ResponseEntity.notFound().build();
         }
@@ -72,7 +72,7 @@ public class SubtemaControlador {
 
     @GetMapping("/subtema/{id}/teoria")
     public ResponseEntity<TeoriaDto> getTeoria(@PathVariable Integer id) {
-        Subtema subtema = subtemaServicio.getById(id);
+        Subtema subtema = subtemaServicio.findById(id);
         if (subtema == null) {
             return ResponseEntity.notFound().build();
         }
@@ -92,7 +92,7 @@ public class SubtemaControlador {
     @GetMapping("/subtema/{id}/ejercicios")
     public ResponseEntity<List<EjercicioDto>> getEjerciciosBySubtema(@PathVariable Integer id) {
 
-        Subtema subtema = subtemaServicio.getById(id);
+        Subtema subtema = subtemaServicio.findById(id);
         if (subtema == null) {
             return ResponseEntity.notFound().build();
         }
@@ -130,7 +130,7 @@ public class SubtemaControlador {
     @PostMapping("/subtema/{id}/ejercicios")
     public ResponseEntity<EjercicioDto> crearEjercicio(@PathVariable Integer id, @RequestBody EjercicioDto dto) {
 
-        Subtema subtema = subtemaServicio.getById(id);
+        Subtema subtema = subtemaServicio.findById(id);
         if (subtema == null) {
             return ResponseEntity.notFound().build();
         }
@@ -175,7 +175,7 @@ public class SubtemaControlador {
     /*
     @GetMapping("/subtema/{idSubtema}/ejercicios")
     public ResponseEntity<List<EjercicioDto>> getEjerciciosBySubtema(@PathVariable Integer idSubtema) {
-        Subtema subtema = subtemaServicio.getById(idSubtema);
+        Subtema subtema = subtemaServicio.findById(idSubtema);
         if (subtema == null) {
             return ResponseEntity.notFound().build();
         }

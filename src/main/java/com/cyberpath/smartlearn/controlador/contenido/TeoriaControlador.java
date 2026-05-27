@@ -36,8 +36,8 @@ public class TeoriaControlador {
     }
 
     @GetMapping("/teoria/{id}")
-    public ResponseEntity<TeoriaDto> getById(@PathVariable Integer id) {
-        Teoria teoria = teoriaServicio.getById(id);
+    public ResponseEntity<TeoriaDto> findById(@PathVariable Integer id) {
+        Teoria teoria = teoriaServicio.findById(id);
         if (teoria == null) {
             return ResponseEntity.notFound().build();
         }
@@ -97,7 +97,7 @@ public class TeoriaControlador {
     @PostMapping("/teoria/docente")
     public ResponseEntity<TeoriaDto> saveWeb(@RequestBody TeoriaDto teoriaDto) {
         Teoria teoria = mapDtoToEntity(teoriaDto);
-        Subtema subtema = subtemaServicio.getById(teoriaDto.getIdSubtema());
+        Subtema subtema = subtemaServicio.findById(teoriaDto.getIdSubtema());
 
         if (teoriaDto.getIdSubtema() != null) {
             teoria.setSubtema(subtema);

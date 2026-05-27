@@ -19,7 +19,7 @@ public class ProgresoSubtemaImpl implements ProgresoSubtemaServicio {
     }
 
     @Override
-    public ProgresoSubtema getById(Integer id) {
+    public ProgresoSubtema findById(Integer id) {
         return progresoSubtemaRepositorio.findById(id).orElse(null);
     }
 

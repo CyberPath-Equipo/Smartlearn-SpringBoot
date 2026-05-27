@@ -34,8 +34,8 @@ public class RecursoAdjuntoControlador {
     }
 
     @GetMapping("/recurso-adjunto/{id}")
-    public ResponseEntity<RecursoAdjuntoDto> getById(@PathVariable Integer id) {
-        RecursoAdjunto recurso = recursoAdjuntoServicio.getById(id);
+    public ResponseEntity<RecursoAdjuntoDto> findById(@PathVariable Integer id) {
+        RecursoAdjunto recurso = recursoAdjuntoServicio.findById(id);
         if (recurso == null) {
             return ResponseEntity.notFound().build();
         }

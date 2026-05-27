@@ -38,8 +38,8 @@ public class PreguntaControlador {
     }
 
     @GetMapping("/pregunta/{id}")
-    public ResponseEntity<PreguntaDto> getById(@PathVariable Integer id) {
-        Pregunta pregunta = preguntaServicio.getById(id);
+    public ResponseEntity<PreguntaDto> findById(@PathVariable Integer id) {
+        Pregunta pregunta = preguntaServicio.findById(id);
         if (pregunta == null) {
             return ResponseEntity.notFound().build();
         }
@@ -78,7 +78,7 @@ public class PreguntaControlador {
 
     @GetMapping("/pregunta/{id}/opciones")
     public ResponseEntity<List<OpcionDto>> getOpcionesByPregunta(@PathVariable Integer id) {
-        Pregunta pregunta = preguntaServicio.getById(id);
+        Pregunta pregunta = preguntaServicio.findById(id);
         if (pregunta == null || pregunta.getOpciones() == null) {
             return ResponseEntity.notFound().build();
         }

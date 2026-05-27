@@ -34,8 +34,8 @@ public class ProgresoSubtemaControlador {
     }
 
     @GetMapping("/progreso-subtema/{id}")
-    public ResponseEntity<ProgresoSubtemaDto> getById(@PathVariable Integer id) {
-        ProgresoSubtema progreso = progresoSubtemaServicio.getById(id);
+    public ResponseEntity<ProgresoSubtemaDto> findById(@PathVariable Integer id) {
+        ProgresoSubtema progreso = progresoSubtemaServicio.findById(id);
         if (progreso == null) {
             return ResponseEntity.notFound().build();
         }

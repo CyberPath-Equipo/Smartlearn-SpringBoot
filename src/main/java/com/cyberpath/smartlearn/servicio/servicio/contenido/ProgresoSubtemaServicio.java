@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProgresoSubtemaServicio {
     List<ProgresoSubtema> getAll();
 
-    ProgresoSubtema getById(Integer id);
+    ProgresoSubtema findById(Integer id);
 
     ProgresoSubtema save(ProgresoSubtema progresoSubtema);
 

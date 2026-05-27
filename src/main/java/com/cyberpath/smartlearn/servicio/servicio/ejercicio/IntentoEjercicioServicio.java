@@ -7,7 +7,7 @@ import java.util.List;
 public interface IntentoEjercicioServicio {
     List<IntentoEjercicio> getAll();
 
-    IntentoEjercicio getById(Integer id);
+    IntentoEjercicio findById(Integer id);
 
     IntentoEjercicio save(IntentoEjercicio intentoEjercicio);
 

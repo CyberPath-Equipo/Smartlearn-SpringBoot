@@ -19,7 +19,7 @@ public class IntentoEjercicioImpl implements IntentoEjercicioServicio {
     }
 
     @Override
-    public IntentoEjercicio getById(Integer id) {
+    public IntentoEjercicio findById(Integer id) {
         return intentoEjercicioRepositorio.findById(id).orElse(null);
     }
 

@@ -38,8 +38,8 @@ public class TemaControlador {
     }
 
     @GetMapping("/tema/{id}")
-    public ResponseEntity<TemaDto> getById(@PathVariable Integer id) {
-        Tema tema = temaServicio.getById(id);
+    public ResponseEntity<TemaDto> findById(@PathVariable Integer id) {
+        Tema tema = temaServicio.findById(id);
         if (tema == null) {
             return ResponseEntity.notFound().build();
         }
@@ -48,7 +48,7 @@ public class TemaControlador {
 
     @GetMapping("/tema/{id}/subtemas")
     public ResponseEntity<List<SubtemaDto>> getSubtemasByTema(@PathVariable Integer id) {
-        Tema tema = temaServicio.getById(id);
+        Tema tema = temaServicio.findById(id);
         if (tema == null) {
             return ResponseEntity.notFound().build();
         }
@@ -65,7 +65,7 @@ public class TemaControlador {
 
     @GetMapping("/tema/{id}/materia")
     public ResponseEntity<MateriaDto> getMateria(@PathVariable Integer id) {
-        Tema tema = temaServicio.getById(id);
+        Tema tema = temaServicio.findById(id);
         if (tema == null) {
             return ResponseEntity.notFound().build();
         }

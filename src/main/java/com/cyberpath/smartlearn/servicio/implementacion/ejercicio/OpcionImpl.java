@@ -19,7 +19,7 @@ public class OpcionImpl implements OpcionServicio {
     }
 
     @Override
-    public Opcion getById(Integer id) {
+    public Opcion findById(Integer id) {
         return opcionRepositorio.findById(id).orElse(null);
     }
 

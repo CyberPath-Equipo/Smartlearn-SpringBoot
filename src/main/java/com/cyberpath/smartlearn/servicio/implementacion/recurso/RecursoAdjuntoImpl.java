@@ -19,7 +19,7 @@ public class RecursoAdjuntoImpl implements RecursoAdjuntoServicio {
     }
 
     @Override
-    public RecursoAdjunto getById(Integer id) {
+    public RecursoAdjunto findById(Integer id) {
         return recursoAdjuntoRepositorio.findById(id).orElse(null);
     }
 

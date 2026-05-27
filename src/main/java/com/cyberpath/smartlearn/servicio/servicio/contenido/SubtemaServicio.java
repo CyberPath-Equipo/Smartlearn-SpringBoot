@@ -7,7 +7,7 @@ import java.util.List;
 public interface SubtemaServicio {
     List<Subtema> getAll();
 
-    Subtema getById(Integer id);
+    Subtema findById(Integer id);
 
     Subtema save(Subtema subtema);
 

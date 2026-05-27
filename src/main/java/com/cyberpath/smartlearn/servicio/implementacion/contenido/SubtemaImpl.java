@@ -21,7 +21,7 @@ public class SubtemaImpl implements SubtemaServicio {
     }
 
     @Override
-    public Subtema getById(Integer id) {
+    public Subtema findById(Integer id) {
         return subtemaRepositorio.findById(id).orElse(null);
     }
 

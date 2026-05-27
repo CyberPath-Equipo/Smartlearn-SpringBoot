@@ -25,7 +25,7 @@ public class EjercicioImpl implements EjercicioServicio {
     }
 
     @Override
-    public Ejercicio getById(Integer id) {
+    public Ejercicio findById(Integer id) {
         return ejercicioRepositorio.findById(id).orElse(null);
     }
 

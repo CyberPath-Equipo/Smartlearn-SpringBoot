@@ -7,7 +7,7 @@ import java.util.List;
 public interface RecursoAdjuntoServicio {
     List<RecursoAdjunto> getAll();
 
-    RecursoAdjunto getById(Integer id);
+    RecursoAdjunto findById(Integer id);
 
     RecursoAdjunto save(RecursoAdjunto recursoAdjunto);
 

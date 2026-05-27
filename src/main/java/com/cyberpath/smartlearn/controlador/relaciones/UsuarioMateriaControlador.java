@@ -41,7 +41,7 @@ public class UsuarioMateriaControlador {
 
     @GetMapping("/usuario-materia/materia/{idMateria}/usuarios")
     public ResponseEntity<List<UsuarioMateriaDto>> getUsuariosByMateria(@PathVariable Integer idMateria) {
-        Materia materia = materiaServicio.getById(idMateria);
+        Materia materia = materiaServicio.findById(idMateria);
         if (materia == null) {
             return ResponseEntity.notFound().build();
         }

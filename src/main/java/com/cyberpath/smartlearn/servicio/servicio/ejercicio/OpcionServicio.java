@@ -7,7 +7,7 @@ import java.util.List;
 public interface OpcionServicio {
     List<Opcion> getAll();
 
-    Opcion getById(Integer id);
+    Opcion findById(Integer id);
 
     Opcion save(Opcion opcion);
 

@@ -9,7 +9,7 @@ import java.util.List;
 public interface EjercicioServicio {
     List<Ejercicio> getAll();
 
-    Ejercicio getById(Integer id);
+    Ejercicio findById(Integer id);
 
     Ejercicio save(Ejercicio ejercicio);
 

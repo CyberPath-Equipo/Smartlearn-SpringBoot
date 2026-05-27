@@ -7,7 +7,7 @@ import java.util.List;
 public interface PreguntaServicio {
     List<Pregunta> getAll();
 
-    Pregunta getById(Integer id);
+    Pregunta findById(Integer id);
 
     Pregunta save(Pregunta pregunta);
 

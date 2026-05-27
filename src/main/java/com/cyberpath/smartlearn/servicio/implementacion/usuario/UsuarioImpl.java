@@ -104,7 +104,7 @@ public class UsuarioImpl implements UsuarioServicio {
 
     @Override
     public Materia getMateriaById(Integer idMateria) {
-        return materiaServicio.getById(idMateria);
+        return materiaServicio.findById(idMateria);
     }
 
     @Override

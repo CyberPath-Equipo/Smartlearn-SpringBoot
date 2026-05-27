@@ -7,7 +7,7 @@ import java.util.List;
 public interface UsuarioEjercicioServicio {
     List<UsuarioEjercicio> getAll();
 
-    UsuarioEjercicio getById(Integer id);
+    UsuarioEjercicio findById(Integer id);
 
     UsuarioEjercicio save(UsuarioEjercicio usuarioEjercicio);
 

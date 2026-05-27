@@ -34,8 +34,8 @@ public class OpcionControlador {
     }
 
     @GetMapping("/opcion/{id}")
-    public ResponseEntity<OpcionDto> getById(@PathVariable Integer id) {
-        Opcion opcion = opcionServicio.getById(id);
+    public ResponseEntity<OpcionDto> findById(@PathVariable Integer id) {
+        Opcion opcion = opcionServicio.findById(id);
         if (opcion == null) {
             return ResponseEntity.notFound().build();
         }

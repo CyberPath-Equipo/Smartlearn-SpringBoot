@@ -19,7 +19,7 @@ public class TemaImpl implements TemaServicio {
     }
 
     @Override
-    public Tema getById(Integer id) {
+    public Tema findById(Integer id) {
         return temaRepositorio.findById(id).orElse(null);
     }
 

@@ -33,7 +33,7 @@ public class RolControlador {
     }
 
     @GetMapping("/rol/{id}")
-    public ResponseEntity<RolDto> getById(@PathVariable Integer id) {
+    public ResponseEntity<RolDto> findById(@PathVariable Integer id) {
         Rol rol = rolServicio.findById(id);
         if (rol == null) {
             return ResponseEntity.notFound().build();

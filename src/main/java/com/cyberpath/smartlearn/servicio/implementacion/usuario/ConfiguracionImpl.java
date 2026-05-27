@@ -19,7 +19,7 @@ public class ConfiguracionImpl implements ConfiguracionServicio {
     }
 
     @Override
-    public Configuracion getById(Integer id) {
+    public Configuracion findById(Integer id) {
         return configuracionRepositorio.findById(id).orElse(null);
     }
 

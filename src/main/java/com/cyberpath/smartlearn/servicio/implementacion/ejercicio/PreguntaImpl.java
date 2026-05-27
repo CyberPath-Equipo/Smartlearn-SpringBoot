@@ -19,7 +19,7 @@ public class PreguntaImpl implements PreguntaServicio {
     }
 
     @Override
-    public Pregunta getById(Integer id) {
+    public Pregunta findById(Integer id) {
         return preguntaRepositorio.findById(id).orElse(null);
     }
 
