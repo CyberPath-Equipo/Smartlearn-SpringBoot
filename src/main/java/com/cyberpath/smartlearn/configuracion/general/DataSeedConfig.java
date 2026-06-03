@@ -29,6 +29,7 @@ public class DataSeedConfig {
                         .correo("admin@smartlearn.com")
                         .contrasena("123")
                         .idRol(3)
+                        .verificado(true)
                         .build();
 
                 usuarioServicio.save(adminDto);

@@ -40,7 +40,7 @@ public class UsuarioImpl implements UsuarioServicio {
         Rol rol = rolRepositorio.findById(usuarioDto.getIdRol())
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
         usuario.setRol(rol);
-        usuario.setVerificado(false);
+        usuario.setVerificado(Boolean.TRUE.equals(usuarioDto.getVerificado()));
         usuario.setCreadoEn(LocalDateTime.now());
         usuario.setActualizadoEn(LocalDateTime.now());
 
