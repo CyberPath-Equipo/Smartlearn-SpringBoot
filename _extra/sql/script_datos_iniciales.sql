@@ -48,11 +48,11 @@ VALUES ('PDF', 'Documento en formato PDF descargable'),
 -- ============================================================
 
 INSERT INTO tbl_materia (nombre, slug, descripcion)
-VALUES ('Matemáticas Básicas', 'matematicas-basicas', 'Conceptos fundamentales de matemáticas'),
-       ('Álgebra', 'algebra', 'Operaciones algebraicas y ecuaciones'),
-       ('Geometría', 'geometria', 'Figuras geométricas y teoremas'),
-       ('Español', 'espanol', 'Gramática y literatura española'),
-       ('Historia de México', 'historia-de-mexico', 'Curso básico de historia de México');
+VALUES ('Matemáticas Básicas', 'https://res.cloudinary.com/dlchxvwae/image/upload/v1780543435/materia-mate_eqx0t6.png', 'Conceptos fundamentales de matemáticas'),
+       ('Álgebra', 'https://res.cloudinary.com/dlchxvwae/image/upload/v1780543428/materia-algebra_csgnei.png', 'Operaciones algebraicas y ecuaciones'),
+       ('Geometría', 'https://res.cloudinary.com/dlchxvwae/image/upload/v1780543433/materia-geometria_qqyvfl.png', 'Figuras geométricas y teoremas'),
+       ('Español', 'https://res.cloudinary.com/dlchxvwae/image/upload/v1780543431/materia-espanol_adnpwv.png', 'Gramática y literatura española'),
+       ('Historia de México', 'https://res.cloudinary.com/dlchxvwae/image/upload/v1780543434/materia-historia_ex8orj.png', 'Curso básico de historia de México');
 
 -- ============================================================
 -- 3. TEMAS

@@ -91,7 +91,7 @@ CREATE TABLE tbl_usuario_materia (
      REFERENCES tbl_materia(id_materia) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- ============================================================
+-- ============================================================exit
 -- LEVEL 3: SUBTHEMES & SECURITY
 -- ============================================================
 
