@@ -715,20 +715,20 @@ VALUES (60, '10 años', 0),
 -- VERIFICACIÓN FINAL
 -- ============================================================
 
-SELECT 'Script ejecutado correctamente' AS mensaje;
-SELECT COUNT(*) AS total_materias
-FROM tbl_materia;
-SELECT COUNT(*) AS total_temas
-FROM tbl_tema;
-SELECT COUNT(*) AS total_subtemas
-FROM tbl_subtema;
-SELECT COUNT(*) AS total_ejercicios
-FROM tbl_ejercicio;
-SELECT COUNT(*) AS total_preguntas
-FROM tbl_pregunta;
-SELECT COUNT(*) AS total_opciones
-FROM tbl_opcion;
-SELECT COUNT(*) AS total_recursos
-FROM tbl_recurso_adjunto;
-SELECT COUNT(*) AS total_usuarios
-FROM tbl_usuario;
+# SELECT 'Script ejecutado correctamente' AS mensaje;
+# SELECT COUNT(*) AS total_materias
+# FROM tbl_materia;
+# SELECT COUNT(*) AS total_temas
+# FROM tbl_tema;
+# SELECT COUNT(*) AS total_subtemas
+# FROM tbl_subtema;
+# SELECT COUNT(*) AS total_ejercicios
+# FROM tbl_ejercicio;
+# SELECT COUNT(*) AS total_preguntas
+# FROM tbl_pregunta;
+# SELECT COUNT(*) AS total_opciones
+# FROM tbl_opcion;
+# SELECT COUNT(*) AS total_recursos
+# FROM tbl_recurso_adjunto;
+# SELECT COUNT(*) AS total_usuarios
+# FROM tbl_usuario;

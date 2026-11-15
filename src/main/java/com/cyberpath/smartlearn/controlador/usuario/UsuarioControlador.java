@@ -2,8 +2,8 @@ package com.cyberpath.smartlearn.controlador.usuario;
 
 import com.cyberpath.smartlearn.controlador.usuario.contrasena.CambioPasswordDto;
 import com.cyberpath.smartlearn.dto.contenido.MateriaDto;
-import com.cyberpath.smartlearn.dto.usuario.RegistroVerificacionRequest;
-import com.cyberpath.smartlearn.dto.usuario.TwoFactorResendRequest;
+import com.cyberpath.smartlearn.dto.usuario.twoFactor.RegistroVerificacionRequest;
+import com.cyberpath.smartlearn.dto.usuario.twoFactor.TwoFactorResendRequest;
 import com.cyberpath.smartlearn.dto.usuario.UsuarioDto;
 import com.cyberpath.smartlearn.modelo.contenido.Materia;
 import com.cyberpath.smartlearn.modelo.usuario.Rol;
@@ -154,7 +154,7 @@ public class UsuarioControlador {
 
         if (usuario.getTwoFactorEnabled()) {
             String transactionId = twoFactorServicio.createTransaction(usuario.getId(), "EMAIL");
-            
+
             return ResponseEntity.ok(LoginResponse.builder()
                     .requires2fa(true)
                     .twoFactorTransactionId(transactionId)
@@ -189,7 +189,7 @@ public class UsuarioControlador {
         // Si el usuario tiene 2FA habilitado
         if (usuario.getTwoFactorEnabled()) {
             String transactionId = twoFactorServicio.createTransaction(usuario.getId(), "EMAIL");
-            
+
             return ResponseEntity.ok(LoginResponse.builder()
                     .requires2fa(true)
                     .twoFactorTransactionId(transactionId)
@@ -210,11 +210,6 @@ public class UsuarioControlador {
             return ResponseEntity.badRequest().body(Map.of("error", "refreshToken es obligatorio"));
         }
 
-        if (!jwtService.isRefreshTokenValid(request.getRefreshToken())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Refresh token inválido o expirado"));
-        }
-
         String correo = jwtService.obtenerSubject(request.getRefreshToken());
         Usuario usuario = usuarioServicio.findByCorreo(correo);
         if (usuario == null) {
@@ -222,7 +217,7 @@ public class UsuarioControlador {
                     .body(Map.of("error", "Usuario no encontrado"));
         }
 
-        return ResponseEntity.ok(buildLoginResponse(usuario, request.getRefreshToken()));
+        return ResponseEntity.ok(buildLoginResponse(usuario));
     }
 
     @PutMapping("/usuario/{id}/password")
@@ -284,13 +279,8 @@ public class UsuarioControlador {
     }
 
     private LoginResponse buildLoginResponse(Usuario usuario) {
-        return buildLoginResponse(usuario, jwtService.generarRefreshToken(usuario.getCorreo()));
-    }
-
-    private LoginResponse buildLoginResponse(Usuario usuario, String refreshToken) {
         return LoginResponse.builder()
                 .token(jwtService.generarToken(usuario.getCorreo()))
-                .refreshToken(refreshToken)
                 .idUsuario(usuario.getId())
                 .nombreCuenta(usuario.getNombreCuenta())
                 .idRol(usuario.getRol().getId())

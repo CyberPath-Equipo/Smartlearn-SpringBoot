@@ -1,4 +1,4 @@
-package com.cyberpath.smartlearn.dto.usuario;
+package com.cyberpath.smartlearn.dto.usuario.twoFactor;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

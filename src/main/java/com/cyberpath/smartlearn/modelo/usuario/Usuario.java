@@ -3,6 +3,9 @@ package com.cyberpath.smartlearn.modelo.usuario;
 import com.cyberpath.smartlearn.modelo.contenido.ProgresoSubtema;
 import com.cyberpath.smartlearn.modelo.ejercicio.IntentoEjercicio;
 import com.cyberpath.smartlearn.modelo.relaciones.UsuarioMateria;
+import com.cyberpath.smartlearn.modelo.usuario.twoFactor.RecoveryCode;
+import com.cyberpath.smartlearn.modelo.usuario.twoFactor.TrustedDevice;
+import com.cyberpath.smartlearn.modelo.usuario.twoFactor.TwoFactorTransaction;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -87,15 +90,15 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
-    private java.util.List<com.cyberpath.smartlearn.modelo.usuario.TwoFactorTransaction> twoFactorTransactions = new ArrayList<>();
+    private java.util.List<TwoFactorTransaction> twoFactorTransactions = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
-    private java.util.List<com.cyberpath.smartlearn.modelo.usuario.TrustedDevice> trustedDevices = new ArrayList<>();
+    private java.util.List<TrustedDevice> trustedDevices = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
-    private java.util.List<com.cyberpath.smartlearn.modelo.usuario.RecoveryCode> recoveryCodes = new ArrayList<>();
+    private java.util.List<RecoveryCode> recoveryCodes = new ArrayList<>();
 
 
     public void addIntentoEjercicio(IntentoEjercicio intentoEjercicio) {

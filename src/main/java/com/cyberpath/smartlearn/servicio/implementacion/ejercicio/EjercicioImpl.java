@@ -52,45 +52,4 @@ public class EjercicioImpl implements EjercicioServicio {
 
         return ejercicioRepositorio.save(aux);
     }
-
-    @Override
-    public void sincronizarOpciones(Pregunta pregunta, List<OpcionDto> opcionesDto) {
-
-        List<Opcion> opcionesActuales = pregunta.getOpciones();
-
-        Set<Integer> idsDto = opcionesDto.stream()
-                .map(OpcionDto::getId)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
-
-        opcionesActuales.removeIf(opcion ->
-                opcion.getId() != null && !idsDto.contains(opcion.getId())
-        );
-
-        for (OpcionDto dto : opcionesDto) {
-
-            if (dto.getId() != null) {
-                Opcion opcionExistente = opcionesActuales.stream()
-                        .filter(o -> o.getId().equals(dto.getId()))
-                        .findFirst()
-                        .orElseThrow(() ->
-                                new IllegalStateException(
-                                        "Opción no encontrada: " + dto.getId()
-                                )
-                        );
-
-                opcionExistente.setTexto(dto.getTexto());
-                opcionExistente.setCorrecta(dto.isCorrecta());
-
-            } else {
-                Opcion nueva = Opcion.builder()
-                        .texto(dto.getTexto())
-                        .correcta(dto.isCorrecta())
-                        .pregunta(pregunta)
-                        .build();
-
-                opcionesActuales.add(nueva);
-            }
-        }
-    }
 }

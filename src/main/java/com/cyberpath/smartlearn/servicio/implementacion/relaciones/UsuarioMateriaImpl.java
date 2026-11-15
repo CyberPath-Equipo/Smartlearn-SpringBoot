@@ -38,22 +38,6 @@ public class UsuarioMateriaImpl implements UsuarioMateriaServicio {
         return usuarioMateriaRepositorio.save(usuarioMateria);
     }
 
-    @Autowired
-    private EntityManager entityManager;
-
-    @Override
-    public UsuarioMateria saveReferencia(UsuarioMateriaDto dto) {
-        UsuarioMateria relacion = new UsuarioMateria();
-
-        Usuario usuarioRef = entityManager.getReference(Usuario.class, dto.getIdUsuario());
-        Materia materiaRef = entityManager.getReference(Materia.class, dto.getIdMateria());
-
-        relacion.setUsuario(usuarioRef);
-        relacion.setMateria(materiaRef);
-
-        return usuarioMateriaRepositorio.save(relacion);
-    }
-
     @Override
     public void delete(Integer id) {
         usuarioMateriaRepositorio.deleteById(id);

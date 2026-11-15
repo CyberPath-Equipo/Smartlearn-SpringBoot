@@ -26,9 +26,11 @@ public class Pregunta {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
+    @Builder.Default
     private TipoPregunta tipo = TipoPregunta.opcion_multiple;
 
     @Column(name = "orden")
+    @Builder.Default
     private Integer orden = 0;
 
     @Column(name = "puntos")

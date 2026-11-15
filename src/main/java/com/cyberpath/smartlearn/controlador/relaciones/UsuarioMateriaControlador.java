@@ -23,7 +23,6 @@ public class UsuarioMateriaControlador {
 
     private final UsuarioMateriaServicio usuarioMateriaServicio;
     private final MateriaServicio materiaServicio;
-    private final UsuarioServicio usuarioServicio;
 
     @GetMapping("/usuario-materia")
     public ResponseEntity<List<UsuarioMateriaDto>> lista() {
@@ -49,7 +48,6 @@ public class UsuarioMateriaControlador {
         if (lista == null || lista.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(
                 lista.stream()
                         .map(this::convertToDto)
@@ -88,21 +86,6 @@ public class UsuarioMateriaControlador {
         return ResponseEntity.ok(convertToDto(guardada));
     }
 
-    @PutMapping("/usuario-materia/{id}")
-    public ResponseEntity<UsuarioMateriaDto> update(@PathVariable Integer id, @RequestBody UsuarioMateriaDto usuarioMateriaDto) {
-        UsuarioMateria datosActualizacion = mapDtoToEntity(usuarioMateriaDto);
-
-        if (usuarioMateriaDto.getIdMateria() != null) {
-            datosActualizacion.setMateria(Materia.builder().id(usuarioMateriaDto.getIdMateria()).build());
-        }
-        if (usuarioMateriaDto.getIdUsuario() != null) {
-            datosActualizacion.setUsuario(Usuario.builder().id(usuarioMateriaDto.getIdUsuario()).build());
-        }
-
-        UsuarioMateria actualizada = usuarioMateriaServicio.update(id, datosActualizacion);
-        return ResponseEntity.ok(convertToDto(actualizada));
-    }
-
     @DeleteMapping("/usuario-materia/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         usuarioMateriaServicio.delete(id);
@@ -111,10 +94,9 @@ public class UsuarioMateriaControlador {
 
     private UsuarioMateriaDto convertToDto(UsuarioMateria usuarioMateria) {
         return UsuarioMateriaDto.builder()
-                .id(usuarioMateria.getId() != null ? usuarioMateria.getId().getIdUsuario() : null)
-                .suscritoEn(usuarioMateria.getSuscritoEn() != null ? usuarioMateria.getSuscritoEn().toString() : null)
-                .idMateria(usuarioMateria.getMateria() != null ? usuarioMateria.getMateria().getId() : null)
-                .idUsuario(usuarioMateria.getUsuario() != null ? usuarioMateria.getUsuario().getId() : null)
+                .id(usuarioMateria.getId())
+                .idMateria(usuarioMateria.getMateria().getId())
+                .idUsuario(usuarioMateria.getUsuario().getId())
                 .build();
     }
 
@@ -129,6 +111,7 @@ public class UsuarioMateriaControlador {
 
     private UsuarioMateria mapDtoToEntity(UsuarioMateriaDto dto) {
         return UsuarioMateria.builder()
+                .id(dto.getId())
                 .build();
     }
 }

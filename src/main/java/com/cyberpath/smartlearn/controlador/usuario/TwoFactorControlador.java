@@ -1,9 +1,8 @@
 package com.cyberpath.smartlearn.controlador.usuario;
 
 import com.cyberpath.smartlearn.configuracion.seguridad.login.LoginResponse;
-import com.cyberpath.smartlearn.dto.usuario.*;
+import com.cyberpath.smartlearn.dto.usuario.twoFactor.*;
 import com.cyberpath.smartlearn.modelo.usuario.Usuario;
-import com.cyberpath.smartlearn.repositorio.usuario.UsuarioRepositorio;
 import com.cyberpath.smartlearn.servicio.servicio.usuario.TwoFactorServicio;
 import com.cyberpath.smartlearn.servicio.servicio.usuario.UsuarioServicio;
 import lombok.AllArgsConstructor;
@@ -14,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RequestMapping("/smartlearn/api/usuario/2fa")

@@ -12,8 +12,8 @@
 
     <groupId>com.cyberpath.smartlearn</groupId>
     <artifactId>SmartLearn-Backend</artifactId>
-    <version>0.2</version>
-    <name>SmartLearn-SpringBoot</name>
+    <version>0.3</version>
+    <name>SmartLearn-Backend</name>
     <description>Backend para la Aplicación Móvil y Página Web de SmartLearn</description>
 
     <properties>
@@ -109,10 +109,6 @@
             <artifactId>javase</artifactId>
             <version>3.5.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.cloudinary</groupId>
@@ -129,9 +125,6 @@
                 <version>3.3.0</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <excludes>
-                        <exclude>**/pruebas/**</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
 

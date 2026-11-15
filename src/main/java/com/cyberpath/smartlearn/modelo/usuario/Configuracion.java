@@ -18,9 +18,11 @@ public class Configuracion {
     private Integer id;
 
     @Column(name = "modo_audio")
+    @Builder.Default
     private boolean modoAudio = false;
 
     @Column(name = "notificaciones_activadas")
+    @Builder.Default
     private boolean notificacionesActivadas = true;
 
     @Enumerated(EnumType.STRING)
@@ -29,9 +31,11 @@ public class Configuracion {
     private TamanoFuente tamanoFuente = TamanoFuente.medio;
 
     @Column(name = "modo_offline")
+    @Builder.Default
     private boolean modoOffline = false;
 
     @Column(name = "cuenta_creada")
+    @Builder.Default
     private boolean cuentaCreada = false;
 
     @OneToOne(fetch = FetchType.LAZY)

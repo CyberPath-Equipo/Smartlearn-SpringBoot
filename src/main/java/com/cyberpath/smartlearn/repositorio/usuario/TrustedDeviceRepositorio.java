@@ -1,6 +1,6 @@
 package com.cyberpath.smartlearn.repositorio.usuario;
 
-import com.cyberpath.smartlearn.modelo.usuario.TrustedDevice;
+import com.cyberpath.smartlearn.modelo.usuario.twoFactor.TrustedDevice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

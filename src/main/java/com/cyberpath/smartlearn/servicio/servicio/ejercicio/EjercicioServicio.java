@@ -16,6 +16,4 @@ public interface EjercicioServicio {
     void delete(Integer id);
 
     Ejercicio update(Integer id, Ejercicio ejercicio);
-
-    void sincronizarOpciones(Pregunta pregunta, List<OpcionDto> opciones);
 }

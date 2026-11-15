@@ -1,7 +1,7 @@
 package com.cyberpath.smartlearn.servicio.servicio.usuario;
 
 import com.cyberpath.smartlearn.configuracion.seguridad.login.LoginResponse;
-import com.cyberpath.smartlearn.dto.usuario.*;
+import com.cyberpath.smartlearn.dto.usuario.twoFactor.*;
 
 import java.util.List;
 

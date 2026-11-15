@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UsuarioMateriaDto {
     private Integer id;
-    private String suscritoEn;
 
     private Integer idMateria;
     private Integer idUsuario;

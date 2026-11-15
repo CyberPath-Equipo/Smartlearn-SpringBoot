@@ -15,8 +15,6 @@ public interface UsuarioMateriaServicio {
 
     UsuarioMateria save(UsuarioMateria usuarioMateria);
 
-    UsuarioMateria saveReferencia(UsuarioMateriaDto usuarioMateriaDto);
-
     void delete(Integer id);
 
     UsuarioMateria update(Integer id, UsuarioMateria usuarioMateria);

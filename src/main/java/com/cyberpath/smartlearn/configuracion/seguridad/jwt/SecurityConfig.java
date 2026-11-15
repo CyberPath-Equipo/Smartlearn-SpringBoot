@@ -5,10 +5,10 @@ import com.cyberpath.smartlearn.servicio.servicio.usuario.UsuarioServicio;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -36,10 +36,18 @@ public class SecurityConfig {
     }
 
     @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
     public UserDetailsService userDetailsService(UsuarioServicio usuarioServicio) {
         return username -> {
             Usuario usuario = usuarioServicio.findByCorreo(username);
-            if (usuario == null) throw new UsernameNotFoundException("No existe: " + username);
+
+            if (usuario == null) {
+                throw new UsernameNotFoundException("No existe el usuario con correo: " + username);
+            }
 
             return User.builder()
                     .username(usuario.getCorreo())
@@ -50,27 +58,20 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    // Registrar el filtro de bloqueo de navegador como bean (opcional) o instanciar en el método
-    @Bean
-    public BrowserBlockFilter browserBlockFilter() {
-        return new BrowserBlockFilter();
+    public JwtAuthFilter jwtAuthFilter(UserDetailsService userDetailsService) {
+        return new JwtAuthFilter(jwtService, userDetailsService);
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, UsuarioServicio usuarioServicio) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/smartlearn/api/usuario/login",
                                 "/smartlearn/api/usuario/login/docente",
-                                "/smartlearn/api/usuario/token/refresh",
                                 "/smartlearn/api/usuario/registro",
                                 "/smartlearn/api/usuario/registro/verificar",
                                 "/smartlearn/api/usuario/registro/reenviar",
@@ -78,16 +79,9 @@ public class SecurityConfig {
                                 "/smartlearn/api/usuario/2fa/resend",
                                 "/smartlearn/api/test",
                                 "/smartlearn/api/lsm/**").permitAll()
-
-                        .requestMatchers(HttpMethod.GET, "/smartlearn/api/usuario").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .defaultSuccessUrl("/smartlearn/api/usuario", true)
-                        .permitAll()
-        )
-                .addFilterBefore(browserBlockFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(jwtAuthFilter(usuarioServicio), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter(userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -98,16 +92,10 @@ public class SecurityConfig {
         configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setExposedHeaders(List.of("X-New-Access-Token"));
         configuration.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
-
-    @Bean
-    public JwtAuthFilter jwtAuthFilter(UsuarioServicio usuarioServicio) {
-        return new JwtAuthFilter(jwtService, usuarioServicio);
     }
 }

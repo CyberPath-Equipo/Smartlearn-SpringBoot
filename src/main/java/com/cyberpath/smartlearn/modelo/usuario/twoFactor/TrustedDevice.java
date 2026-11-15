@@ -1,5 +1,6 @@
-package com.cyberpath.smartlearn.modelo.usuario;
+package com.cyberpath.smartlearn.modelo.usuario.twoFactor;
 
+import com.cyberpath.smartlearn.modelo.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ public class TrustedDevice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

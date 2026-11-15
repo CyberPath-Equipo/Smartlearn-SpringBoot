@@ -3,8 +3,11 @@ package com.cyberpath.smartlearn.servicio.implementacion.usuario;
 import com.cyberpath.smartlearn.configuracion.seguridad.correo.CorreoServicio;
 import com.cyberpath.smartlearn.configuracion.seguridad.jwt.JwtService;
 import com.cyberpath.smartlearn.configuracion.seguridad.login.LoginResponse;
-import com.cyberpath.smartlearn.dto.usuario.*;
+import com.cyberpath.smartlearn.dto.usuario.twoFactor.*;
 import com.cyberpath.smartlearn.modelo.usuario.*;
+import com.cyberpath.smartlearn.modelo.usuario.twoFactor.RecoveryCode;
+import com.cyberpath.smartlearn.modelo.usuario.twoFactor.TrustedDevice;
+import com.cyberpath.smartlearn.modelo.usuario.twoFactor.TwoFactorTransaction;
 import com.cyberpath.smartlearn.repositorio.usuario.*;
 import com.cyberpath.smartlearn.servicio.servicio.usuario.TwoFactorServicio;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
@@ -226,7 +229,6 @@ public class TwoFactorServicioImpl implements TwoFactorServicio {
         transactionRepositorio.save(transaction);
 
         String token = jwtService.generarToken(usuario.getCorreo());
-        String refreshToken = jwtService.generarRefreshToken(usuario.getCorreo());
 
         String trustedDeviceToken = null;
         if (request.isRememberDevice()) {
@@ -246,7 +248,6 @@ public class TwoFactorServicioImpl implements TwoFactorServicio {
 
         return LoginResponse.builder()
                 .token(token)
-                .refreshToken(refreshToken)
                 .idUsuario(usuario.getId())
                 .nombreCuenta(usuario.getNombreCuenta())
                 .idRol(usuario.getRol().getId())
@@ -412,7 +413,7 @@ public class TwoFactorServicioImpl implements TwoFactorServicio {
     public List<Object> listTrustedDevices(Integer usuarioId) {
         List<TrustedDevice> devices = trustedDeviceRepositorio.findByUsuarioIdAndRevokedFalse(usuarioId);
         return devices.stream().map(d -> new Object() {
-            public Long id = d.getId();
+            public Integer id = d.getId();
             public String deviceInfo = d.getDeviceInfo();
             public LocalDateTime createdAt = d.getCreatedAt();
             public LocalDateTime expiresAt = d.getExpiresAt();

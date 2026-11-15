@@ -1,4 +1,4 @@
-package com.cyberpath.smartlearn.dto.usuario;
+package com.cyberpath.smartlearn.dto.usuario.twoFactor;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RegistroVerificacionRequest {
+public class TwoFactorVerifyRequest {
     private String transactionId;
     private String code;
+    private boolean rememberDevice;
+    private String deviceInfo;
 }
 

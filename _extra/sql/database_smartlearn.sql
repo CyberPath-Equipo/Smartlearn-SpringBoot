@@ -80,15 +80,16 @@ CREATE TABLE tbl_tema (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE tbl_usuario_materia (
-    id_usuario INT UNSIGNED NOT NULL,
-    id_materia INT UNSIGNED NOT NULL,
-    suscrito_en DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id_usuario, id_materia),
-    INDEX idx_usumat_materia (id_materia),
-    CONSTRAINT fk_usumat_usuario FOREIGN KEY (id_usuario)
-     REFERENCES tbl_usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_usumat_materia FOREIGN KEY (id_materia)
-     REFERENCES tbl_materia(id_materia) ON DELETE CASCADE ON UPDATE CASCADE
+     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+     id_usuario INT UNSIGNED NOT NULL,
+     id_materia INT UNSIGNED NOT NULL,
+     PRIMARY KEY (id),
+     UNIQUE KEY uq_usuario_materia (id_usuario, id_materia),
+     INDEX idx_usumat_materia (id_materia),
+     CONSTRAINT fk_usumat_usuario FOREIGN KEY (id_usuario)
+         REFERENCES tbl_usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+     CONSTRAINT fk_usumat_materia FOREIGN KEY (id_materia)
+         REFERENCES tbl_materia(id_materia) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ============================================================exit
@@ -110,7 +111,7 @@ CREATE TABLE tbl_subtema (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE tbl_two_factor_transaction (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     transaction_id VARCHAR(64) NOT NULL UNIQUE,
     user_id INT UNSIGNED NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -126,7 +127,7 @@ CREATE TABLE tbl_two_factor_transaction (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE tbl_trusted_device (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT UNSIGNED NOT NULL,
     device_token VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -141,7 +142,7 @@ CREATE TABLE tbl_trusted_device (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE tbl_recovery_code (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT UNSIGNED NOT NULL,
     code_hash VARCHAR(255) NOT NULL,
     used BOOLEAN DEFAULT FALSE,
