@@ -1,0 +1,10 @@
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA4MTc2NywiZXhwIjoxNzk0MTY4MTY3LCJqdGkiOiJiNjk3OTJiMy01ODc5LTQ5MDMtOTYyMi01YmY5NThkMWNlODgifQ.P80fPGmuScddgj4SZrEtUwdds9vP6EiL4wJZ35vzxhQ",
+  "idUsuario": 1,
+  "nombreCuenta": "admin",
+  "idRol": 3,
+  "requires2fa": false,
+  "twoFactorTransactionId": null,
+  "twoFactorChannel": null,
+  "trustedDeviceToken": null
+}

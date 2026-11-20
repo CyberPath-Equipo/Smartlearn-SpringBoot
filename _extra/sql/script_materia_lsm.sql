@@ -71,7 +71,7 @@ VALUES (
 INSERT INTO tbl_teoria (id_subtema, contenido, revisado, fuente)
 VALUES (
            @id_subtema_conocimiento_animales,
-           'Los animales de la granja son muy especiales y viven en un lugar muy bonito. A la vaca le gusta mucho comer pasto y nos da leche para hacer queso. El cerdo es gordo y muy chistoso, le encanta estar en su corral. La oveja tiene lana de color blanco que es muy suave, y el burro es muy fuerte y ayuda a cargar cosas en el campo. El gallo y la gallina caminan buscando comida y nos regalan huevos cada mañana.\n\nUn niño y su familia cuidan a los animales todos los días. Con mucho amor, les dan agua limpia y comida. Los animales se ponen muy feliz cuando las personas los ayudan. Si visitas una granja, siempre recuerda decir "por favor" y "gracias" a las personas que trabajan ahí cuidando la naturaleza.',
+           'Los animales de la granja son muy especiales https://i.pinimg.com/736x/cb/78/e9/cb78e9e0b846fc5b61e696f4c8f453c3.jpg y viven en un lugar muy bonito. A la vaca le gusta mucho comer pasto y nos da leche para hacer queso. El cerdo es gordo y muy chistoso, le encanta estar en su corral. La oveja tiene lana de color blanco que es muy suave, y el burro es muy fuerte y ayuda a cargar cosas en el campo. El gallo y la gallina caminan buscando comida y nos regalan huevos cada mañana.\n\nUn niño y su familia cuidan a los animales todos los días. Con mucho amor, les dan agua limpia y comida. Los animales se ponen muy feliz cuando las personas los ayudan. Si visitas una granja, siempre recuerda decir "por favor" y "gracias" a las personas que trabajan ahí cuidando la naturaleza.',
            1,
            'SmartLearn Content Team'
        );

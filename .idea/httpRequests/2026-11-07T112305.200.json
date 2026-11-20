@@ -1,0 +1,11 @@
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA3MjE4NSwiZXhwIjoxNzk0MTU4NTg1LCJqdGkiOiJiYzI2YzAyNC04ZWI2LTQ4NjAtOTI2Ni03ZTJlMDBjN2QyMjQiLCJ0b2tlblR5cGUiOiJBQ0NFU1MifQ.mHRlOmaZ_-yoZLTr2cfg7bVdCFR1_YbyZCWcQ67kfZ4",
+  "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA3MjE4NSwiZXhwIjoxNzk1MzY4MTg1LCJqdGkiOiJkOWM1MWUzYi1lYTEyLTQ1OWMtYWViMC02ZmQ3ZWVlNGJmNWQiLCJ0b2tlblR5cGUiOiJSRUZSRVNIIn0.qq_Y-VkNvW2huGbOXNAeX1m409rSUVA4YYNdAWc6ODU",
+  "idUsuario": 1,
+  "nombreCuenta": "admin",
+  "idRol": 3,
+  "requires2fa": false,
+  "twoFactorTransactionId": null,
+  "twoFactorChannel": null,
+  "trustedDeviceToken": null
+}

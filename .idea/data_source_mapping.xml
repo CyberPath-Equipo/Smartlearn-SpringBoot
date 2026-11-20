@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/_extra/sql/auxi.sql" value="4334451d-9336-4f4b-bbc6-c9f3562e2199" />
     <file url="file://$PROJECT_DIR$/_extra/sql/database_smartlearn.sql" value="d38503a6-b9e0-4f8b-956d-d0af05ec7eb1" />
     <file url="file://$PROJECT_DIR$/_extra/sql/script_datos_iniciales.sql" value="d38503a6-b9e0-4f8b-956d-d0af05ec7eb1" />
+    <file url="file://$PROJECT_DIR$/_extra/sql/script_materia_lsm.sql" value="d38503a6-b9e0-4f8b-956d-d0af05ec7eb1" />
   </component>
 </project>

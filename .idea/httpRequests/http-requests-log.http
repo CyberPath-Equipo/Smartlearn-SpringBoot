@@ -1,0 +1,736 @@
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login/docente
+Content-Type: application/json
+Content-Length: 64
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin@smartlearn.com",
+  "contrasena": "123456"
+}
+
+<> 2026-11-15T190204.200.json
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 64
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin@smartlearn.com",
+  "contrasena": "123456"
+}
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 55
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123456"
+}
+
+<> 2026-11-15T190115.200.json
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 49
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin",
+  "contrasena": "123456"
+}
+
+###
+
+GET https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/test
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 49
+
+{
+  "correo": "admin",
+  "contrasena": "123456"
+}
+
+<> 2026-11-15T190021.200.txt
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/test
+Content-Type: application/json
+Content-Length: 49
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin",
+  "contrasena": "123456"
+}
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/test
+Content-Type: application/json
+Content-Length: 49
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin",
+  "contrasena": "123456"
+}
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 49
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin",
+  "contrasena": "123456"
+}
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 64
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin@smartlearn.com",
+  "contrasena": "123456"
+}
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 50
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin1",
+  "contrasena": "123456"
+}
+
+###
+
+POST http://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 50
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin1",
+  "contrasena": "123456"
+}
+
+###
+
+POST http://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login/docente
+Content-Type: application/json
+Content-Length: 50
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin1",
+  "contrasena": "123456"
+}
+
+<> 2026-11-15T185725.401.txt
+
+###
+
+POST http://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login/docente
+Content-Type: application/json
+Content-Length: 49
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "admin",
+  "contrasena": "123456"
+}
+
+<> 2026-11-15T185719.401.txt
+
+###
+
+POST http://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login/docente
+Content-Type: application/json
+Content-Length: 38
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "correo": "",
+  "contrasena": ""
+}
+
+<> 2026-11-15T185709.401.txt
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 55
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123456"
+}
+
+<> 2026-11-15T150406.200.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 55
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123456"
+}
+
+<> 2026-11-15T150303.200.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+###
+
+GET http://localhost:8080/smartlearn/api/test
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+<> 2026-11-15T144118.200.txt
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+<> 2026-11-15T132926.200.json
+
+###
+
+POST https://smartlearn.westus.cloudapp.azure.com/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+<> 2026-11-15T132743.200.json
+
+###
+
+GET http://localhost:8080/smartlearn/api/usuario
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA4MTc2NywiZXhwIjoxNzk0MTY4MTY3LCJqdGkiOiJiNjk3OTJiMy01ODc5LTQ5MDMtOTYyMi01YmY5NThkMWNlODgifQ.P80fPGmuScddgj4SZrEtUwdds9vP6EiL4wJZ35vzxhQ
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+<> 2026-11-07T140329.200.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+<> 2026-11-07T140247.200.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+<> 2026-11-07T133201.200.json
+
+###
+
+GET http://localhost:8080/smartlearn/api/usuario
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA3OTM0NiwiZXhwIjoxNzk0MTY1NzQ2LCJqdGkiOiIyZDBiNmFmMy0zMWJlLTQzYTUtODdlOS04MTBhODIyMWEyYTgifQ.yzd55X5cANVrmJLJK6R-hdIZ6dqFTDNO9ghnXd9mUkM
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+<> 2026-11-07T132256.401.json
+
+###
+
+GET http://localhost:8080/smartlearn/api/usuario
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+<> 2026-11-07T132226.200.json
+
+###
+
+GET http://localhost:8080/smartlearn/api/usuario
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA3MzQyMywiZXhwIjoxNzk0MTU5ODIzLCJqdGkiOiIwMDI3MWU0Zi0wYjBkLTQ0MTAtOGY3OC0yOGE3Mjc0ZjhkODciLCJ0b2tlblR5cGUiOiJBQ0NFU1MifQ.TsofD5KoCORtARGKKfZ7M7oYy8YF0Z4vJ47wv3U_rsA
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+###
+
+GET http://localhost:8080/smartlearn/api/usuario
+Content-Type: application/json
+Authorization: Bearer {{$auth.token("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA3MzQyMywiZXhwIjoxNzk0MTU5ODIzLCJqdGkiOiIwMDI3MWU0Zi0wYjBkLTQ0MTAtOGY3OC0yOGE3Mjc0ZjhkODciLCJ0b2tlblR5cGUiOiJBQ0NFU1MifQ.TsofD5KoCORtARGKKfZ7M7oYy8YF0Z4vJ47wv3U_rsA")}}
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+###
+
+GET http://localhost:8080/smartlearn/api/usuario
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA3MzQyMywiZXhwIjoxNzk0MTU5ODIzLCJqdGkiOiIwMDI3MWU0Zi0wYjBkLTQ0MTAtOGY3OC0yOGE3Mjc0ZjhkODciLCJ0b2tlblR5cGUiOiJBQ0NFU1MifQ.TsofD5KoCORtARGKKfZ7M7oYy8YF0Z4vJ47wv3U_rsA
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+<> 2026-11-07T114343.200.json
+
+###
+
+GET http://localhost:8080/smartlearn/api/usuario
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA3MzM2OCwiZXhwIjoxNzk0MTU5NzY4LCJqdGkiOiI4ODgwYWU2Mi03MGMxLTQ2MzYtOWRmMS02NWFkNzNkMTgyNTAiLCJ0b2tlblR5cGUiOiJBQ0NFU1MifQ.J27Yj2XljKFlcvtT7poHWRQapYNzkOR4T-D24JYDHCY
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+###
+
+GET http://localhost:8080/smartlearn/api/usuario
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzbWFydGxlYXJuLmNvbSIsImlhdCI6MTc5NDA3MzM2OCwiZXhwIjoxNzk0MTU5NzY4LCJqdGkiOiI4ODgwYWU2Mi03MGMxLTQ2MzYtOWRmMS02NWFkNzNkMTgyNTAiLCJ0b2tlblR5cGUiOiJBQ0NFU1MifQ.J27Yj2XljKFlcvtT7poHWRQapYNzkOR4T-D24JYDHCY
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=F186A6030F32CD7B80A92E7EE475801A
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+<> 2026-11-07T114248.200.json
+
+###
+
+GET http://localhost:8080/smartlearn/api/usuario
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "123"
+}
+
+<> 2026-11-07T112305.200.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario/login
+Content-Type: application/json
+Content-Length: 53
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+
+{
+  "nombreCuenta": "admin",
+  "contrasena": "1234"
+}
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+Content-Length: 38
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T094219.500.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+Content-Length: 38
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T094207.500.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+Content-Length: 38
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T094135.200.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+Content-Length: 38
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T092523.500.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+Content-Length: 38
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T092320.500.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+Content-Length: 38
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+Cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T092304.500.json
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+content-length: 38
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T004620.200.html
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+content-length: 38
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T004550.200.html
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+content-length: 38
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T004350.200.html
+
+###
+
+POST http://localhost:8080/smartlearn/api/usuario-materia
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2026.1.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+cookie: JSESSIONID=65F6079A25E0727C4867C756CD0B6207
+content-length: 38
+
+{
+  "idMateria": 1,
+  "idUsuario": 1
+}
+
+<> 2026-11-07T002104.200.html
+
+###
+

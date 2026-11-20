@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "nombreCuenta": "admin",
+    "correo": "admin@smartlearn.com",
+    "nombreCompleto": "Administrador del Sistema",
+    "activo": true,
+    "verificado": true,
+    "idRol": 3,
+    "idConfiguracion": null,
+    "idUltimaConexion": 1
+  }
+]
