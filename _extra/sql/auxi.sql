@@ -18,6 +18,7 @@ TRUNCATE TABLE tbl_ejercicio;
 TRUNCATE TABLE tbl_teoria;
 TRUNCATE TABLE tbl_subtema;
 TRUNCATE TABLE tbl_tema;
+--f
 TRUNCATE TABLE tbl_materia;
 TRUNCATE TABLE tbl_tipo_recurso;
 TRUNCATE TABLE tbl_rol;
